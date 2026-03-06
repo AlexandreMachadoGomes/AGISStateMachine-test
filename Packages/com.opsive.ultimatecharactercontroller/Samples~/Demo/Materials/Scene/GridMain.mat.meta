@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c09dfade57437974c8863b39f005d5ca
+timeCreated: 1473039929
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Scene/GridMain.mat
+  uploadId: 841272

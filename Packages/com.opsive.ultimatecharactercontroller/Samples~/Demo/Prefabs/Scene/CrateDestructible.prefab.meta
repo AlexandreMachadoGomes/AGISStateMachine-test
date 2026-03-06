@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c9a2a6d14aeb51e4a8f8bdd815772ec6
+timeCreated: 1524776727
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/CrateDestructible.prefab
+  uploadId: 841272

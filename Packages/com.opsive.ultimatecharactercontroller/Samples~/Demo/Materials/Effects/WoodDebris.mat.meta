@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 22dedcc578344ec4d9832745aef3ae82
+timeCreated: 1525453588
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Effects/WoodDebris.mat
+  uploadId: 841272

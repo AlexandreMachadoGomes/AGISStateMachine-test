@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1d642cb4735b99b428aff097949959c8
+timeCreated: 1501082628
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Inspectors/Inventory/ItemCollectionInspector.cs
+  uploadId: 841272

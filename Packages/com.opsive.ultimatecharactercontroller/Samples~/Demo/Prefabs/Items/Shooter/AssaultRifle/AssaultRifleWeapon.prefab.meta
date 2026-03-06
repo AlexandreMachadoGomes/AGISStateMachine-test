@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1170ef9dc35f0454297cead491980e1b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Shooter/AssaultRifle/AssaultRifleWeapon.prefab
+  uploadId: 841272

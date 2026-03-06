@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 25509d19bb4e28046a7363cd6b9c6415
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Shooter/RocketLauncher/Explosion.prefab
+  uploadId: 841272

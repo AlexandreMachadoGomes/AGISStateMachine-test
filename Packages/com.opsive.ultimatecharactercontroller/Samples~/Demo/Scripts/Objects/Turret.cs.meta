@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 14f6d55780b9f914c8d4c40bb2fbf030
+timeCreated: 1525258500
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Scripts/Objects/Turret.cs
+  uploadId: 841272

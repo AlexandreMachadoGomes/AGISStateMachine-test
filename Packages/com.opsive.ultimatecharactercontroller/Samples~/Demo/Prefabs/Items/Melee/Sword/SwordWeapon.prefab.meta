@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4c4efe98fbf79d643b2478da406744d2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Melee/Sword/SwordWeapon.prefab
+  uploadId: 841272

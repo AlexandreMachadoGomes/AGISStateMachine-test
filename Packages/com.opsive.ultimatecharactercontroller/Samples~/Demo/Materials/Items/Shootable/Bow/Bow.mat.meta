@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1c913a39bc7c5c942b6f5066297d86f9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Items/Shootable/Bow/Bow.mat
+  uploadId: 841272

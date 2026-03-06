@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7820c52a08a890a47907bcf249a6c0bf
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/WeaponPad.prefab
+  uploadId: 841272

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7e05492ab446e6648848b6891434c16c
+timeCreated: 1535641455
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/Shooter/SniperRifle/ReloadSniperRifleItemPreset.asset
+  uploadId: 841272

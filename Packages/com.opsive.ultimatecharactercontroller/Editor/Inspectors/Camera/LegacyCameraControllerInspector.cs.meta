@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5393a1c95ed767d49be0a2ec88bdf340
+timeCreated: 1484437660
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Inspectors/Camera/LegacyCameraControllerInspector.cs
+  uploadId: 841272

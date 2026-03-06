@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2a7ac94dd442d9e4c817cbc086b5761f
+timeCreated: 1534528654
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Camera/FirstPerson/RideFirstPersonFreeLookPreset.asset
+  uploadId: 841272

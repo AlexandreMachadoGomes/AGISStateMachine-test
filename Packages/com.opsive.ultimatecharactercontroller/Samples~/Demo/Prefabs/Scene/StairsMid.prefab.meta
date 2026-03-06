@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5587930eb5c19594e94f8a88e74acdda
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/StairsMid.prefab
+  uploadId: 841272

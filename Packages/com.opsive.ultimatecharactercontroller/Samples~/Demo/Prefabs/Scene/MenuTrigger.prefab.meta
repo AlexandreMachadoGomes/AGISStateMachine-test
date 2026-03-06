@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0fe1da68145f52143b46db30616994ac
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/MenuTrigger.prefab
+  uploadId: 841272

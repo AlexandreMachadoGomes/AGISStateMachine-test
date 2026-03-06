@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3097b67e8b65bfd44ada50b4b8892ac8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Melee/Shield/ShieldModel.prefab
+  uploadId: 841272

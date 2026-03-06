@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2ea87cd7f29b86045ac6bcd6cda2c3a8
+timeCreated: 1521897662
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Items/Shootable/Bullets/SniperBulletDecal.mat
+  uploadId: 841272

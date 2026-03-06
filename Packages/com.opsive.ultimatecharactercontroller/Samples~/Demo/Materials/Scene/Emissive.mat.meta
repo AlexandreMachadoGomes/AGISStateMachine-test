@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 82f62206a7ca74d42990e4c610e7e92b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Scene/Emissive.mat
+  uploadId: 841272

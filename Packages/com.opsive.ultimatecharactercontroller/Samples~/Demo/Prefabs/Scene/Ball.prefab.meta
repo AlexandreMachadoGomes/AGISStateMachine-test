@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 966793e8fd61b9e468158ac385e33ef3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/Ball.prefab
+  uploadId: 841272

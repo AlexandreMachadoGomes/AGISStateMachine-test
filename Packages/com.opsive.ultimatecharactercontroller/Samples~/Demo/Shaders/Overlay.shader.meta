@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 45919b2d0b839f6488a894431bff57a9
+timeCreated: 1515975832
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Shaders/Overlay.shader
+  uploadId: 841272

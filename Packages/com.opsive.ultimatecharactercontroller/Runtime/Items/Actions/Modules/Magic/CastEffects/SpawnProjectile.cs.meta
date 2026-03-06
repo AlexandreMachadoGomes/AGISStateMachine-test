@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 7926e0bd62234fdd9a9efed32fd03f5e
+timeCreated: 1650036370
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/CastEffects/SpawnProjectile.cs
+  uploadId: 841272

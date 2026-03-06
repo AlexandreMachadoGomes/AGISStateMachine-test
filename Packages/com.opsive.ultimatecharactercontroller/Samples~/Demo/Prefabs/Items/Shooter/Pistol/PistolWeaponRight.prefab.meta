@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 553bd82b2dacd2f4d98afc55e35d675e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Shooter/Pistol/PistolWeaponRight.prefab
+  uploadId: 841272

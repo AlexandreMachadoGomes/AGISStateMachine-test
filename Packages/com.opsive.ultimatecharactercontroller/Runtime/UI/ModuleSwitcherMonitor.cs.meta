@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: d65f165fe54245c4a701f57e64dfe816
+timeCreated: 1659101565
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/UI/ModuleSwitcherMonitor.cs
+  uploadId: 841272

@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 0198e3e6515842a69c18783206b07a12
+timeCreated: 1651589251
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/UI/MultiAimTargetMonitor.cs
+  uploadId: 841272

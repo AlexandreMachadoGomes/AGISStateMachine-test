@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0baf48657715a014b994e0c6a01ca7c9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Textures/Scene/Mirror1.renderTexture
+  uploadId: 841272

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ee980642220d145478deb3537ca8cc87
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.shared/Editor/UIElements/GeneratedStubTypes.cs
+  uploadId: 841272

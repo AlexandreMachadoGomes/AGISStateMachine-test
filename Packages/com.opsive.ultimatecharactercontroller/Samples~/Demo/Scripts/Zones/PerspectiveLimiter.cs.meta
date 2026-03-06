@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d0a6f571ad3438a47ac88aff50b4c6cf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Scripts/Zones/PerspectiveLimiter.cs
+  uploadId: 841272

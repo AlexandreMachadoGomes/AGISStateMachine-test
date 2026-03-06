@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 75b4a0fd8e4a0b14bb9cac502a77aa37
+timeCreated: 1500999042
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Objects/CharacterAssist/ItemPickupBase.cs
+  uploadId: 841272

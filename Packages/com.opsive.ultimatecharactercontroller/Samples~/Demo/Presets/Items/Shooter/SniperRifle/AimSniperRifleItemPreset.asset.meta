@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d7dbd9790a7e2cc44aab0c80ecdb136c
+timeCreated: 1531846000
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: -1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/Shooter/SniperRifle/AimSniperRifleItemPreset.asset
+  uploadId: 841272

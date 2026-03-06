@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 2974760746ec467282f0344e7a97705e
+timeCreated: 1643798481
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Shootable/HitscanShooter.cs
+  uploadId: 841272

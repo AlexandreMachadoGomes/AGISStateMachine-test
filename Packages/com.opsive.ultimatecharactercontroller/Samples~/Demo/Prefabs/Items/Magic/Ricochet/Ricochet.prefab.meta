@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 60efc0f81a408164999c4210c008315c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Magic/Ricochet/Ricochet.prefab
+  uploadId: 841272

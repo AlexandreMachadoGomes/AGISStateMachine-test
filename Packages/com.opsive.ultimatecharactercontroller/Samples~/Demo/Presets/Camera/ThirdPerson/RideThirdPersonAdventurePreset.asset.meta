@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2d4b69dd1405ff044907e75b170311ed
+timeCreated: 1533670555
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Camera/ThirdPerson/RideThirdPersonAdventurePreset.asset
+  uploadId: 841272

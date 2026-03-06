@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 96786b8c6dcb3d546923d6cc48b8795e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Flashlight/FlashlightVolumetricConeModel.prefab
+  uploadId: 841272

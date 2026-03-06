@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 078bff04ac2aeaa41b5e64d9016a240d
+timeCreated: 1504016360
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Character/FirstPerson/FirstPersonJumpPreset.asset
+  uploadId: 841272

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 32da0da2b18697f45b39ec1ec4541e9e
+timeCreated: 1513724185
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Character/Abilities/Generic.cs
+  uploadId: 841272

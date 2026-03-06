@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 502f28110d763fc4da5fadfbb4ea3825
+timeCreated: 1518280555
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 600
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/UI/FullScreenItemUIMonitor.cs
+  uploadId: 841272

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 64f2fa1f4fdfea445b980a7530be3231
+timeCreated: 1512934167
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/StateSystem/StateTrigger.cs
+  uploadId: 841272

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 03fdcb21c2dc0e141ba3c4ac57e55756
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.shared/Runtime/Audio/Default3DAudioConfig.asset
+  uploadId: 841272

@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 0dab66f2eb7c4df19ca96d3102cd9487
+timeCreated: 1652806390
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Utility/SearchableList.cs
+  uploadId: 841272

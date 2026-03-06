@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b082f52328fff304e8c1692070976113
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/Shooter/AssaultRifle/RheaAimAssaultRifleFirstPersonPerspectiveItemPreset.asset
+  uploadId: 841272

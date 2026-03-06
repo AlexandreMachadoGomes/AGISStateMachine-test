@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 27f97a858bca96045a845d9af5c6dba3
+timeCreated: 1511455046
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Objects/ItemAssist/Tracer.cs
+  uploadId: 841272

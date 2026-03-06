@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 82afc4e1f852e1343a6398818257514c
+timeCreated: 1558400403
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.shared/Runtime/Networking/INetworkInfo.cs
+  uploadId: 841272

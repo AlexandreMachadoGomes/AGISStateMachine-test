@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ef5d37783489b2d47881c49cc5e22740
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Magic/Teleport/TeleportEndParticle.prefab
+  uploadId: 841272

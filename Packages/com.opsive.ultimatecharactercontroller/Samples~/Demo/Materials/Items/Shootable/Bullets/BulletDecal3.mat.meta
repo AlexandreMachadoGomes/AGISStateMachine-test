@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6b820c3cd989bd54d9765ffcd05fb68d
+timeCreated: 1521897662
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Items/Shootable/Bullets/BulletDecal3.mat
+  uploadId: 841272

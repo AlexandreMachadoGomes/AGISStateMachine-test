@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0a580a5ea04fdab47941095489aa23b7
+timeCreated: 1492469980
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Materials/InvisibleShadowCaster.mat
+  uploadId: 841272

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c61d1063e93b5224b8fc4bac6ee29f93
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Magic/ShieldBubble/ShieldBubble.prefab
+  uploadId: 841272

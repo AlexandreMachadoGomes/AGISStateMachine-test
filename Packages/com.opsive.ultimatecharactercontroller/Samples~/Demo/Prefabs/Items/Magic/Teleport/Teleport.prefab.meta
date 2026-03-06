@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c1e2ddf3b37ced248a57749be560ef6c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Magic/Teleport/Teleport.prefab
+  uploadId: 841272

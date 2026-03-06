@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4d44596a32e48fd428185ee58eb06437
+timeCreated: 1521734651
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/SurfaceSystem/SurfaceEffects/JumpOnSand.asset
+  uploadId: 841272

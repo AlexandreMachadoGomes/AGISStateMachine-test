@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4ca87b146a9b633428b4d3b210fa60c6
+timeCreated: 1516372030
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Camera/FirstPerson/AimMeleeFirstPersonCombatPreset.asset
+  uploadId: 841272

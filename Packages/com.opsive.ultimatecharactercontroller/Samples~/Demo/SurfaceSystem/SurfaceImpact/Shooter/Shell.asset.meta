@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 278249160c1c8a845ae483589763a8be
+timeCreated: 1521723439
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/SurfaceSystem/SurfaceImpact/Shooter/Shell.asset
+  uploadId: 841272

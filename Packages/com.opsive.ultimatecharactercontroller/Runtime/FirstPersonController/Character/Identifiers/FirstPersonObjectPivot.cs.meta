@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: b4aed019a66bb2942b8c87772894d49e
+timeCreated: 1510186147
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 300
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/FirstPersonController/Character/Identifiers/FirstPersonObjectPivot.cs
+  uploadId: 841272

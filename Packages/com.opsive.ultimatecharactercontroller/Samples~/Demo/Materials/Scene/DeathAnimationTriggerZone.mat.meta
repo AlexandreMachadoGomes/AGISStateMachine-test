@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b5f48e18ff7c4ab4995f457d4e6981c2
+timeCreated: 1525356051
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Scene/DeathAnimationTriggerZone.mat
+  uploadId: 841272

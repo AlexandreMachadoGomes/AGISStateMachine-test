@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 3293b7af3981bc244b312421dfee1b51
+timeCreated: 1492386658
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Camera/ViewTypes/ViewType.cs
+  uploadId: 841272

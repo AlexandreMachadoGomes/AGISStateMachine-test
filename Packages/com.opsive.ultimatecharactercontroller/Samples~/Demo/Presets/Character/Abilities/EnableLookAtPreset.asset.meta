@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cc163d61e2c82534989f9cbecc01beff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Character/Abilities/EnableLookAtPreset.asset
+  uploadId: 841272

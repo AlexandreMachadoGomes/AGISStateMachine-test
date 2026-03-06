@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 362155b3b81744a4aa28b315efd334a2
+timeCreated: 1554812130
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Objects/MovingPlatform.cs
+  uploadId: 841272

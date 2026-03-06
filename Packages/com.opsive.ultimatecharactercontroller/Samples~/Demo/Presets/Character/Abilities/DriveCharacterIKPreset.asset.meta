@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a955214f45770ff428a6b2be2e0d4e2b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Character/Abilities/DriveCharacterIKPreset.asset
+  uploadId: 841272

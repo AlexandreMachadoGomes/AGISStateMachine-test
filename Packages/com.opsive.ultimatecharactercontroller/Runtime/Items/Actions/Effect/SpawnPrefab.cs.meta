@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: bc1925c37f814a9c82f3f5959ea0210b
+timeCreated: 1661424285
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Effect/SpawnPrefab.cs
+  uploadId: 841272

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c02e2969283dd6c45a4cb7fd4609f5d1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Melee/Knife/KnifePickup.prefab
+  uploadId: 841272

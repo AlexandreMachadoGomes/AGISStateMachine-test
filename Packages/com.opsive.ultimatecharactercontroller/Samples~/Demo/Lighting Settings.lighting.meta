@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dac1a2e2997f3ff40b3099850318e228
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Lighting
+    Settings.lighting
+  uploadId: 841272

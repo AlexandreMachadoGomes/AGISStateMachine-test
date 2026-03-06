@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c0c0d8d66a17f894e9cab323f1996e5d
+timeCreated: 1547544916
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Character/Effects/EnableShakePreset.asset
+  uploadId: 841272

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6f3f00ab9aa6282458e3019ccb31d53f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Shooter/SniperRifle/SniperRiflePickup.prefab
+  uploadId: 841272

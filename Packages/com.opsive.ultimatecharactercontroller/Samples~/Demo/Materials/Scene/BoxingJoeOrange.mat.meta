@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5b240290b964f6b468c6ec73a3afa6ab
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Scene/BoxingJoeOrange.mat
+  uploadId: 841272

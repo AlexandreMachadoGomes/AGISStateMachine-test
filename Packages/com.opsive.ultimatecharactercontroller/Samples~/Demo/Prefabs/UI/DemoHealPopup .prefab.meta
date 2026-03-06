@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c8f9d80a608a9df449f75e204bc2c42a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/UI/DemoHealPopup
+    .prefab
+  uploadId: 841272

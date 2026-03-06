@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 64b87f2aa7349c549a362f06ad36c59c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/Shooter/RocketLauncher/ThirdPersonRocketLauncherRecoilEffectPreset.asset
+  uploadId: 841272

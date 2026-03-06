@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c933e0001b6c033469e3851e70ef5941
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.shared/Runtime/Audio/Default2DAudioSource.prefab
+  uploadId: 841272

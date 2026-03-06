@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114f4adff47823d4aadb77159ef6731f, type: 3}
+  m_Name: OnScreenControlsUnityInputSystemPreset
+  m_EditorClassIdentifier: 
+  m_Data:
+    m_ObjectType: Opsive.Shared.Input.InputSystem.UnityInputSystem
+    m_ValueHashes: 
+    m_LongValueHashes: 2aa2867b9b285d3dc7e0cbb61075d479514cf296b4d5c4e725cf3663cebefbf2ddc6c6305e6905ca
+    m_ValuePositions: 0000000008000000090000000a0000000a000000
+    m_Values: 0000803f0000803f000102000000
+    m_UnityObjects: []
+    m_Version: 3.4

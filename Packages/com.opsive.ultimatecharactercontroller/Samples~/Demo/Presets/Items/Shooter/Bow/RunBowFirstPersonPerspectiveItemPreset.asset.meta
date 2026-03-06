@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 329a0394b7421574781f94424b8eded8
+timeCreated: 1536637277
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/Shooter/Bow/RunBowFirstPersonPerspectiveItemPreset.asset
+  uploadId: 841272

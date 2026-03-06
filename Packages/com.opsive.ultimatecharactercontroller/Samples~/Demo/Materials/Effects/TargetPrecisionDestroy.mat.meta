@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0bc7fb4f8b69c8b45b3a6cf777d2bc50
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Effects/TargetPrecisionDestroy.mat
+  uploadId: 841272

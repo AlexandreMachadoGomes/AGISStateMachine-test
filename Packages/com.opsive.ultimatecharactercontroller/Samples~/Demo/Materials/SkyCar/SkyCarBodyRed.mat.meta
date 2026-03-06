@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1d3a2baaa80b1bc499e48131e598a87c
+timeCreated: 1571230628
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/SkyCar/SkyCarBodyRed.mat
+  uploadId: 841272

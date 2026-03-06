@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0bfce5e149f81f24eadef6b7af17ef3a
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/ObjectMaps/DemoItemStateIndexReadOnly.csv
+  uploadId: 841272

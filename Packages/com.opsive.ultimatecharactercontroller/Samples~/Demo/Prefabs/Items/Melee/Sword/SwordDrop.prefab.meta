@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f5af721343e0ead4aaf15d9d6afafeea
+timeCreated: 1525354518
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Melee/Sword/SwordDrop.prefab
+  uploadId: 841272

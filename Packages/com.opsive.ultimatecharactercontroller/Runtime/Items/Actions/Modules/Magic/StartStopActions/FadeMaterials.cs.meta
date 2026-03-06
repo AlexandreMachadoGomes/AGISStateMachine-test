@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: f1c2fb9240c04aba8e5e672234a15357
+timeCreated: 1650273368
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/StartStopActions/FadeMaterials.cs
+  uploadId: 841272

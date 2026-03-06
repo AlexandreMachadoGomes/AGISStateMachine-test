@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 7f4224c12740b644f82a0f901a35061e
+timeCreated: 1531917952
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 370
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Objects/ItemAssist/Trail.cs
+  uploadId: 841272

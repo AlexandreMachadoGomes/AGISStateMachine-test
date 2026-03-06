@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e83b3f9d2b9295440a6f7d1a903c44d8
+timeCreated: 1544736243
+licenseType: Store
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/README.txt
+  uploadId: 841272

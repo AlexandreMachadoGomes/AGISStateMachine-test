@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 814583161d9cd4c41a51f1dbeaf0db37
+timeCreated: 1517245172
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Throwable/FragGrenade/FragGrenadeDrop.prefab
+  uploadId: 841272

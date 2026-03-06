@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: b6175230e2fa15d4e9e9c607117f42f5
+timeCreated: 1558375509
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Networking/INetworkMagicObject.cs
+  uploadId: 841272

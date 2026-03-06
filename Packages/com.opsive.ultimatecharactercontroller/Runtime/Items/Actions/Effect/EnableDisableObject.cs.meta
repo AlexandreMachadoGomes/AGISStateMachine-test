@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 179248b1c60e4ae0aaecaa009fba6274
+timeCreated: 1661442535
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Effect/EnableDisableObject.cs
+  uploadId: 841272

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 078921550a8e4a10b136d22a2a808f2f
+timeCreated: 1645628203
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Shootable/ClipModule.cs
+  uploadId: 841272

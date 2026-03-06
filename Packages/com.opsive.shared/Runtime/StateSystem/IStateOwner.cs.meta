@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 24863ed59b5907a4f9eb7f3c9850b9db
+timeCreated: 1497724626
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.shared/Runtime/StateSystem/IStateOwner.cs
+  uploadId: 841272

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 45d26fba8aeefca4a820e97b9f8ad09a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Magic/ParticalStream/ParticleStreamParticle.prefab
+  uploadId: 841272

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a997860fdda769047acc11f528ffffc2
+timeCreated: 1524061938
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Camera/FirstPerson/DrunkPersonFirstPersonCombatPreset.asset
+  uploadId: 841272

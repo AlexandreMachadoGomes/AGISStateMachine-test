@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d0d050efd2052034f8b97c2e54954f84
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Shooter/SniperRifle/SniperRifleWeapon.prefab
+  uploadId: 841272

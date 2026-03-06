@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: cd73ae2da8545f244a2f68adbd514b57
+timeCreated: 1653576317
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/ShieldAction.cs
+  uploadId: 841272

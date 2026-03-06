@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 04dd9a66580ecda4798babf81460d0d0
+timeCreated: 1519913288
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/Throwable/FragGrenade/QuickGrenadeItemPreset.asset
+  uploadId: 841272

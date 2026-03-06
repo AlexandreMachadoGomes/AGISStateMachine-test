@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ecdacc0cbaec28a46bc4bf0c82cd0a87
+timeCreated: 1492198222
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Animator/Characters/FirstPersonRightArmMask.mask
+  uploadId: 841272

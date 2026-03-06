@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 06c0311bc4b1f1d459ff2bcfaf60e01d
+timeCreated: 1506087731
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/AnimatorAudioStates/RecoilAnimatorAudioStateSelector.cs
+  uploadId: 841272

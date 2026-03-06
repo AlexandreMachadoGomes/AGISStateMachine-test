@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 61159c49be98c6e4787663a97dc9d1b7
+timeCreated: 1518280555
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 500
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/UI/CharacterMonitor.cs
+  uploadId: 841272

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: d4cf7de5bdfa4a17a9102eea76760efd
+timeCreated: 1646408777
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Melee/AttackEffectModule.cs
+  uploadId: 841272

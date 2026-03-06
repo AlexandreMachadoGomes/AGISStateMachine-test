@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8ddf8c3b9e456074998f1487b6380f2b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Audio/Items/Melee/Shield/ShieldUnequip.asset
+  uploadId: 841272

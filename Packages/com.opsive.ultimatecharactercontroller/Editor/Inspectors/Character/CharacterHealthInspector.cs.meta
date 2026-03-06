@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 271a7884fb3b83341bd8df3f65a873d1
+timeCreated: 1507829278
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Inspectors/Character/CharacterHealthInspector.cs
+  uploadId: 841272

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e01b49402331f41459fdce322ee14cd7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Animator/Scene/Boat.controller
+  uploadId: 841272

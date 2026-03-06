@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3d1c2dc9ff9c46245812cb08ecaa92d4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/UI/ZoneElement.prefab
+  uploadId: 841272

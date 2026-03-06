@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fac247243b5ca304e812b266f8296704
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Character/LargeSlopeUltimateCharacterLocomotion.asset
+  uploadId: 841272

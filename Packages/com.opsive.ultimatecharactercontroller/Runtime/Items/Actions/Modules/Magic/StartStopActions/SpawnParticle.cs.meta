@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 224b3c1c6af74d8383bfd196a73a46de
+timeCreated: 1650269874
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/StartStopActions/SpawnParticle.cs
+  uploadId: 841272

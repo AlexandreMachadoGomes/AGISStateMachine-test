@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 08ba66539fab43af92f17a1579a34601
+timeCreated: 1650037548
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/CastEffects/StartEffect.cs
+  uploadId: 841272

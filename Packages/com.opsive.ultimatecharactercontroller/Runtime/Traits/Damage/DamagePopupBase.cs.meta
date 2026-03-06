@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 452ab9336cfe46f39d3f92b4b6d1600e
+timeCreated: 1619775118
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Traits/Damage/DamagePopupBase.cs
+  uploadId: 841272

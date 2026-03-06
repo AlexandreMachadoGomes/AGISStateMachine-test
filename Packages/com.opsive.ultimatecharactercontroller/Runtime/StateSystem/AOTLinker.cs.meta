@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 076144a8918352549981a20b956086ee
+timeCreated: 1486426095
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/StateSystem/AOTLinker.cs
+  uploadId: 841272

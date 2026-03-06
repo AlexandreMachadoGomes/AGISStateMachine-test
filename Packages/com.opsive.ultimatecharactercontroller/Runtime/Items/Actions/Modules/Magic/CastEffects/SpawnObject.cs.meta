@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 9b03fb1ab6d948eb92af6a7755fde25f
+timeCreated: 1650037237
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/CastEffects/SpawnObject.cs
+  uploadId: 841272

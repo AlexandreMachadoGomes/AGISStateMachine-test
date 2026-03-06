@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 14cfa7d0fb2c3d0418e599c7ad4671d3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Scripts/UI/ZoneModuleSelection.cs
+  uploadId: 841272

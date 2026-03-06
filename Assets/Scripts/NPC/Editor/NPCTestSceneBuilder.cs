@@ -21,7 +21,6 @@
 
 #if UNITY_EDITOR
 
-using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -661,7 +660,7 @@ namespace AGIS.NPC.Editor
 
         private static void SaveAsset(Object asset, string fileName)
         {
-            string path = Path.Combine(AssetFolder, fileName);
+            string path = System.IO.Path.Combine(AssetFolder, fileName);
             if (AssetDatabase.LoadAssetAtPath<Object>(path) != null)
                 AssetDatabase.DeleteAsset(path);
             AssetDatabase.CreateAsset(asset, path);

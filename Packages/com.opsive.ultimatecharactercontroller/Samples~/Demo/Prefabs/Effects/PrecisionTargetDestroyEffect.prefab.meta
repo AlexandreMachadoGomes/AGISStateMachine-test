@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bb406914b06c4954f831dab22bbc082e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Effects/PrecisionTargetDestroyEffect.prefab
+  uploadId: 841272

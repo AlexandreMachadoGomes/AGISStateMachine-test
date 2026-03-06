@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f04cc1443c662e0409b4329065f9e9bc
+timeCreated: 1525703790
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/GrenadeTarget.prefab
+  uploadId: 841272

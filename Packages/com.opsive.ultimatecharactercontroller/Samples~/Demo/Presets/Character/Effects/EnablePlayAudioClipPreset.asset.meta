@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a85f3262ebebebc47be42bd7fba6d2a0
+timeCreated: 1523827953
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Character/Effects/EnablePlayAudioClipPreset.asset
+  uploadId: 841272

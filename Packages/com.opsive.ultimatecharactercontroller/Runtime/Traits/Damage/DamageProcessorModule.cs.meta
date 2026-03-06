@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 92ba2bd9bebe44ff82a6276a350da1a5
+timeCreated: 1630508319
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Traits/Damage/DamageProcessorModule.cs
+  uploadId: 841272

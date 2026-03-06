@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 18a6539eed479334ab28c35a093ce973
+timeCreated: 1459283420
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Characters/Blitz/Mane.mat
+  uploadId: 841272

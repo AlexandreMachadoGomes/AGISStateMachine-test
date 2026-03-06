@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e48f2d8b45a2ca4489643127d58ee485
+timeCreated: 1519262453
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/Shooter/Bow/BowUseSlot0Preset.asset
+  uploadId: 841272

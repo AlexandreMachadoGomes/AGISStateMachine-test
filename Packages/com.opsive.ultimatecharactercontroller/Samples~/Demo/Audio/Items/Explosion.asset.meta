@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1d08380144ea0664c918d6c51a4c4a5d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Audio/Items/Explosion.asset
+  uploadId: 841272

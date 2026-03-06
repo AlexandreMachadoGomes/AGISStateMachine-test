@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: de15490ab97268d43a7ba178022deef7
+timeCreated: 1571230629
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/SkyCar/SkyCarWheelGrey.mat
+  uploadId: 841272

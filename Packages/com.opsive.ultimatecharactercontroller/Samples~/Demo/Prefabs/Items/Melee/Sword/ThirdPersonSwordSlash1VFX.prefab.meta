@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 894ec4388be8419458f29f24f72a27e2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Melee/Sword/ThirdPersonSwordSlash1VFX.prefab
+  uploadId: 841272

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e445b1b673df81e4fb40813dfe74d623
+timeCreated: 1458868930
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Characters/Blitz/Accessories.mat
+  uploadId: 841272

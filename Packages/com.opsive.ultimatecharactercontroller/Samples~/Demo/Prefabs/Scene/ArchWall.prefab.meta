@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 273c606d25db8ed459a5de78f57a0b79
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/ArchWall.prefab
+  uploadId: 841272

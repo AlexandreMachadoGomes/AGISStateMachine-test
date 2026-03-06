@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 458cb80c4919468c8d1dec4961855514
+timeCreated: 1681810061
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Impact/ConditionalImpactReceiver.cs
+  uploadId: 841272

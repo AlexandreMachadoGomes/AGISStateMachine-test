@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 45ca1cad25824ccb9f1238ba5e4fa8aa
+timeCreated: 1663335358
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Controls/Types/ReorderableObjectListAttributeControl.cs
+  uploadId: 841272

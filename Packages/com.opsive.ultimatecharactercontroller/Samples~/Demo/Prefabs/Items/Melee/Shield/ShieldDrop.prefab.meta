@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3a62d9d3903b8d144b778aec820691e4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Melee/Shield/ShieldDrop.prefab
+  uploadId: 841272

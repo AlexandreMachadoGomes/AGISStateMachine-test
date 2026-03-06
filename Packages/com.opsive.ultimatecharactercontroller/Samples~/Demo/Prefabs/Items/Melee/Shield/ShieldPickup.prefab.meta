@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 131c11ae64ed97d42be2e992c44dd497
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Melee/Shield/ShieldPickup.prefab
+  uploadId: 841272

@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 651b805f9d0b405698e37aa73fbc6204
+timeCreated: 1643212198
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Inspectors/Items/Actions/CharacterItemActionInspector.cs
+  uploadId: 841272

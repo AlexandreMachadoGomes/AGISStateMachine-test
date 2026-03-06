@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 7894b9d93eb14be680cf855d825476e0
+timeCreated: 1653919384
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Effect/PlayAudioClip.cs
+  uploadId: 841272

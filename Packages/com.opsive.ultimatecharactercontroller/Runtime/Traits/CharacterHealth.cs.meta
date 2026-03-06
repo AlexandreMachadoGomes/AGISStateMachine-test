@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5d6607657a78e5445a5e47d0ad348e2d
+timeCreated: 1507907779
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Traits/CharacterHealth.cs
+  uploadId: 841272

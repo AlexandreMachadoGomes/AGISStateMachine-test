@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 85bac1cb0240866459b4c85bf422d164
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Shooter/Shotgun/ShotgunDrop.prefab
+  uploadId: 841272

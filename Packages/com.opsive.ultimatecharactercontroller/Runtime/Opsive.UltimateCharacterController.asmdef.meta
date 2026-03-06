@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cb7ef9d091ef9704cac35413bf140440
+timeCreated: 1545458898
+licenseType: Store
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Opsive.UltimateCharacterController.asmdef
+  uploadId: 841272

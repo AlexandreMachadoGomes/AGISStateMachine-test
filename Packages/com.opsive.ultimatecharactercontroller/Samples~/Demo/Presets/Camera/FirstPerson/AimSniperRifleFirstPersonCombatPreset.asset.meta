@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d40508c11044f254a9e22229d3a5c9b3
+timeCreated: 1516372030
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Camera/FirstPerson/AimSniperRifleFirstPersonCombatPreset.asset
+  uploadId: 841272

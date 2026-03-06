@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5c438f50e587e0545ab083e617d96d3b
+timeCreated: 1521728420
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/SurfaceSystem/SurfaceEffects/Shooter/ShellOnWood.asset
+  uploadId: 841272

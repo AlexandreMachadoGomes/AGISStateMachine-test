@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b04149646c7acbc4ba937f15add80427
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Audio/Items/Shooter/Bullet/BulletImpactTile.asset
+  uploadId: 841272

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 65ab37320356e6243a748e62c9c77a46
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/NotMovingTargetVariant.prefab
+  uploadId: 841272

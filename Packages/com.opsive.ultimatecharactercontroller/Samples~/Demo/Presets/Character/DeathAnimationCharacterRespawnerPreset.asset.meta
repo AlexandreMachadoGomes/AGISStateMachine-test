@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a0db6b83174ff2b419ac6a38c696139b
+timeCreated: 1525441519
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Character/DeathAnimationCharacterRespawnerPreset.asset
+  uploadId: 841272

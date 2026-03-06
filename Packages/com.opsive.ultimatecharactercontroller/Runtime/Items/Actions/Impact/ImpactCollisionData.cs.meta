@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: cae7a6a228ef48c49cd7f0b5582f82d5
+timeCreated: 1646324166
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Impact/ImpactCollisionData.cs
+  uploadId: 841272

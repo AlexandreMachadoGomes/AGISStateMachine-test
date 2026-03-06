@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 20c6b8d9f56141809ed3ae1b2645d941
+timeCreated: 1654269844
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Effect/InvokeUnityEvent.cs
+  uploadId: 841272

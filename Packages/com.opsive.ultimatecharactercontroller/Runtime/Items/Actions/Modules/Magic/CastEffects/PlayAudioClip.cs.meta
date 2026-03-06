@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: daf7ccf532f749a0b0910a2ae6c62e3d
+timeCreated: 1650036849
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/CastEffects/PlayAudioClip.cs
+  uploadId: 841272

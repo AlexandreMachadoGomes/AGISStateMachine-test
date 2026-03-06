@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b5966f0788c3cec4e94b2f029b5f22ae
+timeCreated: 1492198222
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Animator/Characters/RightHandMask.mask
+  uploadId: 841272

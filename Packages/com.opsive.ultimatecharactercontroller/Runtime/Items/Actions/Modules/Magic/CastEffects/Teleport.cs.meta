@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 7140ab220fbf4e4fb8f960099085b1ad
+timeCreated: 1650267717
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/CastEffects/Teleport.cs
+  uploadId: 841272

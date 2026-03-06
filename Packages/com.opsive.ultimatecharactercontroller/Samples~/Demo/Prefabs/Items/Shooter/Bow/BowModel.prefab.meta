@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 02d0d1c3a8b6aa14fb868d20eb6e1e35
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Shooter/Bow/BowModel.prefab
+  uploadId: 841272

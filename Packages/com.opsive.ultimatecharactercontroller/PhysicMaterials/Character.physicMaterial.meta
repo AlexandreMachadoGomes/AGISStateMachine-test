@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b202ee37f3bfe31498a60fa2c5a67885
+timeCreated: 1493935287
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/PhysicMaterials/Character.physicMaterial
+  uploadId: 841272

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 62c29328a51c39541a1b10b8963e54b7
+timeCreated: 1506296478
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Controls/AbilityDrawers/RagdollDrawer.cs
+  uploadId: 841272

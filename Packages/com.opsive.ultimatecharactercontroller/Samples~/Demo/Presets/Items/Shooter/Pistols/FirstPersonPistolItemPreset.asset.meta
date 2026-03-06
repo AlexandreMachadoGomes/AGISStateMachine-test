@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e374b9f2c9898e0409910155b69b6665
+timeCreated: 1501186361
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/Shooter/Pistols/FirstPersonPistolItemPreset.asset
+  uploadId: 841272

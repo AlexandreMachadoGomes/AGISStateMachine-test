@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 32484090b5d550a4088a4d1efa70ffca
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Melee/Katana/ThirdPersonKatanaSlash3VFX.prefab
+  uploadId: 841272

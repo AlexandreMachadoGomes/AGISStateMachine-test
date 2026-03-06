@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9234c8b41d7f93d48affe128383c77cb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Items/Magic/ParticleStreamGlow.mat
+  uploadId: 841272

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: ce605d45ab1645a093556eb68f7729c7
+timeCreated: 1651681235
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Shootable/ExtraModule.cs
+  uploadId: 841272

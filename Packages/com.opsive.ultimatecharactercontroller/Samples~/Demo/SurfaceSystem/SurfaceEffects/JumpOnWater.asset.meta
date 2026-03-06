@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bc8bde3155aa0fa4b88cefa7e69950a7
+timeCreated: 1521734651
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/SurfaceSystem/SurfaceEffects/JumpOnWater.asset
+  uploadId: 841272

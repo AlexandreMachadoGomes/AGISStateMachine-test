@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b8b86318a8413c3478fa4a07b55cd8b4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.shared/Editor/Inspectors/Audio/AudioConfigInspector.cs
+  uploadId: 841272

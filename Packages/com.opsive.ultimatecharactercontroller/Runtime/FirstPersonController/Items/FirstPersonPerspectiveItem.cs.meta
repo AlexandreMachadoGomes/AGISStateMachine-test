@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 5476160779b6bb145b4eb7245c6888d8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: -110
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/FirstPersonController/Items/FirstPersonPerspectiveItem.cs
+  uploadId: 841272

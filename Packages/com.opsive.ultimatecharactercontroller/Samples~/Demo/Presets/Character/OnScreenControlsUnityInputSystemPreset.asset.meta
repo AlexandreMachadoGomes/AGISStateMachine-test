@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 827b55e2683ac33469c42711c3dc5218
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Character/OnScreenControlsUnityInputSystemPreset.asset
+  uploadId: 841272

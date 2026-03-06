@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 05f5e1807ea84ee890f0acc1d9d66e05
+timeCreated: 1658236772
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/UI/Inventory/ItemAddRemoveButton.cs
+  uploadId: 841272

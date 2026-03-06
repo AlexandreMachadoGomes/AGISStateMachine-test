@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: d9ccb9cb210fb444f8daaac8d2c2f133
+timeCreated: 1554267520
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 9000
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Game/KinematicObject.cs
+  uploadId: 841272

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 53685b4c64a9d15498391ab0b6219080
+timeCreated: 1508335645
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Materials/Effects/Spark.mat
+  uploadId: 841272

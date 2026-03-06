@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 04b4a2c718659bd4f929184a6075349b
+timeCreated: 1508169597
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/SurfaceSystem/SurfaceTypes/Grass.asset
+  uploadId: 841272

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 49e510b31c6b2694ab481348c0b537ea
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Presets/Items/DisableItemPullbackPreset.asset
+  uploadId: 841272

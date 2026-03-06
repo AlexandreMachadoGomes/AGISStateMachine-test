@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: b9979591597f47cbb79a52d512900373
+timeCreated: 1649266126
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/ExtraModule.cs
+  uploadId: 841272

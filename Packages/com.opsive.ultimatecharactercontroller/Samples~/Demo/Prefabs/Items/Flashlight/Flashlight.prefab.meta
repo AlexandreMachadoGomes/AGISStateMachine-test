@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f29d7ee0a5cbbc248a3b67c59e7e1a45
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Flashlight/Flashlight.prefab
+  uploadId: 841272

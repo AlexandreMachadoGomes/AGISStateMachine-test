@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 639d253eb2fc43b0bf76d4a1713bcb12
+timeCreated: 1646816559
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/UsableActionModule.cs
+  uploadId: 841272

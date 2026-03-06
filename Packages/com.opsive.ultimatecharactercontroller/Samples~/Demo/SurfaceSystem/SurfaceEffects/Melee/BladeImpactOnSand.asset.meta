@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 611c5938eab2d434bb41d74fb4c8c60a
+timeCreated: 1521734651
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/SurfaceSystem/SurfaceEffects/Melee/BladeImpactOnSand.asset
+  uploadId: 841272

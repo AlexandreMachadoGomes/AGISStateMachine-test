@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 73001159b1184f1f9cbece12c15b1408
+timeCreated: 1652966914
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Controls/Attributes/StateNameAttribute.cs
+  uploadId: 841272

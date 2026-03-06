@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dc9d158fd7f20664b98619bf47ac64d1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Magic/Fireball/Fireball.prefab
+  uploadId: 841272

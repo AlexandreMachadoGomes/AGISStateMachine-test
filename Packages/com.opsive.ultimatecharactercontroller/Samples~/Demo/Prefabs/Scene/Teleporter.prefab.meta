@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a5ff241bf429b2d4c80a67852600d10d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/Teleporter.prefab
+  uploadId: 841272

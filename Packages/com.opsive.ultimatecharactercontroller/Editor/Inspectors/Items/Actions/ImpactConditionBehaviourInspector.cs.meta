@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: d57c14e6ec704202a20ef29c9315c192
+timeCreated: 1681831338
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Editor/Inspectors/Items/Actions/ImpactConditionBehaviourInspector.cs
+  uploadId: 841272

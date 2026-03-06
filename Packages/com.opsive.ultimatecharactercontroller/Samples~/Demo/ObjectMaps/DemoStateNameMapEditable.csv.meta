@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 91d8e1b449d34974fb7ebd55e7c25e99
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/ObjectMaps/DemoStateNameMapEditable.csv
+  uploadId: 841272

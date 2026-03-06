@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 95d1ccc37ca9fa7438a710a8e25867cf
+timeCreated: 1576175142
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Integrations/UniversalRP.unitypackage
+  uploadId: 841272

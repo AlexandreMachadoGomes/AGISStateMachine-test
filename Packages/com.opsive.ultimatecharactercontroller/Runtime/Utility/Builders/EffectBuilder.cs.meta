@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f42176d3f22418e43b2969c5f177fca9
+timeCreated: 1513110789
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Utility/Builders/EffectBuilder.cs
+  uploadId: 841272

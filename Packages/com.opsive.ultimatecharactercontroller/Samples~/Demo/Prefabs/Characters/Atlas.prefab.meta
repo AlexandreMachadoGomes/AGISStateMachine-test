@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 35a6c3a0cc2e11e4eac14ff349cfee6c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Characters/Atlas.prefab
+  uploadId: 841272

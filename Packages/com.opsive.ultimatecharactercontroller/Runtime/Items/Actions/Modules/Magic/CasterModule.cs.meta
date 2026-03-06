@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: c4c700f8db0e4f13a2c55fb71a9f11ce
+timeCreated: 1649266063
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/CasterModule.cs
+  uploadId: 841272

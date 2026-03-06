@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d85bbc3a58fa48d4198fce75244d0532
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Integrations/HDRP.unitypackage
+  uploadId: 841272

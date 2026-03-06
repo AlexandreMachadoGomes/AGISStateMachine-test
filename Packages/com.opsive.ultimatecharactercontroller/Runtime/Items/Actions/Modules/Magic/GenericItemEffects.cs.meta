@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: c7650f839416429dacf4e6f23041960a
+timeCreated: 1654270696
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/GenericItemEffects.cs
+  uploadId: 841272

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 4b9d9fd8fe138c74896d24120f9e5a59
+timeCreated: 1491651145
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: -200
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.shared/Runtime/Game/Scheduler.cs
+  uploadId: 841272

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: bb488f41f96c76745a5caf587d43a358
+timeCreated: 1497457303
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Character/Abilities/Items/ItemAbility.cs
+  uploadId: 841272

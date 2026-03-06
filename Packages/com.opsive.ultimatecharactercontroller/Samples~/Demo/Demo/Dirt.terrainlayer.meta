@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 86d1ea2aa502de649ba52b32208df310
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Demo/Dirt.terrainlayer
+  uploadId: 841272

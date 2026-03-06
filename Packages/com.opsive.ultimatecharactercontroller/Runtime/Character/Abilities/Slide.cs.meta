@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: cc409a59c9641514d8ea0bd83ff77ad2
+timeCreated: 1487015903
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Character/Abilities/Slide.cs
+  uploadId: 841272

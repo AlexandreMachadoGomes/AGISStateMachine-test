@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cfc693cce96a090429991703e7c7ae53
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Items/Throwable/FragGrenade/FragGrenadeWeaponRight.prefab
+  uploadId: 841272

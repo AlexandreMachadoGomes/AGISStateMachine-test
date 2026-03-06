@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 32312f6a71db5394992170264a17b3fc
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/PrecisionTarget.prefab
+  uploadId: 841272

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 36f550d826807234da02ab37845e64af
+timeCreated: 1521641601
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/SurfaceSystem/SurfaceTypes/Shield.asset
+  uploadId: 841272

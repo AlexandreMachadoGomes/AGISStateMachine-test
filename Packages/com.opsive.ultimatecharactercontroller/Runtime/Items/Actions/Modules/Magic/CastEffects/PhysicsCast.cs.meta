@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 9bd77213d0b0456fb72442ad4ebb632c
+timeCreated: 1650036753
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/Magic/CastEffects/PhysicsCast.cs
+  uploadId: 841272

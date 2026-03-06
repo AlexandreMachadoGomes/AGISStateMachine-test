@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ca5369d9c20a80448a3ef540bff0f573
+timeCreated: 1514928893
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Animator/Items/AssaultRifle.controller
+  uploadId: 841272

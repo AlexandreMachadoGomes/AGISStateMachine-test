@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 41edf11d5c5dfe0419c54a761e15ab0f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/UI/EquipmentToggleButton.prefab
+  uploadId: 841272

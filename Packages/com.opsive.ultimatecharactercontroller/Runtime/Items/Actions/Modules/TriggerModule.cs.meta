@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 3c0d49266c2d4e98b5e6312005b540ca
+timeCreated: 1652371630
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Items/Actions/Modules/TriggerModule.cs
+  uploadId: 841272

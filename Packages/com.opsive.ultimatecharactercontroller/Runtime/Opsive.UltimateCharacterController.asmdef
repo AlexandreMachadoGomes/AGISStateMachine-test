@@ -1,0 +1,17 @@
+{
+    "name": "Opsive.UltimateCharacterController",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d8e89a79cd8df884b8d5b3356783eb74",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

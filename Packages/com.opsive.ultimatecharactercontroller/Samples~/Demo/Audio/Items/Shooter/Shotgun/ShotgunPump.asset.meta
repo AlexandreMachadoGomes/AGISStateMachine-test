@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e791fc628a9321e41a1ed31d64c6c4ac
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Audio/Items/Shooter/Shotgun/ShotgunPump.asset
+  uploadId: 841272

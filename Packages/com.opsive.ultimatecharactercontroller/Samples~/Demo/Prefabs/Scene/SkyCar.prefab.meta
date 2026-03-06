@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9a3e3860609e3414e9b503ca902b9ae6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/Prefabs/Scene/SkyCar.prefab
+  uploadId: 841272

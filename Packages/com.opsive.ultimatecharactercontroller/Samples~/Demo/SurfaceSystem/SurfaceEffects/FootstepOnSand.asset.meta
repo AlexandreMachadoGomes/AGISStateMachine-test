@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2583dc6ff23a41746a1eff81c14a89c9
+timeCreated: 1508170188
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Samples~/Demo/SurfaceSystem/SurfaceEffects/FootstepOnSand.asset
+  uploadId: 841272

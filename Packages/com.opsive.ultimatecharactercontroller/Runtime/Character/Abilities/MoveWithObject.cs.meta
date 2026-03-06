@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 7ce9e1632a4dec94e97dbbdbd9464376
+timeCreated: 1554206872
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 233710
+  packageName: Ultimate Character Controller
+  packageVersion: 3.3.3p1
+  assetPath: Packages/com.opsive.ultimatecharactercontroller/Runtime/Character/Abilities/MoveWithObject.cs
+  uploadId: 841272
