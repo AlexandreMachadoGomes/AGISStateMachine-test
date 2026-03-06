@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ea1b1b86039794e878ec74fd62cb39, type: 3}
+  m_Name: AGIS_StateMachineGraph
+  m_EditorClassIdentifier: 
+  graph:
+    graphId:
+      _value: 01792434bd3542ce83ecf3eef80c4b81
+    version: 1
+    entryNodeId:
+      _value: 
+    nodes: []
+    edges:
+    - edgeId:
+        _value: 
+      fromNodeId:
+        _value: 
+      toNodeId:
+        _value: 
+      condition:
+        kind: 0
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 0
+        cooldownSeconds: 0
+      scopeId: 
+    - edgeId:
+        _value: 
+      fromNodeId:
+        _value: 
+      toNodeId:
+        _value: 
+      condition:
+        kind: 0
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 0
+        cooldownSeconds: 0
+      scopeId: 

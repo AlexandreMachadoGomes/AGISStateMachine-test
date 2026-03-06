@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27336a7d8141f546879b578cb01fd56, type: 3}
+  m_Name: RoutedMovement
+  m_EditorClassIdentifier: 
+  groupAssetId:
+    _value: e56ca882af6f496f94bc3a3cd3509099
+  displayName: Routed Movement
+  internalGraph:
+    graphId:
+      _value: 05b8228ea2ea46d58153333568db4aca
+    version: 1
+    entryNodeId:
+      _value: a749069a72e741a5a0a34a3377095849
+    nodes:
+    - nodeId:
+        _value: a749069a72e741a5a0a34a3377095849
+      nodeTypeId: npc.reset_route
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 3e0b95f4ff574214ac7b9c2173fadd91
+      nodeTypeId: npc.move_to_waypoint
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 39429357a7724aa6beddacca1eaef8fc
+      nodeTypeId: npc.advance_waypoint
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    edges:
+    - edgeId:
+        _value: a88653fb856f4a3a90fc3a23e7582ccf
+      fromNodeId:
+        _value: a749069a72e741a5a0a34a3377095849
+      toNodeId:
+        _value: 3e0b95f4ff574214ac7b9c2173fadd91
+      condition:
+        kind: 4
+        constValue: 1
+        children: []
+        leaf:
+          conditionId:
+            _value: c6cbe11ae11943829f72b3e3a77b6d44
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 2a38b09129b14b81869a68a729a6126d
+      fromNodeId:
+        _value: 3e0b95f4ff574214ac7b9c2173fadd91
+      toNodeId:
+        _value: 39429357a7724aa6beddacca1eaef8fc
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 313cc245209540d7ad18d96885fb18ce
+          conditionTypeId: npc.has_arrived_at_waypoint
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 6e5fad40e13842a4a385c9c9660f1687
+      fromNodeId:
+        _value: 39429357a7724aa6beddacca1eaef8fc
+      toNodeId:
+        _value: 3e0b95f4ff574214ac7b9c2173fadd91
+      condition:
+        kind: 4
+        constValue: 1
+        children: []
+        leaf:
+          conditionId:
+            _value: 2e9c1966c7874da3a37c1b706369c3fc
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+  internalEntryNodeId:
+    _value: 
+  scopes: []
+  exposedParams: []
+  bindings: []

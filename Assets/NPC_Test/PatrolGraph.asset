@@ -1,0 +1,848 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ea1b1b86039794e878ec74fd62cb39, type: 3}
+  m_Name: PatrolGraph
+  m_EditorClassIdentifier: 
+  graph:
+    graphId:
+      _value: b19b7f2133d14b69a2ee6189bd8e1d84
+    version: 1
+    entryNodeId:
+      _value: 9a074fa478ab48f8ac943ab4c8b953bd
+    nodes:
+    - nodeId:
+        _value: eef1f66781234601aa06ba9761b35446
+      nodeTypeId: agis.any_state
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      nodeTypeId: npc.behavior_selector
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+      nodeTypeId: npc.follow_target
+      params:
+        values:
+        - key: follow_player
+          value:
+            _type: 0
+            _bool: 1
+            _int: 0
+            _float: 0
+            _string: 
+            _vector2: {x: 0, y: 0}
+            _vector3: {x: 0, y: 0, z: 0}
+            _guid:
+              _value: 
+        - key: use_detection_memory
+          value:
+            _type: 0
+            _bool: 1
+            _int: 0
+            _float: 0
+            _string: 
+            _vector2: {x: 0, y: 0}
+            _vector3: {x: 0, y: 0, z: 0}
+            _guid:
+              _value: 
+        - key: pursuit_range_bonus
+          value:
+            _type: 2
+            _bool: 0
+            _int: 0
+            _float: 4
+            _string: 
+            _vector2: {x: 0, y: 0}
+            _vector3: {x: 0, y: 0, z: 0}
+            _guid:
+              _value: 
+        - key: pursuit_angle_bonus
+          value:
+            _type: 2
+            _bool: 0
+            _int: 0
+            _float: 20
+            _string: 
+            _vector2: {x: 0, y: 0}
+            _vector3: {x: 0, y: 0, z: 0}
+            _guid:
+              _value: 
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 205f80d2368747b7b59a21b965a8d564
+      nodeTypeId: npc.investigate
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 5d51f0070a8c4bd6bc9b4e9d449cdae2
+      nodeTypeId: npc.wander
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 90827679374644339e0160ddfb677450
+      nodeTypeId: Grouped
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 4515e901ad9f44a5ab66fcb471980617
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 12f2cb30a84641c48dc70d6c2e55b413
+      nodeTypeId: npc.take_damage
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 672b3d3c6d184dfbb9792877773da313
+      nodeTypeId: npc.dying
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: 36a1ef5aa2c64975a88d95ecd4b26516
+      nodeTypeId: npc.idle
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    edges:
+    - edgeId:
+        _value: 9e0e867c18ac45369c89559b5cd05ddb
+      fromNodeId:
+        _value: eef1f66781234601aa06ba9761b35446
+      toNodeId:
+        _value: 672b3d3c6d184dfbb9792877773da313
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: d0fcda604b0f482f82c97dfcb17dfee4
+          conditionTypeId: npc.blackboard_bool
+          params:
+            values:
+            - key: key
+              value:
+                _type: 3
+                _bool: 0
+                _int: 0
+                _float: 0
+                _string: npc.is_dying
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+            - key: expected
+              value:
+                _type: 0
+                _bool: 1
+                _int: 0
+                _float: 0
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+      priority: 20
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 016734da0a39451fa9e7fb816415da8d
+      fromNodeId:
+        _value: eef1f66781234601aa06ba9761b35446
+      toNodeId:
+        _value: 12f2cb30a84641c48dc70d6c2e55b413
+      condition:
+        kind: 0
+        constValue: 0
+        children:
+        - kind: 3
+          constValue: 0
+          children: []
+          leaf:
+            conditionId:
+              _value: 2d399765d00c48d7b7d60f69873e505b
+            conditionTypeId: npc.blackboard_bool
+            params:
+              values:
+              - key: key
+                value:
+                  _type: 3
+                  _bool: 0
+                  _int: 0
+                  _float: 0
+                  _string: npc.is_damaged
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+              - key: expected
+                value:
+                  _type: 0
+                  _bool: 1
+                  _int: 0
+                  _float: 0
+                  _string: 
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+        - kind: 3
+          constValue: 0
+          children: []
+          leaf:
+            conditionId:
+              _value: 94b34fdce959432691f0c127004a2f2d
+            conditionTypeId: npc.actor_state_bool
+            params:
+              values:
+              - key: key
+                value:
+                  _type: 3
+                  _bool: 0
+                  _int: 0
+                  _float: 0
+                  _string: npc.is_dead
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+              - key: expected
+                value:
+                  _type: 0
+                  _bool: 0
+                  _int: 0
+                  _float: 0
+                  _string: 
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+        leaf:
+          conditionId:
+            _value: 7656fe7309ef48ff88bb6840881e5534
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 10
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0.5
+      scopeId: Any
+    - edgeId:
+        _value: 69d3f113a606461eb2d7f5dae690ea5e
+      fromNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      toNodeId:
+        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+      condition:
+        kind: 0
+        constValue: 0
+        children:
+        - kind: 3
+          constValue: 0
+          children: []
+          leaf:
+            conditionId:
+              _value: 079d007ea1bb486ca729e469436c3084
+            conditionTypeId: npc.detection_meter_exceeds
+            params:
+              values:
+              - key: use_max_detection
+                value:
+                  _type: 0
+                  _bool: 1
+                  _int: 0
+                  _float: 0
+                  _string: 
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+        - kind: 3
+          constValue: 0
+          children: []
+          leaf:
+            conditionId:
+              _value: 94b34fdce959432691f0c127004a2f2d
+            conditionTypeId: npc.actor_state_bool
+            params:
+              values:
+              - key: key
+                value:
+                  _type: 3
+                  _bool: 0
+                  _int: 0
+                  _float: 0
+                  _string: npc.is_dead
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+              - key: expected
+                value:
+                  _type: 0
+                  _bool: 0
+                  _int: 0
+                  _float: 0
+                  _string: 
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+        leaf:
+          conditionId:
+            _value: 35b3af50b08241cf9a4d0d2ac37ec960
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 3
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 68d09f0844854d799e7b7424be8a6d97
+      fromNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      toNodeId:
+        _value: 205f80d2368747b7b59a21b965a8d564
+      condition:
+        kind: 0
+        constValue: 0
+        children:
+        - kind: 3
+          constValue: 0
+          children: []
+          leaf:
+            conditionId:
+              _value: d11df081274d44b1b6d257f98807a65d
+            conditionTypeId: npc.detection_meter_exceeds
+            params:
+              values:
+              - key: threshold
+                value:
+                  _type: 2
+                  _bool: 0
+                  _int: 0
+                  _float: 1
+                  _string: 
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+              - key: use_max_detection
+                value:
+                  _type: 0
+                  _bool: 0
+                  _int: 0
+                  _float: 0
+                  _string: 
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+        - kind: 3
+          constValue: 0
+          children: []
+          leaf:
+            conditionId:
+              _value: 94b34fdce959432691f0c127004a2f2d
+            conditionTypeId: npc.actor_state_bool
+            params:
+              values:
+              - key: key
+                value:
+                  _type: 3
+                  _bool: 0
+                  _int: 0
+                  _float: 0
+                  _string: npc.is_dead
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+              - key: expected
+                value:
+                  _type: 0
+                  _bool: 0
+                  _int: 0
+                  _float: 0
+                  _string: 
+                  _vector2: {x: 0, y: 0}
+                  _vector3: {x: 0, y: 0, z: 0}
+                  _guid:
+                    _value: 
+        leaf:
+          conditionId:
+            _value: e1085209d829444d9abd44cb56692260
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 2
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: e73daa57c07f49dda01b71db32d084ce
+      fromNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      toNodeId:
+        _value: 90827679374644339e0160ddfb677450
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 3fbd06bd239942ed968243e392ba2e9d
+          conditionTypeId: npc.actor_state_bool
+          params:
+            values:
+            - key: key
+              value:
+                _type: 3
+                _bool: 0
+                _int: 0
+                _float: 0
+                _string: npc.use_routes
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+            - key: expected
+              value:
+                _type: 0
+                _bool: 1
+                _int: 0
+                _float: 0
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+      priority: 1
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: ab1699b9472548a09bbf1f4c3f9e0cad
+      fromNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      toNodeId:
+        _value: 5d51f0070a8c4bd6bc9b4e9d449cdae2
+      condition:
+        kind: 4
+        constValue: 1
+        children: []
+        leaf:
+          conditionId:
+            _value: 65aef4dc3d974695a56ddc4e63824c5e
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: b594529c5e744cbfaf6fc1c6568c076a
+      fromNodeId:
+        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+      toNodeId:
+        _value: 205f80d2368747b7b59a21b965a8d564
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: bc008000d7e7481fa43d901374b8ea6a
+          conditionTypeId: npc.has_lost_target
+          params:
+            values:
+            - key: timeout
+              value:
+                _type: 2
+                _bool: 0
+                _int: 0
+                _float: 3
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+      priority: 1
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 7ed061998bad4527a5f6821e988271d7
+      fromNodeId:
+        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+      toNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      condition:
+        kind: 2
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 27760e1770b24e79bf599c26450b3423
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 5d47e62a19e44f8db2d5b54a3375b8c6
+      fromNodeId:
+        _value: 205f80d2368747b7b59a21b965a8d564
+      toNodeId:
+        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 079d007ea1bb486ca729e469436c3084
+          conditionTypeId: npc.detection_meter_exceeds
+          params:
+            values:
+            - key: use_max_detection
+              value:
+                _type: 0
+                _bool: 1
+                _int: 0
+                _float: 0
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+      priority: 1
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: a1fcf3a1fc41410fb65605c1651a9cd7
+      fromNodeId:
+        _value: 205f80d2368747b7b59a21b965a8d564
+      toNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      condition:
+        kind: 2
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: cdfe3bb3c6524ff5a98d39247b0038af
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: d28f23f690774d06805c46180baf0717
+      fromNodeId:
+        _value: 5d51f0070a8c4bd6bc9b4e9d449cdae2
+      toNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 8f519e3ee69044d6a6515bc61a375266
+          conditionTypeId: npc.actor_state_bool
+          params:
+            values:
+            - key: key
+              value:
+                _type: 3
+                _bool: 0
+                _int: 0
+                _float: 0
+                _string: npc.use_routes
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+            - key: expected
+              value:
+                _type: 0
+                _bool: 1
+                _int: 0
+                _float: 0
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+      priority: 1
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 923cf22dba194c79ad715ecd027e9793
+      fromNodeId:
+        _value: 5d51f0070a8c4bd6bc9b4e9d449cdae2
+      toNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: d11df081274d44b1b6d257f98807a65d
+          conditionTypeId: npc.detection_meter_exceeds
+          params:
+            values:
+            - key: threshold
+              value:
+                _type: 2
+                _bool: 0
+                _int: 0
+                _float: 1
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+            - key: use_max_detection
+              value:
+                _type: 0
+                _bool: 0
+                _int: 0
+                _float: 0
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 187a54b6b20242d186aa9c167a95afa2
+      fromNodeId:
+        _value: 90827679374644339e0160ddfb677450
+      toNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 353695bce997422b9f9127cdf6cdf524
+          conditionTypeId: npc.actor_state_bool
+          params:
+            values:
+            - key: key
+              value:
+                _type: 3
+                _bool: 0
+                _int: 0
+                _float: 0
+                _string: npc.use_routes
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+            - key: expected
+              value:
+                _type: 0
+                _bool: 0
+                _int: 0
+                _float: 0
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+      priority: 1
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 56939568e22946c6b95bf1556721059e
+      fromNodeId:
+        _value: 90827679374644339e0160ddfb677450
+      toNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: d11df081274d44b1b6d257f98807a65d
+          conditionTypeId: npc.detection_meter_exceeds
+          params:
+            values:
+            - key: threshold
+              value:
+                _type: 2
+                _bool: 0
+                _int: 0
+                _float: 1
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+            - key: use_max_detection
+              value:
+                _type: 0
+                _bool: 0
+                _int: 0
+                _float: 0
+                _string: 
+                _vector2: {x: 0, y: 0}
+                _vector3: {x: 0, y: 0, z: 0}
+                _guid:
+                  _value: 
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: c464656625f74c98962fd2fcdfa9da49
+      fromNodeId:
+        _value: 12f2cb30a84641c48dc70d6c2e55b413
+      toNodeId:
+        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: 0f96bb4f345647c980d699923feb8109
+          conditionTypeId: agis.node_complete
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+    - edgeId:
+        _value: 148d4cac4952481897db0a372ad1acdc
+      fromNodeId:
+        _value: 672b3d3c6d184dfbb9792877773da313
+      toNodeId:
+        _value: 36a1ef5aa2c64975a88d95ecd4b26516
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        leaf:
+          conditionId:
+            _value: f59458aa044749a298aafd4e8d908522
+          conditionTypeId: agis.node_complete
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99744b11a552062489e2781d89122968, type: 3}
+  m_Name: EnemyTemplateData
+  m_EditorClassIdentifier: 
+  patrolGraph: {fileID: 0}
+  stealthGraph: {fileID: 0}
+  knownGroupedAssets: []
+  routeData: {fileID: 0}
+  fillRate: 1
+  drainRate: 0.4
+  maxDetection: 3
+  investigateThreshold: 1
+  targetTag: Player
+  detectionRange: 10
+  detectionAngle: 60
