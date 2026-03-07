@@ -30,8 +30,10 @@
 //
 //   Pathfinding (A* Pathfinding Project):
 //     Seeker                    — requests paths from the A* graph
-//     AIPath                    — follows computed paths; controls character movement
-//     AIDestinationSetter       — keeps the AIPath target synced to a Transform
+//     AIPath                    — path computation (canMove = false; set by AStarAIAgentMovement.Awake)
+//     NPCUCCPathFinder          — IAGISNPCPathFinder bridge to AStarAIAgentMovement UCC ability
+//     NOTE: AIDestinationSetter is NOT added — AStarAIAgentMovement sets destination directly
+//           via IAstarAI.destination; AIDestinationSetter would conflict.
 //
 // ── What Inject() wires ───────────────────────────────────────────────────────────────
 //
@@ -43,27 +45,22 @@
 //     Slot 1 "Patrol"  ← data.patrolGraph
 //     knownGroupedAssets registered so grouped nodes can resolve
 //
-// ── UCC DEPENDENCIES (#if OPSIVE_UCC) ────────────────────────────────────────────────
+// ── UCC PRE-REQUISITES (#if OPSIVE_UCC) ──────────────────────────────────────────────
 //
-//   ⚠ 1. UltimateCharacterLocomotion must already exist on the prefab.
-//        AGISEnemyConfigurator CANNOT add it — UCC requires a complete character setup
-//        (abilities, item manager, effect manager, etc.) done in the Unity inspector.
-//        → If this component is missing when UpgradeEnemy/Configure runs, a LogWarning
-//          is emitted and the actor will not have UCC animation ability support.
+//   The following must be done in the inspector / CharacterBuilder BEFORE UpgradeEnemy() runs:
 //
-//   ⚠ 2. AIPath directly writes to CharacterController/Rigidbody.
-//        When UCC is active, UltimateCharacterLocomotion also owns the character's
-//        movement. Having both active causes jitter or physics conflicts.
-//        → Recommended fix: disable AIPath.canMove, then create a UCC movement Ability
-//          that reads AIPath.desiredVelocity and forwards it to
-//          CharacterLocomotion.InputVector each UpdateAbility() tick.
-//        → Until that bridge is in place, either disable AIPath (no movement) or
-//          remove UltimateCharacterLocomotion (no UCC abilities).
+//   1. UltimateCharacterLocomotion must be configured on the prefab.
+//      AGISEnemyConfigurator CANNOT add it — UCC requires a complete character setup
+//      (abilities, item manager, effect manager, etc.) done in the Unity inspector.
 //
-//   ⚠ 3. NPCTakeDamageNodeType and NPCDyingNodeType use an ability_index param.
-//        This index must match the actual position of the ability inside
-//        UltimateCharacterLocomotion.Abilities[] as shown in the inspector.
-//        Out-of-range indices are silently treated as "no ability" (NoOp behaviour).
+//   2. AStarAIAgentMovement ability must be added to UltimateCharacterLocomotion.Abilities[]
+//      (it is a concurrent ability; add it via the UCC Character Manager in inspector).
+//      NPCUCCPathFinder.Awake() will log a clear error if this ability is missing.
+//
+//   3. OPSIVE_UCC scripting define must be set in Player Settings.
+//
+//   4. TakeDamage and Die ability types must be present in Abilities[]
+//      (looked up by type at runtime — array index does not matter).
 
 using System;
 using System.Reflection;
@@ -92,11 +89,10 @@ namespace AGIS.NPC
         ///
         /// <para><b>UCC pre-requisites</b> (only relevant when OPSIVE_UCC is defined):<br/>
         /// • <c>UltimateCharacterLocomotion</c> must already be configured on the prefab.<br/>
-        /// • <c>AIPath</c> conflicts with UCC locomotion — implement a UCC movement ability
-        ///   that reads <c>AIPath.desiredVelocity</c> and feeds it to
-        ///   <c>CharacterLocomotion.InputVector</c>.<br/>
-        /// • <c>ability_index</c> params in TakeDamage/Dying nodes must match the ability's
-        ///   position in <c>UltimateCharacterLocomotion.Abilities[]</c>.</para>
+        /// • <c>AStarAIAgentMovement</c> concurrent ability must be added to the locomotion's
+        ///   Abilities[] in the UCC inspector — <c>NPCUCCPathFinder</c> will log an error if absent.<br/>
+        /// • <c>TakeDamage</c> and <c>Die</c> abilities must be present in Abilities[]
+        ///   (resolved by type — array index does not matter).</para>
         /// </summary>
         public static void UpgradeEnemy(GameObject enemy, AGISEnemyTemplateData template)
         {
@@ -128,7 +124,7 @@ namespace AGIS.NPC
         /// <list type="bullet">
         ///   <item>AGISActorRuntime, AGISActorState, AGISStateMachineRunner</item>
         ///   <item>NPCDetectionCone, NPCDetectionMeter, NPCRouteDataHolder</item>
-        ///   <item>Seeker, AIPath, AIDestinationSetter (A* Pathfinding)</item>
+        ///   <item>Seeker, AIPath, NPCUCCPathFinder (A* Pathfinding + UCC bridge)</item>
         /// </list>
         /// When AGISStateMachineRunner is newly added its <c>autoRegisterTypesFromAssemblies</c>
         /// flag is enabled so all node/condition types are discovered automatically.
@@ -151,12 +147,15 @@ namespace AGIS.NPC
             EnsureComponent<NPCDetectionMeter>(actor);
             EnsureComponent<NPCRouteDataHolder>(actor);
 
-            // A* Pathfinding — always added for path computation.
-            // With UCC active, disable AIPath.canMove and bridge desiredVelocity to UCC
-            // (see file header for details).
+            // A* Pathfinding — path computation.
+            // AStarAIAgentMovement.Awake() sets IAstarAI.canMove = false so A* never
+            // writes to the transform directly; UCC locomotion drives movement instead.
             EnsureComponent<Seeker>(actor);
             EnsureComponent<AIPath>(actor);
-            EnsureComponent<AIDestinationSetter>(actor);
+            // NOTE: AIDestinationSetter is intentionally NOT added here.
+            //       AStarAIAgentMovement sets IAstarAI.destination directly;
+            //       having AIDestinationSetter alongside it would conflict.
+            EnsureComponent<NPCUCCPathFinder>(actor);
 
 #if OPSIVE_UCC
             WarnIfUCCMissing(actor);

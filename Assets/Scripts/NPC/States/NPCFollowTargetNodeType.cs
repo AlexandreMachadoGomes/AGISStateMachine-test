@@ -28,7 +28,6 @@ using System.Collections.Generic;
 using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
-using Pathfinding;
 using UnityEngine;
 
 namespace AGIS.NPC.States
@@ -76,14 +75,12 @@ namespace AGIS.NPC.States
                                 "Only updated when use_detection_memory = true." },
         };
 
-        // ── IAGISNodeComponentRequirements ────────────────────────────────────────────
-
         public IReadOnlyList<Type> GetRequiredComponents(IAGISParamAccessor resolvedParams)
         {
             if (!resolvedParams.GetBool("use_detection_memory", false))
-                return new[] { typeof(AIPath), typeof(Seeker), typeof(AIDestinationSetter) };
+                return new[] { typeof(IAGISNPCPathFinder) };
 
-            return new[] { typeof(AIPath), typeof(Seeker), typeof(AIDestinationSetter), typeof(NPCDetectionCone) };
+            return new[] { typeof(IAGISNPCPathFinder), typeof(NPCDetectionCone) };
         }
 
         public IAGISNodeRuntime CreateRuntime(in AGISNodeRuntimeCreateArgs args)
@@ -99,9 +96,7 @@ namespace AGIS.NPC.States
         private sealed class Runtime : IAGISNodeRuntime
         {
             private readonly AGISExecutionContext _ctx;
-            private readonly AIPath               _aiPath;
-            private readonly Seeker               _seeker;
-            private readonly AIDestinationSetter  _destSetter;
+            private readonly IAGISNPCPathFinder   _pathFinder;
             private readonly NPCDetectionCone     _detection;
             private readonly AGISActorState       _actorState;
             private readonly bool                 _followPlayer;
@@ -119,24 +114,20 @@ namespace AGIS.NPC.States
                 _useMemory    = useMemory;
                 _rangeBonus   = rangeBonus;
                 _angleBonus   = angleBonus;
-                _aiPath       = ctx.Actor?.GetComponent<AIPath>();
-                _seeker       = ctx.Actor?.GetComponent<Seeker>();
-                _destSetter   = ctx.Actor?.GetComponent<AIDestinationSetter>();
+                _pathFinder   = ctx.Actor?.GetComponent<IAGISNPCPathFinder>();
                 _detection    = ctx.Actor?.GetComponent<NPCDetectionCone>();
                 _actorState   = useMemory ? ctx.Actor?.GetComponent<AGISActorState>() : null;
             }
 
             public void Enter()
             {
-                if (_aiPath == null) return;
+                if (_pathFinder == null) return;
 
-                _aiPath.enabled     = true;
-                _seeker.enabled     = true;
-                _destSetter.enabled = true;
+                _pathFinder.EnablePathfinding();
 
                 var target = ResolveTarget();
-                if (target != null && _destSetter != null)
-                    _destSetter.target = target.transform;
+                if (target != null)
+                    _pathFinder.SetWalkTargetTransform(target.transform);
 
                 if (_useMemory && _actorState != null)
                     _actorState.Set("npc.target_time_lost", AGISValue.FromFloat(0f));
@@ -171,6 +162,8 @@ namespace AGIS.NPC.States
 
             public void Exit()
             {
+                _pathFinder?.DisablePathfinding();
+                _pathFinder?.ClearWalkTarget();
                 _detection?.ClearPursuitOverride();
             }
 

@@ -11,16 +11,16 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2ea1b1b86039794e878ec74fd62cb39, type: 3}
   m_Name: PatrolGraph
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.ESM.UGC.AGISStateMachineGraphAsset
   graph:
     graphId:
-      _value: b19b7f2133d14b69a2ee6189bd8e1d84
+      _value: 9b7a8dbc75bc4fac96ad98bb14b2468e
     version: 1
     entryNodeId:
-      _value: 9a074fa478ab48f8ac943ab4c8b953bd
+      _value: 972622c5218b4fc490afa8f532f4cf37
     nodes:
     - nodeId:
-        _value: eef1f66781234601aa06ba9761b35446
+        _value: 22c53927aec446e18b96473559d3e6bd
       nodeTypeId: agis.any_state
       params:
         values: []
@@ -33,7 +33,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       nodeTypeId: npc.behavior_selector
       params:
         values: []
@@ -46,7 +46,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+        _value: 870105cb9de144ee84d9515f863fce11
       nodeTypeId: npc.follow_target
       params:
         values:
@@ -103,7 +103,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 205f80d2368747b7b59a21b965a8d564
+        _value: 874500bd1ded4bce84e92da9de146f32
       nodeTypeId: npc.investigate
       params:
         values: []
@@ -116,7 +116,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 5d51f0070a8c4bd6bc9b4e9d449cdae2
+        _value: ffd6d9999cc74667bfb94036edf6baab
       nodeTypeId: npc.wander
       params:
         values: []
@@ -129,7 +129,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 90827679374644339e0160ddfb677450
+        _value: 54d60d6b0f254835ad5f5b988a27a727
       nodeTypeId: Grouped
       params:
         values: []
@@ -137,12 +137,12 @@ MonoBehaviour:
         position: {x: 0, y: 0}
         collapsed: 0
       groupAssetId:
-        _value: 4515e901ad9f44a5ab66fcb471980617
+        _value: 5a097e4bda89478c8c029d43a0bd4355
       exposedOverrides:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 12f2cb30a84641c48dc70d6c2e55b413
+        _value: d2cb73c5be8b4077bdc5dc6093749aa7
       nodeTypeId: npc.take_damage
       params:
         values: []
@@ -155,7 +155,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 672b3d3c6d184dfbb9792877773da313
+        _value: d9793dcbdd714cc9875978454be2614a
       nodeTypeId: npc.dying
       params:
         values: []
@@ -168,7 +168,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 36a1ef5aa2c64975a88d95ecd4b26516
+        _value: 51b1e8625a7244668a57d8c2b69fe987
       nodeTypeId: npc.idle
       params:
         values: []
@@ -182,18 +182,18 @@ MonoBehaviour:
       parallelChildren: []
     edges:
     - edgeId:
-        _value: 9e0e867c18ac45369c89559b5cd05ddb
+        _value: 792ac56d07634ca6873fedb478402bdb
       fromNodeId:
-        _value: eef1f66781234601aa06ba9761b35446
+        _value: 22c53927aec446e18b96473559d3e6bd
       toNodeId:
-        _value: 672b3d3c6d184dfbb9792877773da313
+        _value: d9793dcbdd714cc9875978454be2614a
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: d0fcda604b0f482f82c97dfcb17dfee4
+            _value: b60dc0972cb8478fb8ad53c1966301da
           conditionTypeId: npc.blackboard_bool
           params:
             values:
@@ -225,11 +225,11 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: 016734da0a39451fa9e7fb816415da8d
+        _value: 54c60bf127684b34841cf8037c0a4e86
       fromNodeId:
-        _value: eef1f66781234601aa06ba9761b35446
+        _value: 22c53927aec446e18b96473559d3e6bd
       toNodeId:
-        _value: 12f2cb30a84641c48dc70d6c2e55b413
+        _value: d2cb73c5be8b4077bdc5dc6093749aa7
       condition:
         kind: 0
         constValue: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
           children: []
           leaf:
             conditionId:
-              _value: 2d399765d00c48d7b7d60f69873e505b
+              _value: 0f5941b339f24c71ad72a1723fb4e457
             conditionTypeId: npc.blackboard_bool
             params:
               values:
@@ -270,7 +270,7 @@ MonoBehaviour:
           children: []
           leaf:
             conditionId:
-              _value: 94b34fdce959432691f0c127004a2f2d
+              _value: c0c0945e1c2d4e068180ab555a21cc2b
             conditionTypeId: npc.actor_state_bool
             params:
               values:
@@ -298,7 +298,7 @@ MonoBehaviour:
                     _value: 
         leaf:
           conditionId:
-            _value: 7656fe7309ef48ff88bb6840881e5534
+            _value: 46b677e113f746b2b2bf9763f0ebd2e2
           conditionTypeId: 
           params:
             values: []
@@ -308,11 +308,11 @@ MonoBehaviour:
         cooldownSeconds: 0.5
       scopeId: Any
     - edgeId:
-        _value: 69d3f113a606461eb2d7f5dae690ea5e
+        _value: 1fe6af7674cc429fa9328d23ab89a99f
       fromNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       toNodeId:
-        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+        _value: 870105cb9de144ee84d9515f863fce11
       condition:
         kind: 0
         constValue: 0
@@ -322,7 +322,7 @@ MonoBehaviour:
           children: []
           leaf:
             conditionId:
-              _value: 079d007ea1bb486ca729e469436c3084
+              _value: 00e27fa00e524d4aa682722965810f64
             conditionTypeId: npc.detection_meter_exceeds
             params:
               values:
@@ -342,7 +342,7 @@ MonoBehaviour:
           children: []
           leaf:
             conditionId:
-              _value: 94b34fdce959432691f0c127004a2f2d
+              _value: c0c0945e1c2d4e068180ab555a21cc2b
             conditionTypeId: npc.actor_state_bool
             params:
               values:
@@ -370,7 +370,7 @@ MonoBehaviour:
                     _value: 
         leaf:
           conditionId:
-            _value: 35b3af50b08241cf9a4d0d2ac37ec960
+            _value: 8b72494052ba4229804ae996efb9f031
           conditionTypeId: 
           params:
             values: []
@@ -380,11 +380,11 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: 68d09f0844854d799e7b7424be8a6d97
+        _value: b06b805940d946b1a6c0da040484310c
       fromNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       toNodeId:
-        _value: 205f80d2368747b7b59a21b965a8d564
+        _value: 874500bd1ded4bce84e92da9de146f32
       condition:
         kind: 0
         constValue: 0
@@ -394,7 +394,7 @@ MonoBehaviour:
           children: []
           leaf:
             conditionId:
-              _value: d11df081274d44b1b6d257f98807a65d
+              _value: dc5119c39421440aaa744623d14afad8
             conditionTypeId: npc.detection_meter_exceeds
             params:
               values:
@@ -425,7 +425,7 @@ MonoBehaviour:
           children: []
           leaf:
             conditionId:
-              _value: 94b34fdce959432691f0c127004a2f2d
+              _value: c0c0945e1c2d4e068180ab555a21cc2b
             conditionTypeId: npc.actor_state_bool
             params:
               values:
@@ -453,7 +453,7 @@ MonoBehaviour:
                     _value: 
         leaf:
           conditionId:
-            _value: e1085209d829444d9abd44cb56692260
+            _value: 465a2748a1dc4dbcbf4c1e025b1f9b0e
           conditionTypeId: 
           params:
             values: []
@@ -463,18 +463,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: e73daa57c07f49dda01b71db32d084ce
+        _value: 0b255ea00ad34b9781c0990fd087d045
       fromNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       toNodeId:
-        _value: 90827679374644339e0160ddfb677450
+        _value: 54d60d6b0f254835ad5f5b988a27a727
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: 3fbd06bd239942ed968243e392ba2e9d
+            _value: 6a402cc9f6d74ebd9b61266083f646e0
           conditionTypeId: npc.actor_state_bool
           params:
             values:
@@ -506,18 +506,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: ab1699b9472548a09bbf1f4c3f9e0cad
+        _value: bd342d8f291c4e3689b95380a5d45cb9
       fromNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       toNodeId:
-        _value: 5d51f0070a8c4bd6bc9b4e9d449cdae2
+        _value: ffd6d9999cc74667bfb94036edf6baab
       condition:
         kind: 4
         constValue: 1
         children: []
         leaf:
           conditionId:
-            _value: 65aef4dc3d974695a56ddc4e63824c5e
+            _value: 2e8a9f3176c241eab2d0edd710d3b3a8
           conditionTypeId: 
           params:
             values: []
@@ -527,18 +527,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: b594529c5e744cbfaf6fc1c6568c076a
+        _value: f4f15c65521f49d4b897ee8fbf39386c
       fromNodeId:
-        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+        _value: 870105cb9de144ee84d9515f863fce11
       toNodeId:
-        _value: 205f80d2368747b7b59a21b965a8d564
+        _value: 874500bd1ded4bce84e92da9de146f32
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: bc008000d7e7481fa43d901374b8ea6a
+            _value: f1a32f896da94d3c9a64e78ac747c68e
           conditionTypeId: npc.has_lost_target
           params:
             values:
@@ -559,18 +559,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: 7ed061998bad4527a5f6821e988271d7
+        _value: 87ece2180daa4133a1a73f9ac0672e35
       fromNodeId:
-        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+        _value: 870105cb9de144ee84d9515f863fce11
       toNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       condition:
         kind: 2
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: 27760e1770b24e79bf599c26450b3423
+            _value: 441b3fb7c425490a90835129c53379a1
           conditionTypeId: 
           params:
             values: []
@@ -580,18 +580,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: 5d47e62a19e44f8db2d5b54a3375b8c6
+        _value: 014aa1b7186541d5a5659c641736ee49
       fromNodeId:
-        _value: 205f80d2368747b7b59a21b965a8d564
+        _value: 874500bd1ded4bce84e92da9de146f32
       toNodeId:
-        _value: 11f4e864d84a44e5a88d88dcc2a5dac6
+        _value: 870105cb9de144ee84d9515f863fce11
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: 079d007ea1bb486ca729e469436c3084
+            _value: 00e27fa00e524d4aa682722965810f64
           conditionTypeId: npc.detection_meter_exceeds
           params:
             values:
@@ -612,18 +612,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: a1fcf3a1fc41410fb65605c1651a9cd7
+        _value: cc6df0ecf3b948b9b7ef91a3c2c3fb13
       fromNodeId:
-        _value: 205f80d2368747b7b59a21b965a8d564
+        _value: 874500bd1ded4bce84e92da9de146f32
       toNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       condition:
         kind: 2
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: cdfe3bb3c6524ff5a98d39247b0038af
+            _value: 2564e40446f3478781c19a9844f0f846
           conditionTypeId: 
           params:
             values: []
@@ -633,18 +633,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: d28f23f690774d06805c46180baf0717
+        _value: f4f01d3427cc4074bf272a8d6e6f9d4f
       fromNodeId:
-        _value: 5d51f0070a8c4bd6bc9b4e9d449cdae2
+        _value: ffd6d9999cc74667bfb94036edf6baab
       toNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: 8f519e3ee69044d6a6515bc61a375266
+            _value: 14c8533bfd6e43f2992aab1de1560a69
           conditionTypeId: npc.actor_state_bool
           params:
             values:
@@ -676,18 +676,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: 923cf22dba194c79ad715ecd027e9793
+        _value: fe57f614f08b47dd88eb27df902712cb
       fromNodeId:
-        _value: 5d51f0070a8c4bd6bc9b4e9d449cdae2
+        _value: ffd6d9999cc74667bfb94036edf6baab
       toNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: d11df081274d44b1b6d257f98807a65d
+            _value: dc5119c39421440aaa744623d14afad8
           conditionTypeId: npc.detection_meter_exceeds
           params:
             values:
@@ -719,18 +719,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: 187a54b6b20242d186aa9c167a95afa2
+        _value: 325f9de0e1234efbb050d9ba9c4b41a2
       fromNodeId:
-        _value: 90827679374644339e0160ddfb677450
+        _value: 54d60d6b0f254835ad5f5b988a27a727
       toNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: 353695bce997422b9f9127cdf6cdf524
+            _value: c282690d40ab40678e9447529e143f4b
           conditionTypeId: npc.actor_state_bool
           params:
             values:
@@ -762,18 +762,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: 56939568e22946c6b95bf1556721059e
+        _value: 2a13c6f425194ea49e0953f16ef09a99
       fromNodeId:
-        _value: 90827679374644339e0160ddfb677450
+        _value: 54d60d6b0f254835ad5f5b988a27a727
       toNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: d11df081274d44b1b6d257f98807a65d
+            _value: dc5119c39421440aaa744623d14afad8
           conditionTypeId: npc.detection_meter_exceeds
           params:
             values:
@@ -805,18 +805,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: c464656625f74c98962fd2fcdfa9da49
+        _value: 60f2992151214f0996d7f7fa8cd81a9e
       fromNodeId:
-        _value: 12f2cb30a84641c48dc70d6c2e55b413
+        _value: d2cb73c5be8b4077bdc5dc6093749aa7
       toNodeId:
-        _value: 9a074fa478ab48f8ac943ab4c8b953bd
+        _value: 972622c5218b4fc490afa8f532f4cf37
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: 0f96bb4f345647c980d699923feb8109
+            _value: 89019d0086ef46cdbbf852bb24b90693
           conditionTypeId: agis.node_complete
           params:
             values: []
@@ -826,18 +826,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: 148d4cac4952481897db0a372ad1acdc
+        _value: aae82a9497c1496491e142673da3438e
       fromNodeId:
-        _value: 672b3d3c6d184dfbb9792877773da313
+        _value: d9793dcbdd714cc9875978454be2614a
       toNodeId:
-        _value: 36a1ef5aa2c64975a88d95ecd4b26516
+        _value: 51b1e8625a7244668a57d8c2b69fe987
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: f59458aa044749a298aafd4e8d908522
+            _value: e2e3d497183549d9a844b25e174ea32c
           conditionTypeId: agis.node_complete
           params:
             values: []

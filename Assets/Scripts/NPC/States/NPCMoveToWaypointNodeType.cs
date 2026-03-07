@@ -11,7 +11,6 @@ using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
 using AGIS.NPC.Routes;
-using Pathfinding;
 using UnityEngine;
 
 namespace AGIS.NPC.States
@@ -37,7 +36,7 @@ namespace AGIS.NPC.States
         };
 
         public IReadOnlyList<System.Type> GetRequiredComponents(IAGISParamAccessor resolvedParams)
-            => new[] { typeof(AIPath), typeof(Seeker), typeof(AIDestinationSetter) };
+            => new[] { typeof(IAGISNPCPathFinder) };
 
         public IAGISNodeRuntime CreateRuntime(in AGISNodeRuntimeCreateArgs args)
             => new Runtime(args.Ctx);
@@ -45,47 +44,29 @@ namespace AGIS.NPC.States
         private sealed class Runtime : IAGISNodeRuntime
         {
             private readonly AGISExecutionContext _ctx;
-            private readonly AIPath               _aiPath;
-            private readonly Seeker               _seeker;
-            private readonly AIDestinationSetter  _destSetter;
+            private readonly IAGISNPCPathFinder   _pathFinder;
             private readonly NPCRouteDataHolder   _holder;
             private readonly AGISActorState       _actorState;
-
-            private GameObject _waypointProxy;
 
             public Runtime(AGISExecutionContext ctx)
             {
                 _ctx        = ctx;
-                _aiPath     = ctx.Actor?.GetComponent<AIPath>();
-                _seeker     = ctx.Actor?.GetComponent<Seeker>();
-                _destSetter = ctx.Actor?.GetComponent<AIDestinationSetter>();
+                _pathFinder = ctx.Actor?.GetComponent<IAGISNPCPathFinder>();
                 _holder     = ctx.Actor?.GetComponent<NPCRouteDataHolder>();
                 _actorState = ctx.Actor?.GetComponent<AGISActorState>();
             }
 
             public void Enter()
             {
-                if (_aiPath == null || _holder == null) return;
+                if (_pathFinder == null || _holder == null) return;
 
-                _aiPath.enabled     = true;
-                _seeker.enabled     = true;
-                _destSetter.enabled = true;
+                _pathFinder.EnablePathfinding();
 
                 int seqIdx = _actorState?.GetInt("npc.route.sequence_index") ?? 0;
                 int wpIdx  = _actorState?.GetInt("npc.route.waypoint_index") ?? 0;
 
                 if (_holder.TryGetWaypoint(seqIdx, wpIdx, out var waypoint))
-                {
-                    // Create (or reuse) a proxy GO at the waypoint position so the
-                    // AIDestinationSetter has a stable Transform target to track.
-                    if (_waypointProxy == null)
-                        _waypointProxy = new GameObject("WaypointProxy_temp");
-
-                    _waypointProxy.transform.position = waypoint;
-
-                    if (_destSetter != null)
-                        _destSetter.target = _waypointProxy.transform;
-                }
+                    _pathFinder.SetWalkTarget(waypoint);
 
                 _ctx.Blackboard.Set("npc.route.sequence_index", seqIdx);
                 _ctx.Blackboard.Set("npc.route.waypoint_index", wpIdx);
@@ -94,14 +75,7 @@ namespace AGIS.NPC.States
 
             public void Tick(float dt) { }
 
-            public void Exit()
-            {
-                if (_waypointProxy != null)
-                {
-                    UnityEngine.Object.Destroy(_waypointProxy);
-                    _waypointProxy = null;
-                }
-            }
+            public void Exit() => _pathFinder?.DisablePathfinding();
         }
     }
 }

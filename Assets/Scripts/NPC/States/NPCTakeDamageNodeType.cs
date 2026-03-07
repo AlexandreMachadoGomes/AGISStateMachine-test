@@ -5,8 +5,6 @@
 //          Add an outgoing edge with condition "agis.node_complete" to auto-transition out.
 //
 // Params:
-//   ability_index    (Int,    default 0)                — index of the TakeDamage ability on
-//                                                         UltimateCharacterLocomotion
 //   damage_flag_key  (String, default "npc.is_damaged") — blackboard key cleared on Enter so
 //                                                         the AnyState interrupt does not re-fire
 //                                                         while the damage animation plays.
@@ -15,6 +13,9 @@
 // Guarded by #if OPSIVE_UCC. Without the define the node registers as a shell:
 //   • CreateRuntime() returns a NoOpNodeRuntime that completes on the first Tick.
 //   • IAGISNodeComponentRequirements returns an empty array.
+//
+// The TakeDamage UCC ability is resolved by type (GetAbility<TakeDamage>()) — no inspector
+// index required. Ability order in the UCC ability list does not affect this node.
 //
 // Implements IAGISNodeSignal so "agis.node_complete" edges fire when IsComplete = true.
 // IsComplete is reset to false on Enter() — safe to re-enter (e.g. rapid hits).
@@ -43,10 +44,6 @@ namespace AGIS.NPC.States
         {
             specs =
             {
-                new AGISParamSpec("ability_index", AGISParamType.Int, AGISValue.FromInt(0))
-                    { displayName = "Ability Index",
-                      tooltip     = "Index of the TakeDamage ability on UltimateCharacterLocomotion.",
-                      hasMin = true, intMin = 0 },
                 new AGISParamSpec("damage_flag_key", AGISParamType.String, AGISValue.FromString("npc.is_damaged"))
                     { displayName = "Damage Flag Key",
                       tooltip     = "Blackboard key cleared on Enter to prevent the AnyState interrupt " +
@@ -63,11 +60,10 @@ namespace AGIS.NPC.States
 
         public IAGISNodeRuntime CreateRuntime(in AGISNodeRuntimeCreateArgs args)
         {
-            int    abilityIndex  = args.Params.GetInt   ("ability_index",   0);
             string damageFlagKey = args.Params.GetString("damage_flag_key", "npc.is_damaged");
 
 #if OPSIVE_UCC
-            return new UCCRuntime(args.Ctx, abilityIndex, damageFlagKey);
+            return new UCCRuntime(args.Ctx, damageFlagKey);
 #else
             return new NoOpRuntime(args.Ctx, damageFlagKey);
 #endif
@@ -104,24 +100,22 @@ namespace AGIS.NPC.States
 
 #if OPSIVE_UCC
         // ─────────────────────────────────────────────────────────────────────
-        // UCC runtime — starts the ability by index, polls IsActive for completion.
+        // UCC runtime — starts the ability by type, polls IsActive for completion.
         // ─────────────────────────────────────────────────────────────────────
         private sealed class UCCRuntime : IAGISNodeRuntime, IAGISNodeSignal
         {
             private readonly UltimateCharacterLocomotion _locomotion;
             private readonly IAGISBlackboard             _blackboard;
-            private readonly int                         _abilityIndex;
             private readonly string                      _damageFlagKey;
 
-            private Ability _ability;
+            private TakeDamage _ability;
 
             public bool IsComplete { get; private set; }
 
-            public UCCRuntime(AGISExecutionContext ctx, int abilityIndex, string damageFlagKey)
+            public UCCRuntime(AGISExecutionContext ctx, string damageFlagKey)
             {
                 _locomotion    = ctx.Actor?.GetComponent<UltimateCharacterLocomotion>();
                 _blackboard    = ctx.Blackboard;
-                _abilityIndex  = abilityIndex;
                 _damageFlagKey = damageFlagKey;
             }
 
@@ -134,7 +128,7 @@ namespace AGIS.NPC.States
 
                 if (_locomotion == null) return;
 
-                _ability = _locomotion.GetAbility<Ability>(_abilityIndex);
+                _ability = _locomotion.GetAbility<TakeDamage>();
                 if (_ability != null)
                     _locomotion.TryStartAbility(_ability);
             }

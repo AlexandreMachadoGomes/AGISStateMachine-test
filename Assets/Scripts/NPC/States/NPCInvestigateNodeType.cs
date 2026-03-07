@@ -14,7 +14,7 @@
 //   Navigate  — pathfind to npc.last_known_target_pos from AGISActorState; arrival triggers LookAround
 //   LookAround — disable pathfinding, rotate through random Y-angles, set IsComplete when done
 //
-// Exit — destroys the temporary navigation target GO and re-enables pathfinding for the next state.
+// Exit — disables pathfinding; the next state re-enables it in its own Enter() if needed.
 //
 // Implements IAGISNodeSignal so "agis.node_complete" edges can fire when investigation ends.
 // Template graphs typically use meter-based conditions instead; IAGISNodeSignal is for custom graphs.
@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
-using Pathfinding;
 using UnityEngine;
 
 namespace AGIS.NPC.States
@@ -63,7 +62,7 @@ namespace AGIS.NPC.States
         };
 
         public IReadOnlyList<System.Type> GetRequiredComponents(IAGISParamAccessor resolvedParams)
-            => new[] { typeof(AIPath), typeof(Seeker), typeof(AIDestinationSetter) };
+            => new[] { typeof(IAGISNPCPathFinder) };
 
         public IAGISNodeRuntime CreateRuntime(in AGISNodeRuntimeCreateArgs args)
         {
@@ -81,17 +80,15 @@ namespace AGIS.NPC.States
             private enum Phase { Navigate, LookAround }
 
             private readonly AGISExecutionContext _ctx;
-            private readonly AIPath               _aiPath;
-            private readonly Seeker               _seeker;
-            private readonly AIDestinationSetter  _destSetter;
+            private readonly IAGISNPCPathFinder   _pathFinder;
             private readonly AGISActorState       _actorState;
             private readonly int                  _lookCount;
             private readonly float                _lookDuration;
             private readonly float                _rotationSpeed;
             private readonly float                _arrivalDistSq;
 
-            private Phase      _phase;
-            private GameObject _tempTarget;
+            private Phase   _phase;
+            private Vector3 _targetPos;
 
             // Look-around state
             private float[] _lookAngles;
@@ -105,9 +102,7 @@ namespace AGIS.NPC.States
                            float rotationSpeed, float arrivalDistance)
             {
                 _ctx           = ctx;
-                _aiPath        = ctx.Actor?.GetComponent<AIPath>();
-                _seeker        = ctx.Actor?.GetComponent<Seeker>();
-                _destSetter    = ctx.Actor?.GetComponent<AIDestinationSetter>();
+                _pathFinder    = ctx.Actor?.GetComponent<IAGISNPCPathFinder>();
                 _actorState    = ctx.Actor?.GetComponent<AGISActorState>();
                 _lookCount     = Mathf.Max(1, lookCount);
                 _lookDuration  = lookDuration;
@@ -121,21 +116,14 @@ namespace AGIS.NPC.States
                 _phase     = Phase.Navigate;
                 _holding   = false;
 
-                Vector3 targetPos = _actorState != null
+                _targetPos = _actorState != null
                     ? _actorState.Get("npc.last_known_target_pos").AsVector3()
                     : Vector3.zero;
 
-                _tempTarget = new GameObject("InvestigateTarget_temp");
-                _tempTarget.transform.position = targetPos;
-
-                if (_aiPath != null)
+                if (_pathFinder != null)
                 {
-                    _aiPath.enabled     = true;
-                    _seeker.enabled     = true;
-                    _destSetter.enabled = true;
-
-                    if (_destSetter != null)
-                        _destSetter.target = _tempTarget.transform;
+                    _pathFinder.EnablePathfinding();
+                    _pathFinder.SetWalkTarget(_targetPos);
                 }
             }
 
@@ -151,18 +139,7 @@ namespace AGIS.NPC.States
 
             public void Exit()
             {
-                if (_tempTarget != null)
-                    Object.Destroy(_tempTarget);
-                _tempTarget = null;
-
-                // Re-enable pathfinding so the next state can manage movement freely.
-                if (_aiPath != null)
-                {
-                    _aiPath.enabled     = true;
-                    _seeker.enabled     = true;
-                    _destSetter.enabled = true;
-                }
-
+                _pathFinder?.DisablePathfinding();
                 IsComplete = false;
             }
 
@@ -170,9 +147,9 @@ namespace AGIS.NPC.States
 
             private void TickNavigate()
             {
-                if (_ctx.Actor == null || _tempTarget == null) return;
+                if (_ctx.Actor == null) return;
 
-                Vector3 toTarget = _tempTarget.transform.position - _ctx.Actor.transform.position;
+                Vector3 toTarget = _targetPos - _ctx.Actor.transform.position;
                 toTarget.y = 0f;
 
                 if (toTarget.sqrMagnitude <= _arrivalDistSq)
@@ -184,13 +161,7 @@ namespace AGIS.NPC.States
             private void StartLookAround()
             {
                 _phase = Phase.LookAround;
-
-                if (_aiPath != null)
-                {
-                    _aiPath.enabled     = false;
-                    _seeker.enabled     = false;
-                    _destSetter.enabled = false;
-                }
+                _pathFinder?.DisablePathfinding();
 
                 float baseAngle = _ctx.Actor != null
                     ? _ctx.Actor.transform.eulerAngles.y

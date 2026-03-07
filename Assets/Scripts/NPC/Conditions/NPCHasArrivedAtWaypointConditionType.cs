@@ -2,7 +2,8 @@
 // Folder: Assets/Scripts/NPC/Conditions/
 // Purpose: True when the NPC is within arrival_distance of the waypoint identified by the
 //          current (SequenceIndex, WaypointIndex) stored in AGISActorState.
-//          Falls back to AIPath.reachedDestination when AGISActorState or the holder is absent.
+//          Falls back to IAGISNPCPathFinder.ReachedDestination when AGISActorState or the
+//          holder is absent.
 //
 // Params:
 //   arrival_distance  (Float, default 0.5) — radius in world units around the waypoint.
@@ -11,7 +12,6 @@ using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
 using AGIS.NPC.Routes;
-using Pathfinding;
 using UnityEngine;
 
 namespace AGIS.NPC.Conditions
@@ -40,8 +40,8 @@ namespace AGIS.NPC.Conditions
 
             if (holder == null || actorState == null)
             {
-                var aiPath = actor.GetComponent<AIPath>();
-                return aiPath != null && aiPath.reachedDestination;
+                var pathFinder = actor.GetComponent<IAGISNPCPathFinder>();
+                return pathFinder != null && pathFinder.ReachedDestination;
             }
 
             int seqIdx = actorState.GetInt("npc.route.sequence_index");

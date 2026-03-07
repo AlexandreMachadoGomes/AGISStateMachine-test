@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
-using Pathfinding;
 using UnityEngine;
 
 namespace AGIS.NPC.States
@@ -34,7 +33,7 @@ namespace AGIS.NPC.States
         };
 
         public IReadOnlyList<System.Type> GetRequiredComponents(IAGISParamAccessor resolvedParams)
-            => new[] { typeof(AIPath), typeof(Seeker), typeof(AIDestinationSetter) };
+            => new[] { typeof(IAGISNPCPathFinder) };
 
         public IAGISNodeRuntime CreateRuntime(in AGISNodeRuntimeCreateArgs args)
         {
@@ -46,12 +45,9 @@ namespace AGIS.NPC.States
         private sealed class Runtime : IAGISNodeRuntime
         {
             private readonly AGISExecutionContext _ctx;
-            private readonly AIPath               _aiPath;
-            private readonly Seeker               _seeker;
-            private readonly AIDestinationSetter  _destSetter;
+            private readonly IAGISNPCPathFinder   _pathFinder;
             private readonly float                _radius;
             private readonly float                _pauseTime;
-            private readonly GameObject           _wanderTarget;
 
             private float _pauseTimer;
             private bool  _waiting;
@@ -59,41 +55,24 @@ namespace AGIS.NPC.States
             public Runtime(AGISExecutionContext ctx, float radius, float pauseTime)
             {
                 _ctx        = ctx;
-                _aiPath     = ctx.Actor?.GetComponent<AIPath>();
-                _seeker     = ctx.Actor?.GetComponent<Seeker>();
-                _destSetter = ctx.Actor?.GetComponent<AIDestinationSetter>();
+                _pathFinder = ctx.Actor?.GetComponent<IAGISNPCPathFinder>();
                 _radius     = radius;
                 _pauseTime  = pauseTime;
-
-                if (ctx.Actor != null)
-                {
-                    var go = new GameObject("WanderTarget_temp");
-                    go.transform.position = ctx.Actor.transform.position;
-                    _wanderTarget = go;
-                }
             }
 
             public void Enter()
             {
-                if (_aiPath == null) return;
+                if (_pathFinder == null) return;
 
-                _aiPath.enabled     = true;
-                _seeker.enabled     = true;
-                _destSetter.enabled = true;
-
+                _pathFinder.EnablePathfinding();
                 _waiting    = false;
                 _pauseTimer = 0f;
-
-                if (_wanderTarget != null)
-                {
-                    if (_destSetter != null) _destSetter.target = _wanderTarget.transform;
-                    PickNewDestination();
-                }
+                PickNewDestination();
             }
 
             public void Tick(float dt)
             {
-                if (_aiPath == null || !_aiPath.enabled) return;
+                if (_pathFinder == null) return;
 
                 if (_waiting)
                 {
@@ -102,31 +81,24 @@ namespace AGIS.NPC.States
                     return;
                 }
 
-                if (_aiPath.reachedDestination)
+                if (_pathFinder.ReachedDestination)
                 {
                     _waiting    = true;
                     _pauseTimer = _pauseTime;
                 }
             }
 
-            public void Exit()
-            {
-                if (_wanderTarget != null)
-                    UnityEngine.Object.Destroy(_wanderTarget);
-            }
+            public void Exit() => _pathFinder?.DisablePathfinding();
 
             private void PickNewDestination()
             {
-                if (_wanderTarget == null || _ctx.Actor == null) return;
+                if (_pathFinder == null || _ctx.Actor == null) return;
 
                 Vector3 origin = _ctx.Actor.transform.position;
                 Vector2 rand2D = UnityEngine.Random.insideUnitCircle * _radius;
                 Vector3 candidate = new Vector3(origin.x + rand2D.x, origin.y, origin.z + rand2D.y);
 
-                if (AstarPath.active != null)
-                    candidate = AstarPath.active.GetNearest(candidate, NNConstraint.Default).position;
-
-                _wanderTarget.transform.position = candidate;
+                _pathFinder.SetWalkTarget(_pathFinder.SnapToGraph(candidate));
             }
         }
     }

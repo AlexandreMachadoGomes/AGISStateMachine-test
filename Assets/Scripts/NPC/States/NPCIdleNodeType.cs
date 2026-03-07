@@ -5,7 +5,6 @@
 using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
-using Pathfinding;
 using UnityEngine;
 
 namespace AGIS.NPC.States
@@ -22,26 +21,16 @@ namespace AGIS.NPC.States
 
         private sealed class Runtime : IAGISNodeRuntime
         {
-            private readonly AIPath              _aiPath;
-            private readonly Seeker              _seeker;
-            private readonly AIDestinationSetter _destSetter;
+            private readonly IAGISNPCPathFinder _pathFinder;
 
             public Runtime(GameObject actor)
             {
-                _aiPath     = actor != null ? actor.GetComponent<AIPath>()              : null;
-                _seeker     = actor != null ? actor.GetComponent<Seeker>()              : null;
-                _destSetter = actor != null ? actor.GetComponent<AIDestinationSetter>() : null;
+                _pathFinder = actor != null ? actor.GetComponent<IAGISNPCPathFinder>() : null;
             }
 
-            public void Enter()
-            {
-                if (_aiPath     != null) _aiPath.enabled      = false;
-                if (_seeker     != null) _seeker.enabled      = false;
-                if (_destSetter != null) _destSetter.enabled  = false;
-            }
-
+            public void Enter()  => _pathFinder?.DisablePathfinding();
             public void Tick(float dt) { }
-            public void Exit()         { }
+            public void Exit()   { }
         }
     }
 }

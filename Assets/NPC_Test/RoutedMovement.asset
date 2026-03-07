@@ -11,19 +11,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f27336a7d8141f546879b578cb01fd56, type: 3}
   m_Name: RoutedMovement
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.ESM.UGC.AGISGroupedStateAsset
   groupAssetId:
-    _value: 4515e901ad9f44a5ab66fcb471980617
+    _value: 5a097e4bda89478c8c029d43a0bd4355
   displayName: Routed Movement
   internalGraph:
     graphId:
-      _value: 35adbdf11730465790ffa3206bb73cda
+      _value: 85acef8a4f0a42079a96aec56ee588ad
     version: 1
     entryNodeId:
-      _value: cab9849fa68949aaa28c861a97b3711d
+      _value: ee0e030ad31546b8ac93e5a42606b0a3
     nodes:
     - nodeId:
-        _value: cab9849fa68949aaa28c861a97b3711d
+        _value: ee0e030ad31546b8ac93e5a42606b0a3
       nodeTypeId: npc.reset_route
       params:
         values: []
@@ -36,7 +36,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 0e6f8a2d95f5491aac6f59db51f6cada
+        _value: 11fe762665e940d6b6b46a9676b27f86
       nodeTypeId: npc.move_to_waypoint
       params:
         values: []
@@ -49,7 +49,7 @@ MonoBehaviour:
         values: []
       parallelChildren: []
     - nodeId:
-        _value: 282dcd01a3b945e3a7ec6afee7f86dba
+        _value: 161b9aeaf8a4477e8ea4569ff0b13ff3
       nodeTypeId: npc.advance_waypoint
       params:
         values: []
@@ -63,18 +63,18 @@ MonoBehaviour:
       parallelChildren: []
     edges:
     - edgeId:
-        _value: 9b0b5ee545dc4a0ebae3ae6bbd2794f6
+        _value: 3dc1abe09c964dc2b9a258a897edd779
       fromNodeId:
-        _value: cab9849fa68949aaa28c861a97b3711d
+        _value: ee0e030ad31546b8ac93e5a42606b0a3
       toNodeId:
-        _value: 0e6f8a2d95f5491aac6f59db51f6cada
+        _value: 11fe762665e940d6b6b46a9676b27f86
       condition:
         kind: 4
         constValue: 1
         children: []
         leaf:
           conditionId:
-            _value: 714552d485bd4b23ad222a530cec564b
+            _value: d970a1cead054c6d85a8f340924a198a
           conditionTypeId: 
           params:
             values: []
@@ -84,18 +84,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: b3dd867eb7b94403a473b7425c0dc430
+        _value: 4d9ee3d485fe468e9a4733d763c08f9f
       fromNodeId:
-        _value: 0e6f8a2d95f5491aac6f59db51f6cada
+        _value: 11fe762665e940d6b6b46a9676b27f86
       toNodeId:
-        _value: 282dcd01a3b945e3a7ec6afee7f86dba
+        _value: 161b9aeaf8a4477e8ea4569ff0b13ff3
       condition:
         kind: 3
         constValue: 0
         children: []
         leaf:
           conditionId:
-            _value: 4da85429e7fe4302a059ce70a09bbc69
+            _value: 11da1274536e4e8db850dd7672be421e
           conditionTypeId: npc.has_arrived_at_waypoint
           params:
             values: []
@@ -105,18 +105,18 @@ MonoBehaviour:
         cooldownSeconds: 0
       scopeId: Any
     - edgeId:
-        _value: c38504061e0f46c296680efb75d0d2da
+        _value: 4f63dc2e58864b10bf750cf53cab91e7
       fromNodeId:
-        _value: 282dcd01a3b945e3a7ec6afee7f86dba
+        _value: 161b9aeaf8a4477e8ea4569ff0b13ff3
       toNodeId:
-        _value: 0e6f8a2d95f5491aac6f59db51f6cada
+        _value: 11fe762665e940d6b6b46a9676b27f86
       condition:
         kind: 4
         constValue: 1
         children: []
         leaf:
           conditionId:
-            _value: 2682ca193c8e4db19b421b8e503ca7ec
+            _value: e4afe8342608456eb04e119a718cd7e7
           conditionTypeId: 
           params:
             values: []

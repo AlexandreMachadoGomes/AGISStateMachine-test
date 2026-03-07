@@ -1,11 +1,10 @@
 // File: NPCHasReachedDestinationConditionType.cs
 // Folder: Assets/Scripts/NPC/Conditions/
-// Purpose: True when the A* AIPath agent has reached its current destination.
+// Purpose: True when the pathfinder has reached its current destination.
 
 using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
-using Pathfinding;
 
 namespace AGIS.NPC.Conditions
 {
@@ -17,10 +16,10 @@ namespace AGIS.NPC.Conditions
 
         public bool Evaluate(in AGISConditionEvalArgs args)
         {
-            var aiPath = args.Ctx.Actor != null
-                ? args.Ctx.Actor.GetComponent<AIPath>()
+            var pathFinder = args.Ctx.Actor != null
+                ? args.Ctx.Actor.GetComponent<IAGISNPCPathFinder>()
                 : null;
-            return aiPath != null && aiPath.reachedDestination;
+            return pathFinder != null && pathFinder.ReachedDestination;
         }
     }
 }

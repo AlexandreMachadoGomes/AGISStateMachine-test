@@ -10,16 +10,18 @@
 //     This allows conditions on other edges to guard against further interrupts.
 //   • Clears damage_flag_key from the blackboard so the AnyState→TakeDamage interrupt
 //     does not re-fire mid-animation.
-//   • Starts the Die UCC ability by index.
+//   • Starts the Die UCC ability by type.
 //
 // IsComplete:
 //   • Becomes true when the ability is no longer active.
 //   • If no UltimateCharacterLocomotion (or no OPSIVE_UCC define), IsComplete fires immediately.
 //
 // Params:
-//   ability_index    (Int,    default 0)                — index of the Die ability
 //   death_flag_key   (String, default "npc.is_dead")    — AGISActorState key set true on Enter
 //   damage_flag_key  (String, default "npc.is_damaged") — blackboard key cleared on Enter
+//
+// The Die UCC ability is resolved by type (GetAbility<Die>()) — no inspector index required.
+// Ability order in the UCC ability list does not affect this node.
 //
 // Guarded by #if OPSIVE_UCC. Without the define the node registers as a shell that completes
 // immediately. Persistent param npc.is_dead is always declared regardless of the define.
@@ -29,7 +31,6 @@ using System.Collections.Generic;
 using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
-using Pathfinding;
 using UnityEngine;
 
 #if OPSIVE_UCC
@@ -49,10 +50,6 @@ namespace AGIS.NPC.States
         {
             specs =
             {
-                new AGISParamSpec("ability_index", AGISParamType.Int, AGISValue.FromInt(0))
-                    { displayName = "Ability Index",
-                      tooltip     = "Index of the Die ability on UltimateCharacterLocomotion.",
-                      hasMin = true, intMin = 0 },
                 new AGISParamSpec("death_flag_key", AGISParamType.String, AGISValue.FromString("npc.is_dead"))
                     { displayName = "Death Flag Key",
                       tooltip     = "AGISActorState key written true on Enter. Used by other conditions " +
@@ -83,12 +80,11 @@ namespace AGIS.NPC.States
 
         public IAGISNodeRuntime CreateRuntime(in AGISNodeRuntimeCreateArgs args)
         {
-            int    abilityIndex  = args.Params.GetInt   ("ability_index",   0);
             string deathFlagKey  = args.Params.GetString("death_flag_key",  "npc.is_dead");
             string damageFlagKey = args.Params.GetString("damage_flag_key", "npc.is_damaged");
 
 #if OPSIVE_UCC
-            return new UCCRuntime(args.Ctx, abilityIndex, deathFlagKey, damageFlagKey);
+            return new UCCRuntime(args.Ctx, deathFlagKey, damageFlagKey);
 #else
             return new NoOpRuntime(args.Ctx, deathFlagKey, damageFlagKey);
 #endif
@@ -100,12 +96,7 @@ namespace AGIS.NPC.States
         private static void DisablePathfinding(GameObject actor)
         {
             if (actor == null) return;
-            var aiPath    = actor.GetComponent<AIPath>();
-            var seeker    = actor.GetComponent<Seeker>();
-            var destSetter = actor.GetComponent<AIDestinationSetter>();
-            if (aiPath     != null) aiPath.enabled     = false;
-            if (seeker     != null) seeker.enabled     = false;
-            if (destSetter != null) destSetter.enabled = false;
+            actor.GetComponent<IAGISNPCPathFinder>()?.DisablePathfinding();
         }
 
         // ─────────────────────────────────────────────────────────────────────
@@ -149,7 +140,7 @@ namespace AGIS.NPC.States
 
 #if OPSIVE_UCC
         // ─────────────────────────────────────────────────────────────────────
-        // UCC runtime — starts the ability by index, polls IsActive for completion.
+        // UCC runtime — starts the ability by type, polls IsActive for completion.
         // ─────────────────────────────────────────────────────────────────────
         private sealed class UCCRuntime : IAGISNodeRuntime, IAGISNodeSignal
         {
@@ -157,21 +148,19 @@ namespace AGIS.NPC.States
             private readonly UltimateCharacterLocomotion _locomotion;
             private readonly IAGISBlackboard             _blackboard;
             private readonly AGISActorState              _actorState;
-            private readonly int                         _abilityIndex;
             private readonly string                      _deathFlagKey;
             private readonly string                      _damageFlagKey;
 
-            private Ability _ability;
+            private Die _ability;
 
             public bool IsComplete { get; private set; }
 
-            public UCCRuntime(AGISExecutionContext ctx, int abilityIndex, string deathFlagKey, string damageFlagKey)
+            public UCCRuntime(AGISExecutionContext ctx, string deathFlagKey, string damageFlagKey)
             {
                 _actor         = ctx.Actor;
                 _locomotion    = ctx.Actor?.GetComponent<UltimateCharacterLocomotion>();
                 _blackboard    = ctx.Blackboard;
                 _actorState    = ctx.Actor?.GetComponent<AGISActorState>();
-                _abilityIndex  = abilityIndex;
                 _deathFlagKey  = deathFlagKey;
                 _damageFlagKey = damageFlagKey;
             }
@@ -189,7 +178,7 @@ namespace AGIS.NPC.States
 
                 if (_locomotion == null) return;
 
-                _ability = _locomotion.GetAbility<Ability>(_abilityIndex);
+                _ability = _locomotion.GetAbility<Die>();
                 if (_ability != null)
                     _locomotion.TryStartAbility(_ability);
             }

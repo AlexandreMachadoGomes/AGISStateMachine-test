@@ -41,7 +41,7 @@ Assets/Scripts/
     Serialization/  ← AGISGraphSerializer (JsonUtility round-trip) + AGISContentLibrary (in-memory DB-driven store)
   NPC/
     IAGISNPCPathFinder.cs          ← pathfinder interface
-    NPCStandalonePathFinder.cs     ← concrete A* wrapper (no external deps)
+    NPCUCCPathFinder.cs            ← IAGISNPCPathFinder bridge to AStarAIAgentMovement (UCC + A* integration)
     NPCDetectionCone.cs            ← sphere / cone detection + gizmo
     NPCDetectionMeter.cs           ← config holder for detection meter; declares persistent keys
     AGISEnemyTemplateData.cs       ← ScriptableObject: bundles graphs, route, detection config
@@ -134,9 +134,9 @@ A null condition on an edge evaluates as **false**. Use `ConstBool(true)` for un
 
 ### Pathfinding abstraction
 
-`IAGISNPCPathFinder` — interface used by all NPC node types and conditions. Exposes `ReachedDestination`, `DesiredVelocity`, `IsPathfindingActive`, `WalkTarget`, `Enable/DisablePathfinding()`, `SetWalkTarget()`.
+`IAGISNPCPathFinder` — interface used by all NPC node types and conditions. Exposes `ReachedDestination`, `DesiredVelocity`, `IsPathfindingActive`, `Enable/DisablePathfinding()`, `SetWalkTarget()`, `SetWalkTargetTransform()`, `ClearWalkTarget()`, `SnapToGraph()`.
 
-`NPCStandalonePathFinder` — concrete MonoBehaviour implementing `IAGISNPCPathFinder`. Wraps A* `AIPath` / `Seeker` / `AIDestinationSetter`. No external project dependencies (`AGIS_Class_Manager` is absent in this project — never reference it).
+`NPCUCCPathFinder` — concrete MonoBehaviour implementing `IAGISNPCPathFinder`. Bridges to `AStarAIAgentMovement` (the official A*/UCC integration ability). Requires `UltimateCharacterLocomotion` with `AStarAIAgentMovement` in its ability list, and an `IAstarAI` (AIPath/RichAI) on the same GameObject. `AGISEnemyConfigurator.Configure()` adds `Seeker`, `AIPath`, and `NPCUCCPathFinder` — **not** `AIDestinationSetter` (would conflict with the ability's own destination management).
 
 ### AGISActorState
 

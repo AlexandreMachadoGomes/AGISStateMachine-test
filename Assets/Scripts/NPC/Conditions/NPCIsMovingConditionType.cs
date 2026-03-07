@@ -1,6 +1,6 @@
 // File: NPCIsMovingConditionType.cs
 // Folder: Assets/Scripts/NPC/Conditions/
-// Purpose: True when the A* AIPath agent's desired velocity magnitude exceeds the threshold.
+// Purpose: True when the pathfinder's desired velocity magnitude exceeds the threshold.
 //
 // Params:
 //   threshold  (Float, default 0.1) — minimum speed (units/s) to be considered "moving"
@@ -8,7 +8,6 @@
 using AGIS.ESM.Runtime;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
-using Pathfinding;
 
 namespace AGIS.NPC.Conditions
 {
@@ -28,14 +27,14 @@ namespace AGIS.NPC.Conditions
 
         public bool Evaluate(in AGISConditionEvalArgs args)
         {
-            var aiPath = args.Ctx.Actor != null
-                ? args.Ctx.Actor.GetComponent<AIPath>()
+            var pathFinder = args.Ctx.Actor != null
+                ? args.Ctx.Actor.GetComponent<IAGISNPCPathFinder>()
                 : null;
 
-            if (aiPath == null || !aiPath.enabled) return false;
+            if (pathFinder == null || !pathFinder.IsPathfindingActive) return false;
 
             float threshold = args.Params.GetFloat("threshold", 0.1f);
-            return aiPath.desiredVelocity.sqrMagnitude > threshold * threshold;
+            return pathFinder.DesiredVelocity.sqrMagnitude > threshold * threshold;
         }
     }
 }

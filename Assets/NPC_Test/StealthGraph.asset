@@ -11,16 +11,16 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2ea1b1b86039794e878ec74fd62cb39, type: 3}
   m_Name: StealthGraph
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.ESM.UGC.AGISStateMachineGraphAsset
   graph:
     graphId:
-      _value: fbd3a53c229c418e87ea5d35a84b69c2
+      _value: 885efd9796234ff6be371395ddb876fe
     version: 1
     entryNodeId:
-      _value: a629132061954bd393299deb3b6970de
+      _value: 58282953175a4518a4cf4f2187016e77
     nodes:
     - nodeId:
-        _value: a629132061954bd393299deb3b6970de
+        _value: 58282953175a4518a4cf4f2187016e77
       nodeTypeId: npc.stealth_meter
       params:
         values: []
