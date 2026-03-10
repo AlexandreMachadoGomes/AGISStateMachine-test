@@ -49,10 +49,10 @@ namespace AGIS.ESM.UGC
         [SerializeField] public bool constValue;
 
         // And/Or
-        [SerializeField] public List<AGISConditionExprDef> children;
+        [SerializeReference] public List<AGISConditionExprDef> children;
 
         // Not
-        [SerializeField] public AGISConditionExprDef child;
+        [SerializeReference] public AGISConditionExprDef child;
 
         // Leaf
         [SerializeField] public AGISConditionInstanceDef leaf;

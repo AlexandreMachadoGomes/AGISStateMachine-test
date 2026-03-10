@@ -1,0 +1,979 @@
+/* AGISEditor.uss
+   AGIS ESM Visual Graph Editor — dark theme stylesheet
+   UIToolkit Runtime (UnityEngine.UIElements only)
+   All colours defined inline; no :root variables (not supported in UIToolkit USS). */
+
+/* ═══════════════════════════════════════════════════════════════
+   ROOT
+═══════════════════════════════════════════════════════════════ */
+
+.agis-editor-root {
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: rgb(26, 26, 26);
+    color: rgb(210, 210, 210);
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TAB BAR
+═══════════════════════════════════════════════════════════════ */
+
+.agis-tab-bar {
+    flex-direction: row;
+    flex-shrink: 0;
+    height: 32px;
+    background-color: rgb(18, 18, 18);
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(45, 45, 45);
+    align-items: flex-end;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.agis-tab {
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 6px;
+    height: 28px;
+    background-color: rgb(30, 30, 30);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-color: rgb(45, 45, 45);
+    margin-right: 2px;
+    cursor: link;
+}
+
+.agis-tab:hover {
+    background-color: rgb(40, 40, 40);
+}
+
+.agis-tab--active {
+    background-color: rgb(26, 26, 26);
+    border-bottom-width: 0;
+    border-bottom-color: rgb(26, 26, 26);
+}
+
+.agis-tab--active:hover {
+    background-color: rgb(26, 26, 26);
+}
+
+.agis-tab__label {
+    color: rgb(180, 180, 180);
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.agis-tab--active .agis-tab__label {
+    color: rgb(220, 220, 220);
+}
+
+.agis-tab__dirty {
+    color: rgb(255, 200, 50);
+    font-size: 14px;
+    margin-right: 4px;
+    width: 8px;
+}
+
+.agis-tab__close {
+    width: 16px;
+    height: 16px;
+    font-size: 11px;
+    color: rgb(140, 140, 140);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 3px;
+    -unity-text-align: middle-center;
+    cursor: link;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.agis-tab__close:hover {
+    background-color: rgb(180, 60, 60);
+    color: rgb(255, 255, 255);
+}
+
+.agis-tab-add {
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    color: rgb(140, 140, 140);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 4px;
+    -unity-text-align: middle-center;
+    cursor: link;
+    align-self: center;
+    margin-left: 4px;
+    padding: 0;
+}
+
+.agis-tab-add:hover {
+    background-color: rgb(50, 50, 50);
+    color: rgb(210, 210, 210);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOOLBAR
+═══════════════════════════════════════════════════════════════ */
+
+.agis-toolbar {
+    flex-direction: row;
+    flex-shrink: 0;
+    height: 36px;
+    background-color: rgb(22, 22, 22);
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(45, 45, 45);
+    align-items: center;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.agis-toolbar__group {
+    flex-direction: row;
+    align-items: center;
+}
+
+.agis-toolbar__separator {
+    width: 1px;
+    height: 22px;
+    background-color: rgb(55, 55, 55);
+    margin-left: 6px;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+
+.agis-toolbar__spacer {
+    flex-grow: 1;
+}
+
+.agis-toolbar__button {
+    height: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(40, 40, 40);
+    border-width: 1px;
+    border-color: rgb(60, 60, 60);
+    border-radius: 4px;
+    color: rgb(200, 200, 200);
+    font-size: 12px;
+    cursor: link;
+    margin-left: 2px;
+    margin-right: 2px;
+    -unity-text-align: middle-center;
+}
+
+.agis-toolbar__button:hover {
+    background-color: rgb(55, 55, 55);
+    border-color: rgb(80, 80, 80);
+}
+
+.agis-toolbar__button:active {
+    background-color: rgb(30, 30, 30);
+}
+
+.agis-toolbar__button--primary {
+    background-color: rgb(45, 95, 165);
+    border-color: rgb(60, 120, 200);
+    color: rgb(230, 240, 255);
+}
+
+.agis-toolbar__button--primary:hover {
+    background-color: rgb(58, 123, 213);
+    border-color: rgb(80, 150, 230);
+}
+
+.agis-toolbar__toggle {
+    height: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(35, 35, 35);
+    border-width: 1px;
+    border-color: rgb(55, 55, 55);
+    border-radius: 4px;
+    color: rgb(160, 160, 160);
+    font-size: 12px;
+    cursor: link;
+    margin-left: 2px;
+    margin-right: 2px;
+    -unity-text-align: middle-center;
+}
+
+.agis-toolbar__toggle:hover {
+    background-color: rgb(45, 45, 45);
+}
+
+.agis-toolbar__toggle--on {
+    background-color: rgb(35, 60, 35);
+    border-color: rgb(60, 110, 60);
+    color: rgb(120, 210, 120);
+}
+
+.agis-toolbar__toggle--on:hover {
+    background-color: rgb(45, 75, 45);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CANVAS
+═══════════════════════════════════════════════════════════════ */
+
+.agis-canvas {
+    flex-grow: 1;
+    background-color: rgb(28, 28, 28);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NODE CARDS
+═══════════════════════════════════════════════════════════════ */
+
+.agis-node {
+    position: absolute;
+    width: 180px;
+    background-color: rgb(38, 38, 38);
+    border-width: 1px;
+    border-color: rgb(60, 60, 60);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.agis-node--selected {
+    border-color: rgb(255, 210, 80);
+    border-width: 2px;
+}
+
+.agis-node--active {
+    border-color: rgb(80, 220, 120);
+    border-width: 2px;
+}
+
+.agis-node--error {
+    border-color: rgb(220, 60, 60);
+    border-width: 2px;
+}
+
+.agis-node--warning {
+    border-color: rgb(220, 160, 40);
+    border-width: 2px;
+}
+
+.agis-node__header {
+    flex-direction: row;
+    align-items: center;
+    height: 28px;
+    padding-left: 6px;
+    padding-right: 4px;
+}
+
+.agis-node__header--normal {
+    background-color: rgb(58, 123, 213);
+}
+
+.agis-node__header--anystate {
+    background-color: rgb(139, 26, 26);
+}
+
+.agis-node__header--grouped {
+    background-color: rgb(26, 139, 122);
+}
+
+.agis-node__header--parallel {
+    background-color: rgb(107, 63, 160);
+}
+
+.agis-node__icon {
+    font-size: 13px;
+    color: rgb(230, 230, 230);
+    margin-right: 5px;
+    width: 16px;
+    -unity-text-align: middle-center;
+    flex-shrink: 0;
+}
+
+.agis-node__title {
+    flex-grow: 1;
+    color: rgb(235, 235, 235);
+    font-size: 12px;
+    -unity-font-style: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.agis-node__entry-star {
+    font-size: 13px;
+    color: rgb(255, 210, 50);
+    margin-right: 2px;
+    width: 14px;
+    -unity-text-align: middle-center;
+    flex-shrink: 0;
+}
+
+.agis-node__collapse-btn {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    color: rgb(180, 180, 180);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 3px;
+    -unity-text-align: middle-center;
+    cursor: link;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.agis-node__collapse-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.agis-node__delete-btn {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    color: rgb(180, 100, 100);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 3px;
+    -unity-text-align: middle-center;
+    cursor: link;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.agis-node__delete-btn:hover {
+    background-color: rgb(180, 50, 50);
+    color: rgb(255, 255, 255);
+}
+
+.agis-node__body {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.agis-node__footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    height: 22px;
+    padding-right: 8px;
+    border-top-width: 1px;
+    border-top-color: rgb(50, 50, 50);
+}
+
+.agis-node__port {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: rgb(100, 170, 255);
+    border-width: 2px;
+    border-color: rgb(60, 60, 60);
+    cursor: link;
+    flex-shrink: 0;
+}
+
+.agis-node__port:hover {
+    background-color: rgb(150, 210, 255);
+    border-color: rgb(100, 160, 255);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FIELD ROWS (param drawers)
+═══════════════════════════════════════════════════════════════ */
+
+.agis-field-row {
+    flex-direction: row;
+    align-items: center;
+    min-height: 22px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.agis-field-row:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.agis-field-row__label {
+    width: 80px;
+    font-size: 11px;
+    color: rgb(170, 170, 170);
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 4px;
+}
+
+.agis-field-row__label--overridden {
+    color: rgb(220, 220, 220);
+    -unity-font-style: bold;
+}
+
+.agis-field-row__label--default {
+    color: rgb(130, 130, 130);
+    -unity-font-style: normal;
+}
+
+.agis-field-row__control {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.agis-field-row__control TextField {
+    background-color: rgb(28, 28, 28);
+    border-width: 1px;
+    border-color: rgb(55, 55, 55);
+    border-radius: 3px;
+    color: rgb(210, 210, 210);
+    font-size: 11px;
+    height: 20px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.agis-field-row__control Toggle {
+    height: 20px;
+}
+
+.agis-field-row__reset {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    color: rgba(180, 180, 180, 0);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 2px;
+    cursor: link;
+    -unity-text-align: middle-center;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+    margin-left: 2px;
+}
+
+.agis-field-row__reset--visible {
+    color: rgb(160, 160, 160);
+}
+
+.agis-field-row__reset--visible:hover {
+    color: rgb(255, 200, 80);
+    background-color: rgba(255, 180, 0, 0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SEARCH WINDOW
+═══════════════════════════════════════════════════════════════ */
+
+.agis-search-window {
+    position: absolute;
+    width: 280px;
+    max-height: 340px;
+    background-color: rgb(30, 30, 30);
+    border-width: 1px;
+    border-color: rgb(70, 70, 70);
+    border-radius: 6px;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.agis-search-window__field {
+    height: 30px;
+    background-color: rgb(20, 20, 20);
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(55, 55, 55);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    flex-shrink: 0;
+}
+
+.agis-search-window__field TextField {
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: rgb(210, 210, 210);
+    font-size: 12px;
+    padding-left: 8px;
+}
+
+.agis-search-group-header {
+    height: 22px;
+    padding-left: 10px;
+    font-size: 10px;
+    color: rgb(110, 110, 110);
+    -unity-font-style: bold;
+    background-color: rgb(22, 22, 22);
+    -unity-text-align: middle-left;
+    border-top-width: 1px;
+    border-top-color: rgb(40, 40, 40);
+}
+
+.agis-search-row {
+    flex-direction: row;
+    align-items: center;
+    height: 28px;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: link;
+}
+
+.agis-search-row:hover {
+    background-color: rgb(48, 80, 130);
+}
+
+.agis-search-row--selected {
+    background-color: rgb(58, 100, 165);
+}
+
+.agis-search-row__icon {
+    width: 18px;
+    font-size: 13px;
+    color: rgb(180, 180, 180);
+    -unity-text-align: middle-center;
+    flex-shrink: 0;
+    margin-right: 6px;
+}
+
+.agis-search-row__name {
+    flex-grow: 1;
+    font-size: 12px;
+    color: rgb(210, 210, 210);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.agis-search-row__typeid {
+    font-size: 10px;
+    color: rgb(100, 100, 100);
+    margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STATUS BAR
+═══════════════════════════════════════════════════════════════ */
+
+.agis-status-bar {
+    flex-direction: row;
+    flex-shrink: 0;
+    height: 22px;
+    background-color: rgb(18, 18, 18);
+    border-top-width: 1px;
+    border-top-color: rgb(40, 40, 40);
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.agis-status-bar__text {
+    font-size: 11px;
+    color: rgb(160, 160, 160);
+    margin-right: 12px;
+}
+
+.agis-status-bar__text--error {
+    color: rgb(220, 80, 80);
+}
+
+.agis-status-bar__text--warning {
+    color: rgb(220, 170, 50);
+}
+
+.agis-status-bar__text--ok {
+    color: rgb(100, 210, 100);
+}
+
+.agis-status-bar__text--dirty {
+    color: rgb(255, 200, 50);
+}
+
+.agis-status-bar__live {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: rgb(80, 210, 80);
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+
+.agis-status-bar__spacer {
+    flex-grow: 1;
+}
+
+.agis-status-bar__separator {
+    width: 1px;
+    height: 14px;
+    background-color: rgb(50, 50, 50);
+    margin-left: 8px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MINIMAP
+═══════════════════════════════════════════════════════════════ */
+
+.agis-minimap {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 200px;
+    height: 150px;
+    background-color: rgba(18, 18, 18, 0.85);
+    border-width: 1px;
+    border-color: rgb(60, 60, 60);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BREADCRUMB
+═══════════════════════════════════════════════════════════════ */
+
+.agis-breadcrumb {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(18, 18, 18, 0.80);
+    border-width: 1px;
+    border-color: rgb(50, 50, 50);
+    border-radius: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 24px;
+}
+
+.agis-breadcrumb__btn {
+    font-size: 11px;
+    color: rgb(100, 160, 240);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    cursor: link;
+    padding: 0;
+    margin: 0;
+}
+
+.agis-breadcrumb__btn:hover {
+    color: rgb(140, 190, 255);
+}
+
+.agis-breadcrumb__current {
+    font-size: 11px;
+    color: rgb(200, 200, 200);
+}
+
+.agis-breadcrumb__sep {
+    font-size: 11px;
+    color: rgb(80, 80, 80);
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RIGHT PANEL
+═══════════════════════════════════════════════════════════════ */
+
+.agis-right-panel {
+    width: 320px;
+    flex-shrink: 0;
+    background-color: rgb(24, 24, 24);
+    border-left-width: 1px;
+    border-left-color: rgb(45, 45, 45);
+    flex-direction: column;
+}
+
+.agis-panel-tab-bar {
+    flex-direction: row;
+    flex-shrink: 0;
+    height: 32px;
+    background-color: rgb(20, 20, 20);
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(45, 45, 45);
+    align-items: flex-end;
+}
+
+.agis-panel-tab {
+    flex-grow: 1;
+    height: 28px;
+    font-size: 11px;
+    color: rgb(140, 140, 140);
+    background-color: rgb(20, 20, 20);
+    border-width: 0;
+    border-bottom-width: 2px;
+    border-bottom-color: rgba(0, 0, 0, 0);
+    -unity-text-align: middle-center;
+    cursor: link;
+    padding: 0;
+}
+
+.agis-panel-tab:hover {
+    background-color: rgb(30, 30, 30);
+    color: rgb(180, 180, 180);
+}
+
+.agis-panel-tab--active {
+    color: rgb(100, 160, 240);
+    border-bottom-color: rgb(100, 160, 240);
+}
+
+.agis-panel-content {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.agis-panel-scroll {
+    flex-grow: 1;
+}
+
+.agis-panel-section {
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(40, 40, 40);
+    margin-bottom: 2px;
+}
+
+.agis-panel-section__header {
+    flex-direction: row;
+    align-items: center;
+    height: 24px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: rgb(20, 20, 20);
+    font-size: 11px;
+    color: rgb(150, 150, 150);
+    -unity-font-style: bold;
+    cursor: link;
+}
+
+.agis-panel-section__header:hover {
+    background-color: rgb(28, 28, 28);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONDITION TREE (edge editor)
+═══════════════════════════════════════════════════════════════ */
+
+.agis-cond-node {
+    border-width: 1px;
+    border-radius: 4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
+    overflow: hidden;
+}
+
+.agis-cond-node--and {
+    border-color: rgb(60, 120, 200);
+    background-color: rgb(28, 38, 55);
+}
+
+.agis-cond-node--or {
+    border-color: rgb(160, 100, 40);
+    background-color: rgb(48, 35, 22);
+}
+
+.agis-cond-node--not {
+    border-color: rgb(160, 50, 160);
+    background-color: rgb(45, 22, 45);
+}
+
+.agis-cond-node--leaf {
+    border-color: rgb(60, 140, 60);
+    background-color: rgb(25, 40, 25);
+}
+
+.agis-cond-node--true {
+    border-color: rgb(60, 200, 60);
+    background-color: rgb(22, 48, 22);
+}
+
+.agis-cond-node--false {
+    border-color: rgb(140, 50, 50);
+    background-color: rgb(45, 22, 22);
+}
+
+.agis-cond-node__header {
+    flex-direction: row;
+    align-items: center;
+    height: 24px;
+    padding-left: 6px;
+    padding-right: 4px;
+}
+
+.agis-cond-node__label {
+    flex-grow: 1;
+    font-size: 11px;
+    color: rgb(200, 200, 200);
+    -unity-font-style: bold;
+}
+
+.agis-cond-node__children {
+    padding-left: 10px;
+    padding-bottom: 4px;
+}
+
+.agis-cond-node__btn {
+    height: 20px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 11px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-width: 1px;
+    border-color: rgb(60, 60, 60);
+    border-radius: 3px;
+    color: rgb(180, 180, 180);
+    cursor: link;
+    margin-left: 2px;
+    -unity-text-align: middle-center;
+}
+
+.agis-cond-node__btn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.agis-cond-node__remove {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    color: rgb(180, 80, 80);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 3px;
+    cursor: link;
+    -unity-text-align: middle-center;
+    padding: 0;
+    margin-left: 2px;
+}
+
+.agis-cond-node__remove:hover {
+    background-color: rgb(160, 50, 50);
+    color: rgb(255, 255, 255);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   VALIDATION ROWS
+═══════════════════════════════════════════════════════════════ */
+
+.agis-validation-row {
+    flex-direction: row;
+    align-items: center;
+    min-height: 24px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(35, 35, 35);
+}
+
+.agis-validation-row:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.agis-validation-row__icon {
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    -unity-text-align: middle-center;
+    flex-shrink: 0;
+    margin-right: 6px;
+}
+
+.agis-validation-row__icon--error {
+    color: rgb(220, 70, 70);
+}
+
+.agis-validation-row__icon--warning {
+    color: rgb(220, 170, 50);
+}
+
+.agis-validation-row__msg {
+    flex-grow: 1;
+    font-size: 11px;
+    color: rgb(190, 190, 190);
+    white-space: normal;
+}
+
+.agis-validation-row__goto {
+    width: 24px;
+    height: 20px;
+    font-size: 11px;
+    color: rgb(100, 160, 240);
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    cursor: link;
+    -unity-text-align: middle-center;
+    flex-shrink: 0;
+    padding: 0;
+    margin-left: 4px;
+}
+
+.agis-validation-row__goto:hover {
+    color: rgb(140, 190, 255);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BLACKBOARD ROWS
+═══════════════════════════════════════════════════════════════ */
+
+.agis-bb-row {
+    flex-direction: row;
+    align-items: center;
+    min-height: 22px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(32, 32, 32);
+}
+
+.agis-bb-row:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.agis-bb-row--changed {
+    background-color: rgba(255, 210, 50, 0.08);
+}
+
+.agis-bb-row__key {
+    flex-grow: 1;
+    font-size: 11px;
+    color: rgb(180, 200, 230);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+}
+
+.agis-bb-row__type {
+    width: 44px;
+    font-size: 10px;
+    color: rgb(110, 110, 110);
+    flex-shrink: 0;
+    -unity-text-align: middle-right;
+    margin-right: 6px;
+}
+
+.agis-bb-row__value {
+    width: 80px;
+    font-size: 11px;
+    color: rgb(210, 210, 210);
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -unity-text-align: middle-right;
+}

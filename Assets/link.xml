@@ -1,0 +1,7 @@
+<!-- IL2CPP type preservation for reflection-based auto-registration.
+     Without this, the IL2CPP stripper will remove IAGISNodeType and IAGISConditionType
+     implementations from Assembly-CSharp, breaking RegisterAllFromAssemblies().
+     If the project gains .asmdef files, add their assembly names here too. -->
+<linker>
+  <assembly fullname="Assembly-CSharp" preserve="all"/>
+</linker>

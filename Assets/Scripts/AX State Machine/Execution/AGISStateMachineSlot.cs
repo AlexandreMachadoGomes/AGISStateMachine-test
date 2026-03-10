@@ -33,6 +33,12 @@ namespace AGIS.ESM.Runtime
 
         public AGISStateMachineGraph GetGraphDef() => graphAsset != null ? graphAsset.graph : null;
 
+        // Forwarding properties so the editor can read instance state without
+        // a direct reference to AGISStateMachineInstance.
+        public AGISStateMachineInstance Instance => instance;
+        public AGISGuid CurrentNodeId => instance?.CurrentNodeId ?? AGISGuid.Empty;
+        public AGISGuid LastTransitionEdgeId => instance?.LastTransitionEdgeId ?? AGISGuid.Empty;
+
         public float GetTickHz(float runnerTickHz) => tickHzOverride > 0f ? tickHzOverride : runnerTickHz;
         public int GetMaxTransitionsPerTick(int runnerMax) => maxTransitionsPerTickOverride > 0 ? maxTransitionsPerTickOverride : runnerMax;
 

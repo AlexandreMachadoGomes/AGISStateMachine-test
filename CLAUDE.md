@@ -60,6 +60,8 @@ Assets/Scripts/
       NPCBehaviorSelectorNodeType.cs
       NPCTakeDamageNodeType.cs     ← UCC ability-based (#if OPSIVE_UCC); shell (NoOp) otherwise
       NPCDyingNodeType.cs          ← UCC ability-based (#if OPSIVE_UCC); shell (NoOp) otherwise
+      NPCInvestigateNodeType.cs    ← moves actor to a last-known target position; sets npc.last_known_target_pos on Enter; signals complete via IAGISNodeSignal when arrived
+      NPCStealthMeterNodeType.cs   ← drives the NPCDetectionMeter component; ticks stealth meter up/down based on detection state; persistent key: npc.detection_meter (Float)
     Conditions/                    ← IAGISConditionType implementations
       NPCHasReachedDestinationConditionType.cs
       NPCHasArrivedAtWaypointConditionType.cs
@@ -69,6 +71,8 @@ Assets/Scripts/
       AGISActorStateBoolConditionType.cs
       BlackboardBoolConditionType.cs
       NPCOnSequenceIndexConditionType.cs
+      NPCHasLostTargetConditionType.cs   ← true when npc.target_time_lost exceeds a configurable threshold; param: timeout (Float, 5.0)
+      NPCDetectionMeterConditionType.cs  ← true when npc.detection_meter exceeds a threshold; params: threshold (Float, 1.0), use_max (Bool, false)
     Editor/
       NPCRoutedMovementAssetBuilder.cs   ← builds RoutedMovement grouped asset
       NPCTestSceneBuilder.cs             ← one-click scene builder (menu: AGIS/NPC/...)
@@ -167,6 +171,8 @@ Serialized MonoBehaviour on the actor. Key-value store (`AGISParamTable`) that p
 | `npc.route.sequence_direction` | Int | 1 | `NPCMoveToWaypointNodeType` |
 | `npc.route.route_name` | String | "" | `NPCMoveToWaypointNodeType` |
 | `npc.target_time_lost` | Float | 0 | `NPCFollowTargetNodeType` |
+| `npc.detection_meter` | Float | 0 | `NPCStealthMeterNodeType` |
+| `npc.last_known_target_pos` | Vector3 | (0,0,0) | `NPCInvestigateNodeType` |
 
 ### Template enemy graph (built by NPCTestSceneBuilder)
 
@@ -186,15 +192,24 @@ Serialized MonoBehaviour on the actor. Key-value store (`AGISParamTable`) that p
 
 Toggle `npc.use_routes` in the AGISActorState inspector at runtime to switch modes.
 
+`NPCTestSceneBuilder` creates an NPC with **two slots** on its `AGISStateMachineRunner`: **Slot 0 — Stealth** (`StealthGraph.asset`, drives `NPCStealthMeterNodeType`) and **Slot 1 — Patrol** (`PatrolGraph.asset`, the behavior selector above).
+
+### Editor tools (menu: AGIS/NPC/…)
+
+- **Build Routed Movement Test Scene** — creates `Assets/NPC_Test/` assets + full scene (Ground, A* grid, WalkTarget, NPC_Test capsule with all components wired). Produces a two-slot runner (Stealth slot 0 + Patrol slot 1).
+- **Create Routed Movement Asset** — saves a `RoutedMovement.asset` grouped state to a chosen path
+
 ### Node completion signal
 
 `IAGISNodeSignal` — optional interface a node runtime implements to expose `bool IsComplete`. The state machine does NOT act on it directly; instead, an outgoing edge uses `AGISNodeCompleteConditionType` (`agis.node_complete`) to fire when `IsComplete = true`.
 
 `AGISNodeCompleteConditionType` (`agis.node_complete`) — no params. Returns true when `AGISConditionEvalArgs.CurrentRuntime` implements `IAGISNodeSignal` and `IsComplete == true`. The evaluator now forwards the active runtime into every condition eval (as `AGISConditionEvalArgs.CurrentRuntime`), so this check is zero-overhead for all other condition types.
 
-`NPCTakeDamageNodeType` (`npc.take_damage`) — fires an Animator trigger on Enter, then polls `GetCurrentAnimatorStateInfo` in Tick. Implements `IAGISNodeSignal`. Params: `animation_trigger (String, "TakeDamage")`, `animation_state (String, "TakeDamage")`, `layer (Int, 0)`. If no Animator exists on the actor, `IsComplete` is set true immediately on the first Tick. `IsComplete` is reset to false on both Enter and Exit.
+`NPCTakeDamageNodeType` (`npc.take_damage`) — activates a UCC ability to play a damage reaction. Implements `IAGISNodeSignal`; `IsComplete` becomes true when the ability finishes. Params: `damage_flag_key (String, "npc.is_damaged")` — the `AGISActorState` bool key the node sets true on Enter and false on Exit to signal a damage-reaction cycle. `IsComplete` is reset to false on both Enter and Exit. Requires `#if OPSIVE_UCC`; no-op shell otherwise.
 
 ### Dialogue system
+
+`NPCDyingNodeType` (`npc.dying`) — activates a UCC death ability on Enter. Implements `IAGISNodeSignal`; `IsComplete` becomes true when the death animation/ability finishes. Schema params: `dead_flag_key (String, "npc.is_dead")`. Declares persistent param: `npc.is_dead (Bool, false)`. Requires `#if OPSIVE_UCC`; no-op shell otherwise.
 
 `AGISDialogueNodeType` (`agis.dialogue`) — blackboard-based dialogue beat. On Enter: writes `choice_key = -1` (NoChoice) and `active_id = dialogue_id`. On Exit: removes `active_id`. Game code reads `agis.dialogue.active_id` to know which beat is active and writes an int index to `choice_key` when the player chooses.
 
@@ -216,7 +231,3 @@ Every `agis.dialogue` node must have exactly one of two outgoing transition layo
 
 **Unconnected edges:** All edges produced by `AGISDialogueEdgeSync` start with `toNodeId = AGISGuid.Empty` (the project convention for a dangling/unconnected transition). `AGISGraphCompiler` silently skips them. `AGISGraphValidator` reports them as warnings (`Graph.EdgeToUnconnected`), not errors. The graph editor should draw `!toNodeId.IsValid` edges as dangling arrows with an open tail that can be drag-connected to a target node.
 
-### Editor tools (menu: AGIS/NPC/…)
-
-- **Build Routed Movement Test Scene** — creates `Assets/NPC_Test/` assets + full scene (Ground, A* grid, WalkTarget, NPC_Test capsule with all components wired)
-- **Create Routed Movement Asset** — saves a `RoutedMovement.asset` grouped state to a chosen path

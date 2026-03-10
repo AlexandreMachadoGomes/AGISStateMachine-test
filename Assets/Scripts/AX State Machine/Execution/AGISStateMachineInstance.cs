@@ -37,6 +37,7 @@ namespace AGIS.ESM.Runtime
 
         public int CurrentNodeIndex => _currentNodeIndex;
         public AGISGuid CurrentNodeId => (_currentNodeIndex >= 0 && _currentNodeIndex < _graph.Nodes.Length) ? _graph.Nodes[_currentNodeIndex].NodeId : AGISGuid.Empty;
+        public AGISGuid LastTransitionEdgeId { get; private set; }
 
         public AGISStateMachineInstance(
             AGISExecutionContext ctx,
@@ -67,6 +68,7 @@ namespace AGIS.ESM.Runtime
 
             _policyRuntime.Clear();
             _time = 0f;
+            LastTransitionEdgeId = AGISGuid.Empty;
 
             SetCurrentNode(_graph.EntryNodeIndex);
             _started = true;
@@ -82,6 +84,7 @@ namespace AGIS.ESM.Runtime
 
             _currentRuntime = null;
             _currentNodeIndex = -1;
+            LastTransitionEdgeId = AGISGuid.Empty;
             _started = false;
         }
 
@@ -210,8 +213,9 @@ namespace AGIS.ESM.Runtime
             try { _currentRuntime?.Exit(); }
             catch (Exception ex) { _trace?.Error($"Exception during Exit on node {CurrentNodeId}: {ex}"); }
 
-            // Record policy firing (cooldown)
+            // Record policy firing (cooldown) and track last-fired edge for debug overlay
             _policyRuntime.RecordFired(edge, _time);
+            LastTransitionEdgeId = edge.EdgeId;
 
             // Move
             if (edge.ToNodeIndex < 0 || edge.ToNodeIndex >= _graph.Nodes.Length)

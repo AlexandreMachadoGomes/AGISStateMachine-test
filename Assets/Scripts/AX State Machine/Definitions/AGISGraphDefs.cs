@@ -43,7 +43,7 @@ namespace AGIS.ESM.UGC
         [SerializeField] public AGISParamTable exposedOverrides = new AGISParamTable();
 
         // Parallel node usage (only meaningful if nodeTypeId == "Parallel")
-        [SerializeField] public List<AGISNodeInstanceDef> parallelChildren = new List<AGISNodeInstanceDef>();
+        [SerializeReference] public List<AGISNodeInstanceDef> parallelChildren = new List<AGISNodeInstanceDef>();
     }
 
     [Serializable]
