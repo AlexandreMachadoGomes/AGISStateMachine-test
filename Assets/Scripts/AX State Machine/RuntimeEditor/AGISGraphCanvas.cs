@@ -149,6 +149,9 @@ namespace AGIS.ESM.RuntimeEditor
             var painter = ctx.painter2D;
             float offset = Extent; // shift all world coords by Extent since element is at (-Extent, -Extent)
 
+            // Track per-fromNode LLM return edge count for vertical staggering.
+            var llmReturnCountByNode = new Dictionary<AGISGuid, int>();
+
             foreach (var edge in _graph.edges)
             {
                 if (edge == null) continue;
@@ -166,6 +169,78 @@ namespace AGIS.ESM.RuntimeEditor
 
                 // Source: out port of fromCard
                 var fromPos = fromCard.GetOutPortPosition() + new Vector2(offset, offset);
+
+                // ── isLLMReturn stub arrow ────────────────────────────────────────────
+                if (edge.isLLMReturn)
+                {
+                    llmReturnCountByNode.TryGetValue(edge.fromNodeId, out int stubIdx);
+                    llmReturnCountByNode[edge.fromNodeId] = stubIdx + 1;
+
+                    const float StubLength = 40f;
+                    const float StubStagger = 18f;
+
+                    var stubColor = isSelected ? Color.white : new Color(0.48f, 0.31f, 0.745f);
+                    var stubStart = fromPos + new Vector2(0f, stubIdx * StubStagger);
+                    var stubEnd   = stubStart + new Vector2(StubLength, 0f);
+
+                    // Draw dashed line (alternating 6px on / 4px off).
+                    painter.strokeColor = stubColor;
+                    painter.lineWidth   = 2f;
+                    float x = stubStart.x;
+                    bool on = true;
+                    while (x < stubEnd.x)
+                    {
+                        float segLen = on ? 6f : 4f;
+                        float xEnd   = Mathf.Min(x + segLen, stubEnd.x);
+                        if (on)
+                        {
+                            painter.BeginPath();
+                            painter.MoveTo(new Vector2(x, stubStart.y));
+                            painter.LineTo(new Vector2(xEnd, stubStart.y));
+                            painter.Stroke();
+                        }
+                        x  = xEnd;
+                        on = !on;
+                    }
+
+                    // Filled triangle arrowhead at stub tip.
+                    var tipDir  = Vector2.right;
+                    var tipPerp = new Vector2(-tipDir.y, tipDir.x);
+                    const float ArrSize = 7f;
+                    painter.fillColor = stubColor;
+                    painter.BeginPath();
+                    painter.MoveTo(stubEnd);
+                    painter.LineTo(stubEnd - tipDir * ArrSize + tipPerp * ArrSize * 0.5f);
+                    painter.LineTo(stubEnd - tipDir * ArrSize - tipPerp * ArrSize * 0.5f);
+                    painter.Fill();
+
+                    // Pill at midpoint of stub.
+                    var stubMid  = (stubStart + stubEnd) * 0.5f;
+                    string llmSummary  = AGISConditionSummary.Summarize(edge.condition, _condTypes);
+                    string llmPillText = $"LLM  P{edge.priority}  {llmSummary}";
+                    float llmPillW = Mathf.Clamp(llmPillText.Length * 6.5f + 12f, 40f, 220f);
+                    float llmPillH = 16f;
+                    var llmPillRect = new Rect(stubMid.x - llmPillW * 0.5f, stubMid.y - llmPillH * 0.5f - 10f, llmPillW, llmPillH);
+
+                    painter.fillColor = isSelected
+                        ? new Color(0.25f, 0.15f, 0.35f, 0.92f)
+                        : new Color(0.18f, 0.10f, 0.25f, 0.88f);
+                    painter.BeginPath();
+                    painter.MoveTo(new Vector2(llmPillRect.x + 6f, llmPillRect.y));
+                    painter.LineTo(new Vector2(llmPillRect.xMax - 6f, llmPillRect.y));
+                    painter.ArcTo(new Vector2(llmPillRect.xMax, llmPillRect.y), new Vector2(llmPillRect.xMax, llmPillRect.y + 6f), 6f);
+                    painter.LineTo(new Vector2(llmPillRect.xMax, llmPillRect.yMax - 6f));
+                    painter.ArcTo(new Vector2(llmPillRect.xMax, llmPillRect.yMax), new Vector2(llmPillRect.xMax - 6f, llmPillRect.yMax), 6f);
+                    painter.LineTo(new Vector2(llmPillRect.x + 6f, llmPillRect.yMax));
+                    painter.ArcTo(new Vector2(llmPillRect.x, llmPillRect.yMax), new Vector2(llmPillRect.x, llmPillRect.yMax - 6f), 6f);
+                    painter.LineTo(new Vector2(llmPillRect.x, llmPillRect.y + 6f));
+                    painter.ArcTo(new Vector2(llmPillRect.x, llmPillRect.y), new Vector2(llmPillRect.x + 6f, llmPillRect.y), 6f);
+                    painter.Fill();
+
+                    _pillRects.Add((llmPillRect, edge.edgeId));
+                    continue; // Skip standard bezier rendering for this edge.
+                }
+                // ─────────────────────────────────────────────────────────────────────
 
                 Vector2 toPos;
                 if (isDangling)
@@ -240,8 +315,8 @@ namespace AGIS.ESM.RuntimeEditor
                 painter.ArcTo(new Vector2(pillRect.x, pillRect.y), new Vector2(pillRect.x + 6f, pillRect.y), 6f);
                 painter.Fill();
 
-                // Track pill rect for click detection (in element-local coords, NOT offset)
-                _pillRects.Add((new Rect(pillRect.x - offset, pillRect.y - offset, pillRect.width, pillRect.height), edge.edgeId));
+                // Track pill rect for click detection — keep in edge-layer local space (same as evt.localPosition)
+                _pillRects.Add((pillRect, edge.edgeId));
 
                 // Open circle for dangling edge endpoint
                 if (isDangling)
@@ -1435,6 +1510,24 @@ namespace AGIS.ESM.RuntimeEditor
                     OnOpenSubGraphRequested?.Invoke(card.Def.nodeId));
                 menu.AddSeparator("");
             }
+
+            menu.AddItem("Add LLM Return Edge", false, () =>
+            {
+                if (_graph == null || _history == null) return;
+                var edge = new AGISTransitionEdgeDef
+                {
+                    edgeId     = AGISGuid.New(),
+                    fromNodeId = card.Def.nodeId,
+                    toNodeId   = AGISGuid.Empty,
+                    condition  = AGISConditionExprDef.True(),
+                    priority   = 0,
+                    policy     = new AGISTransitionPolicy(),
+                    scopeId    = "Any",
+                    isLLMReturn = true,
+                };
+                _history.Push(new AddEdgeCommand(_graph, edge));
+                _edgeLayer.RefreshEdges();
+            });
 
             if (card.NodeType.Kind != AGISNodeKind.AnyState)
                 menu.AddItem("Delete", false, () => { SelectNode(card.Def.nodeId); DeleteSelected(); });

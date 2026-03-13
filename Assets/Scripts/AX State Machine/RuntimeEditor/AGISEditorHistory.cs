@@ -141,6 +141,7 @@ namespace AGIS.ESM.RuntimeEditor
 
         private readonly AGISStateMachineGraph _graph;
         private readonly AGISNodeInstanceDef _nodeDef;
+        private bool _wasAutoEntry;
 
         public AddNodeCommand(AGISStateMachineGraph graph, AGISNodeInstanceDef nodeDef)
         {
@@ -152,11 +153,15 @@ namespace AGIS.ESM.RuntimeEditor
         {
             if (_graph.nodes == null) _graph.nodes = new System.Collections.Generic.List<AGISNodeInstanceDef>();
             _graph.nodes.Add(_nodeDef);
+            // Auto-assign entry when graph has no valid entry node yet
+            _wasAutoEntry = !_graph.entryNodeId.IsValid;
+            if (_wasAutoEntry) _graph.entryNodeId = _nodeDef.nodeId;
         }
 
         public void Undo()
         {
             _graph.nodes?.Remove(_nodeDef);
+            if (_wasAutoEntry) _graph.entryNodeId = AGISGuid.Empty;
         }
     }
 
@@ -433,6 +438,57 @@ namespace AGIS.ESM.RuntimeEditor
         {
             var edge = FindEdge();
             if (edge != null) edge.condition = cond;
+        }
+
+        private AGISTransitionEdgeDef FindEdge()
+        {
+            if (_graph.edges == null) return null;
+            foreach (var e in _graph.edges)
+                if (e != null && e.edgeId == _edgeId) return e;
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Toggles the isLLMReturn flag on a transition edge.
+    /// When enabling, toNodeId is cleared to Empty (compiler resolves it).
+    /// When undoing, toNodeId is restored to its pre-enable value.
+    /// </summary>
+    public sealed class ChangeEdgeLLMReturnCommand : IEditorCommand
+    {
+        public string DisplayName => "Toggle LLM Return";
+
+        private readonly AGISStateMachineGraph _graph;
+        private readonly AGISGuid _edgeId;
+        private readonly bool _oldIsLLMReturn;
+        private readonly AGISGuid _oldToNodeId;
+        private readonly bool _newIsLLMReturn;
+
+        public ChangeEdgeLLMReturnCommand(AGISStateMachineGraph graph, AGISGuid edgeId,
+            bool oldIsLLMReturn, AGISGuid oldToNodeId, bool newIsLLMReturn)
+        {
+            _graph            = graph ?? throw new ArgumentNullException(nameof(graph));
+            _edgeId           = edgeId;
+            _oldIsLLMReturn   = oldIsLLMReturn;
+            _oldToNodeId      = oldToNodeId;
+            _newIsLLMReturn   = newIsLLMReturn;
+        }
+
+        public void Do()
+        {
+            var edge = FindEdge();
+            if (edge == null) return;
+            edge.isLLMReturn = _newIsLLMReturn;
+            if (_newIsLLMReturn)
+                edge.toNodeId = AGISGuid.Empty;
+        }
+
+        public void Undo()
+        {
+            var edge = FindEdge();
+            if (edge == null) return;
+            edge.isLLMReturn = _oldIsLLMReturn;
+            edge.toNodeId = _oldToNodeId;
         }
 
         private AGISTransitionEdgeDef FindEdge()

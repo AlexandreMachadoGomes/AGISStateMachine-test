@@ -78,5 +78,12 @@ namespace AGIS.ESM.UGC
         /// edge eligible only if grouped runtime CurrentInternalNodeId is inside that scope.
         /// </summary>
         [SerializeField] public string scopeId = "Any";
+
+        /// <summary>
+        /// When true, this edge routes back to the graph's agis.llm_dialogue node.
+        /// toNodeId is resolved at compile time; the source asset keeps toNodeId = Empty.
+        /// Rendered as a compact purple stub arrow in the editor rather than a full bezier.
+        /// </summary>
+        [SerializeField] public bool isLLMReturn = false;
     }
 }

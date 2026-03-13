@@ -60,8 +60,17 @@ namespace AGIS.ESM.Runtime
 
                 if (!nodeIndexById.TryGetValue(e.fromNodeId, out var fromIndex))
                     continue;
-                if (!nodeIndexById.TryGetValue(e.toNodeId, out var toIndex))
-                    continue;
+
+                int toIndex;
+                if (!nodeIndexById.TryGetValue(e.toNodeId, out toIndex))
+                {
+                    // isLLMReturn edges may have empty toNodeId — include them with sentinel -1;
+                    // the LLM return resolution pass will patch the index after sorting.
+                    if (e.isLLMReturn)
+                        toIndex = -1;
+                    else
+                        continue;
+                }
 
                 e.condition?.EnsureLeafIds();
 
@@ -128,6 +137,45 @@ namespace AGIS.ESM.Runtime
                 if (pr != 0) return pr;
                 return eb.EdgeId.ToString().CompareTo(ea.EdgeId.ToString());
             });
+
+            // ── LLM Return Resolution Pass ─────────────────────────────────────────────
+            // Find the compiled index of the agis.llm_dialogue node (if any).
+            // For every compiled edge with ToNodeIndex == -1 (from an isLLMReturn source edge),
+            // overwrite with the LLM dialogue node's index. Never mutates the source UGC asset.
+            int llmDialogueNodeIndex = -1;
+            for (int n = 0; n < compiledNodesTmp.Count; n++)
+            {
+                if (compiledNodesTmp[n].Def?.nodeTypeId == "agis.llm_dialogue")
+                {
+                    llmDialogueNodeIndex = n;
+                    break;
+                }
+            }
+
+            // Build a fast edge-id → source-edge lookup for the isLLMReturn flag.
+            var llmReturnEdgeIds = new HashSet<AGISGuid>();
+            if (graph.edges != null)
+            {
+                for (int i = 0; i < graph.edges.Count; i++)
+                {
+                    var e = graph.edges[i];
+                    if (e != null && e.isLLMReturn && e.edgeId.IsValid)
+                        llmReturnEdgeIds.Add(e.edgeId);
+                }
+            }
+
+            for (int i = 0; i < compiledEdgesTmp.Count; i++)
+            {
+                var ce = compiledEdgesTmp[i];
+                if (ce.ToNodeIndex != -1) continue;
+                if (!llmReturnEdgeIds.Contains(ce.EdgeId)) continue;
+
+                // Replace with patched version pointing at the LLM dialogue node (may be -1 if absent).
+                compiledEdgesTmp[i] = new AGISCompiledEdge(
+                    ce.EdgeId, ce.FromNodeIndex, llmDialogueNodeIndex,
+                    ce.Priority, ce.Policy, ce.Condition, ce.ScopeId);
+            }
+            // ──────────────────────────────────────────────────────────────────────────
 
             int entryIndex = -1;
             if (graph.entryNodeId.IsValid && nodeIndexById.TryGetValue(graph.entryNodeId, out var idx))

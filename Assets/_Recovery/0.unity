@@ -709,9 +709,6 @@ GameObject:
   - component: {fileID: 1847101407}
   - component: {fileID: 1847101406}
   - component: {fileID: 1847101405}
-  - component: {fileID: 1847101404}
-  - component: {fileID: 1847101403}
-  - component: {fileID: 1847101402}
   - component: {fileID: 1847101401}
   - component: {fileID: 1847101400}
   m_Layer: 0
@@ -747,7 +744,7 @@ MonoBehaviour:
   slots:
   - slotName: patrol
     enabled: 1
-    graphAsset: {fileID: 11400000, guid: feaf26bc9f012c546a52934311537dbb, type: 2}
+    graphAsset: {fileID: 11400000, guid: af37302d27c496d4b8b245f78543c370, type: 2}
     tickHzOverride: 0
     maxTransitionsPerTickOverride: 0
   trace:
@@ -769,54 +766,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createBlackboardOnAwake: 1
---- !u!114 &1847101402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a47190f7b035ae4d884c2c94c334551, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  routeData: {fileID: 0}
---- !u!114 &1847101403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5598bb860b137da4bba0e27785ce24db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fillRate: 1
-  drainRate: 0.4
-  maxDetection: 3
-  investigateThreshold: 1
-  targetTag: Player
---- !u!114 &1847101404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea0fcc56198304649bdbe40a211a5631, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shape: 1
-  detectionMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  range: 10
-  angle: 60
 --- !u!114 &1847101405
 MonoBehaviour:
   m_ObjectHideFlags: 0

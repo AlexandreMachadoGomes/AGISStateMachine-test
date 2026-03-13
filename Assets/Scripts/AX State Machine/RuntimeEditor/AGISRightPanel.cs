@@ -10,18 +10,20 @@ using UnityEngine.UIElements;
 using AGIS.ESM.UGC;
 using AGIS.ESM.Runtime;
 using AGIS.ESM.RuntimeEditor.Panels;
+using AGIS.ESM.Authoring;
 
 namespace AGIS.ESM.RuntimeEditor
 {
     public sealed class AGISRightPanel : VisualElement
     {
         // ── Tab constants ─────────────────────────────────────────────────────
-        private static readonly string[] TabNames = { "Node", "Edge", "Graph", "Grouped", "Blackboard" };
+        private static readonly string[] TabNames = { "Node", "Edge", "Graph", "Grouped", "Blackboard", "Author" };
         private const int TAB_NODE       = 0;
         private const int TAB_EDGE       = 1;
         private const int TAB_GRAPH      = 2;
         private const int TAB_GROUPED    = 3;
         private const int TAB_BLACKBOARD = 4;
+        private const int TAB_AUTHOR     = 5;
 
         // ── Stored dependencies ───────────────────────────────────────────────
         private readonly AGISEditorHistory _history;
@@ -34,6 +36,7 @@ namespace AGIS.ESM.RuntimeEditor
         private readonly AGISGraphPropertiesPanel  _graphTab;
         private readonly AGISGroupedAssetPanel    _groupedTab;
         private readonly AGISBlackboardPanel      _blackboardTab;
+        private readonly AGISCodeAuthoringPanel   _authorTab;
 
         // ── Layout elements ───────────────────────────────────────────────────
         private readonly Button        _collapseBtn;
@@ -105,6 +108,7 @@ namespace AGIS.ESM.RuntimeEditor
             _graphTab      = new AGISGraphPropertiesPanel();
             _groupedTab    = new AGISGroupedAssetPanel();
             _blackboardTab = new AGISBlackboardPanel();
+            _authorTab     = new AGISCodeAuthoringPanel();
 
             // Wire _graphTab.OnGoToNode → OnNodeSelectRequested
             _graphTab.OnGoToNode += id => OnNodeSelectRequested?.Invoke(id);
@@ -138,6 +142,7 @@ namespace AGIS.ESM.RuntimeEditor
                 case TAB_GRAPH:      _contentArea.Add(_graphTab);      break;
                 case TAB_GROUPED:    _contentArea.Add(_groupedTab);    break;
                 case TAB_BLACKBOARD: _contentArea.Add(_blackboardTab); break;
+                case TAB_AUTHOR:     _contentArea.Add(_authorTab);     break;
             }
 
             _activeTabIndex = index;
@@ -212,6 +217,10 @@ namespace AGIS.ESM.RuntimeEditor
             _graphTab.OnSaveRequested   = onSave;
             _graphTab.OnRevertRequested = onRevert;
             _graphTab.SetGraph(graph, runner, slotIndex);
+
+            // Wire the author tab to the live registries from the runner
+            if (runner != null)
+                _authorTab.Configure(runner.NodeTypes, runner.ConditionTypes);
         }
 
         /// <summary>Push a validation report to the graph properties tab.</summary>
@@ -224,6 +233,16 @@ namespace AGIS.ESM.RuntimeEditor
         public void RefreshBlackboard(AGISActorState actorState)
         {
             _blackboardTab.SetActorState(actorState);
+        }
+
+        /// <summary>Open the Author tab (blank slate for a new type).</summary>
+        public void ShowAuthorTab() => SwitchTab(TAB_AUTHOR);
+
+        /// <summary>Open the Author tab pre-populated with an existing record.</summary>
+        public void ShowAuthorTabWithRecord(AGISAuthoredTypeRecord record)
+        {
+            _authorTab.LoadRecord(record);
+            SwitchTab(TAB_AUTHOR);
         }
     }
 }

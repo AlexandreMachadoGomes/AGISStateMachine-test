@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
 using AGIS.ESM.Runtime;
+using AGIS.ESM.RuntimeEditor;
 
 namespace AGIS.ESM.RuntimeEditor.Panels
 {
@@ -30,6 +31,8 @@ namespace AGIS.ESM.RuntimeEditor.Panels
         private readonly Label              _headerLabel;
         private readonly Label              _fromToLabel;
         private readonly Label              _guidLabel;
+        private readonly Toggle             _llmReturnToggle;
+        private readonly Label              _llmReturnNote;
         private readonly IntegerField       _priorityField;
         private readonly Toggle             _interruptibleToggle;
         private readonly FloatField         _cooldownField;
@@ -86,8 +89,20 @@ namespace AGIS.ESM.RuntimeEditor.Panels
             guidRow.Add(copyGuidBtn);
             inner.Add(guidRow);
 
-            // ── Settings ──────────────────────────────────────────────────────
+            // ── LLM Return ────────────────────────────────────────────────────
             inner.Add(MakeSectionHeader("Settings"));
+
+            _llmReturnToggle = new Toggle("Route to LLM Dialogue (LLM Return)");
+            _llmReturnToggle.RegisterValueChangedCallback(OnLLMReturnChanged);
+            inner.Add(_llmReturnToggle);
+
+            _llmReturnNote = new Label("toNodeId resolved at compile time to the agis.llm_dialogue node in this graph.");
+            _llmReturnNote.style.color     = new Color(0.65f, 0.55f, 0.9f);
+            _llmReturnNote.style.whiteSpace = WhiteSpace.Normal;
+            _llmReturnNote.style.fontSize  = 11;
+            _llmReturnNote.style.marginBottom = 4f;
+            _llmReturnNote.style.display   = DisplayStyle.None;
+            inner.Add(_llmReturnNote);
 
             _priorityField = new IntegerField("Priority");
             _priorityField.RegisterValueChangedCallback(OnPriorityChanged);
@@ -183,6 +198,12 @@ namespace AGIS.ESM.RuntimeEditor.Panels
             string toName   = ResolveNodeName(_edge.toNodeId);
             _fromToLabel.text = $"From: {fromName}  \u2192  {toName}";
 
+            // LLM return toggle — suppress callbacks during population
+            _llmReturnToggle.UnregisterValueChangedCallback(OnLLMReturnChanged);
+            _llmReturnToggle.value = _edge.isLLMReturn;
+            _llmReturnToggle.RegisterValueChangedCallback(OnLLMReturnChanged);
+            _llmReturnNote.style.display = _edge.isLLMReturn ? DisplayStyle.Flex : DisplayStyle.None;
+
             // Settings — suppress callbacks during population
             _priorityField.UnregisterValueChangedCallback(OnPriorityChanged);
             _priorityField.value = _edge.priority;
@@ -211,6 +232,17 @@ namespace AGIS.ESM.RuntimeEditor.Panels
         }
 
         // ── Event handlers ────────────────────────────────────────────────────
+
+        private void OnLLMReturnChanged(ChangeEvent<bool> evt)
+        {
+            if (_edge == null || _graph == null) return;
+            var cmd = new ChangeEdgeLLMReturnCommand(
+                _graph, _edge.edgeId,
+                _edge.isLLMReturn, _edge.toNodeId,
+                evt.newValue);
+            _history?.Push(cmd);
+            _llmReturnNote.style.display = evt.newValue ? DisplayStyle.Flex : DisplayStyle.None;
+        }
 
         private void OnPriorityChanged(ChangeEvent<int> evt)
         {

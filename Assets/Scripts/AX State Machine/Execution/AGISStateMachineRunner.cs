@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
+using AGIS.ESM.Knowledge;
+using AGIS.ESM.Networking;
 
 namespace AGIS.ESM.Runtime
 {
@@ -41,6 +43,18 @@ namespace AGIS.ESM.Runtime
         [Tooltip("Optional list of known grouped assets to allow scope/binding validation and runtime resolution without an AssetDatabase resolver.")]
         [SerializeField] private List<AGISGroupedStateAsset> knownGroupedAssets = new List<AGISGroupedStateAsset>();
 
+        [Header("Knowledge Documents")]
+        [Tooltip("Knowledge documents available to agis.llm_dialogue nodes in this runner. Drag AGISKnowledgeDocumentAsset files here.")]
+        [SerializeField] private AGISKnowledgeDocumentAsset[] knowledgeDocuments = System.Array.Empty<AGISKnowledgeDocumentAsset>();
+
+        [Header("Actor Groups (Networking)")]
+        [Tooltip("Group IDs this actor belongs to. Used by AGISActorEventBus to resolve group-scope events.")]
+        [SerializeField] private string[] actorGroupIds = System.Array.Empty<string>();
+
+        [Header("LLM Provider")]
+        [Tooltip("Optional MonoBehaviour implementing ILLMProvider. Used by agis.llm_dialogue nodes.")]
+        [SerializeField] private LLMProviderBehaviour llmProvider;
+
         [Header("Type Registration (optional)")]
         [Tooltip("If enabled, registries will auto-register all types from loaded assemblies that implement IAGISNodeType / IAGISConditionType and have parameterless constructors.")]
         [SerializeField] private bool autoRegisterTypesFromAssemblies = false;
@@ -65,6 +79,7 @@ namespace AGIS.ESM.Runtime
         private AGISActorRuntime _actor;
 
         private Dictionary<AGISGuid, AGISGroupedStateAsset> _groupIndex;
+        private AGISKnowledgeDocumentRegistry _knowledgeDocRegistry;
 
         private void Awake()
         {
@@ -87,6 +102,7 @@ namespace AGIS.ESM.Runtime
             _nodeFactory = new AGISNodeRuntimeFactory(NodeTypes);
 
             BuildGroupIndex();
+            BuildKnowledgeDocRegistry();
 
             EnsureBuiltInStructuralNodeTypes();
 
@@ -94,7 +110,12 @@ namespace AGIS.ESM.Runtime
 
             ResolveComponentDependencies();
 
-            _validator = new AGISGraphValidator(NodeTypes, ConditionTypes, ResolveGroupAsset);
+            _validator = new AGISGraphValidator(NodeTypes, ConditionTypes, ResolveGroupAsset, ResolveKnowledgeDoc);
+
+            // ── Actor registry + event bus registration ──────────────────────────────
+            var actorState = gameObject.GetComponent<AGISActorState>();
+            if (actorState != null)
+                AGISActorRegistry.Instance.Register(gameObject.GetInstanceID(), actorState, actorGroupIds);
 
             RebuildAllSlots();
         }
@@ -107,6 +128,11 @@ namespace AGIS.ESM.Runtime
         private void OnDisable()
         {
             StopAllSlots();
+        }
+
+        private void OnDestroy()
+        {
+            AGISActorRegistry.Instance.Unregister(gameObject.GetInstanceID());
         }
 
         private void Update()
@@ -311,6 +337,29 @@ namespace AGIS.ESM.Runtime
                 return g;
             return null;
         }
+
+        // ── Knowledge document registry ────────────────────────────────────────────────
+
+        private void BuildKnowledgeDocRegistry()
+        {
+            _knowledgeDocRegistry = new AGISKnowledgeDocumentRegistry();
+            if (knowledgeDocuments == null) return;
+            foreach (var doc in knowledgeDocuments)
+                if (doc != null) _knowledgeDocRegistry.Register(doc);
+        }
+
+        private AGISKnowledgeDocumentAsset ResolveKnowledgeDoc(AGISGuid id)
+        {
+            if (_knowledgeDocRegistry == null || !id.IsValid) return null;
+            _knowledgeDocRegistry.TryGet(id, out var doc);
+            return doc;
+        }
+
+        /// <summary>
+        /// Expose the LLM provider for node runtimes that need it.
+        /// Returns null when no provider is configured.
+        /// </summary>
+        public ILLMProvider LLMProvider => llmProvider;
 
         private void EnsureBuiltInStructuralNodeTypes()
         {

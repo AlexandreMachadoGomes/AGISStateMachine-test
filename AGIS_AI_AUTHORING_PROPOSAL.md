@@ -1,196 +1,356 @@
-AGIS AI Authoring Layer
-AGIS_ESM — AI-Driven State Machine Creation
+# AGIS ESM — An GI System: Extensible State Machine
+## Project Overview and AI Authoring Proposal
 
+---
 
-OVERVIEW
+# Part 1 — The Project
 
-The AGIS Enhanced State Machine already provides a powerful, data-driven architecture for defining NPC and actor behaviour through a visual editor. The next layer extends this further: rather than a human user building and editing state machines through the UI, an AI system would be able to perform the same operations — constructing graphs, defining transitions, creating entirely new states and conditions, and injecting custom logic into them — all at runtime, using the same underlying hooks the editor itself uses.
+## What Is AGIS ESM
 
-The core principle is full authoring parity: anything a designer can do through the visual editor, the AI can do programmatically. This is not a simplified scripting layer or a restricted template system — it is the same pipeline, driven by a different author.
+AGIS ESM (An GI System — Extensible State Machine) is a Unity 6 framework for defining, editing, and executing actor behaviour through parameter-driven state machines. It is designed as a standalone engine-level library: self-contained, runtime-safe, and independent of any specific game.
 
+The system targets game AI — NPCs, enemies, companions, ambient actors — but its architecture is general enough for any stateful runtime behaviour: UI flows, quest progression, dialogue, animation controllers, or procedural systems.
 
-1. WHAT THE AI CAN CREATE AND EDIT
+The central design principle is that **behaviour is data**. A state machine in AGIS is a graph stored as a serializable data object. It can be created in an editor, saved as an asset, loaded at runtime, modified live, and re-executed — all without touching any code. Code enters the system only at the definition layer (implementing a state type or condition type), not at the graph-authoring layer.
 
-1.1 State Machines and Graphs
+A reference NPC layer built on top of the framework provides ready-made state and condition types for common game AI tasks (movement, detection, routes, dialogue, stealth). It is a usage example as much as a library — its types follow the same interfaces as anything a developer or AI would author.
+
+---
+
+## 1. Core Architecture
+
+The pipeline has three stages:
+
+> **UGC Definitions → Compiler → Runtime Execution**
+
+UGC (User-Generated Content) is the graph as data: nodes, edges, parameters, condition expressions. The compiler transforms a UGC graph into an optimised runtime structure. The runner drives the Enter / Tick / Exit loop and evaluates transitions on every frame.
+
+### 1.1 The Graph — UGC Definitions
+
+A state machine is represented as an `AGISStateMachineGraph`. This is a plain serializable data object containing:
+
+- **Nodes** — A list of `AGISNodeInstanceDef`. Each node has a stable GUID, a type ID that references a registered state type, and a parameter table holding the designer's per-instance configuration values.
+- **Edges** — A list of `AGISTransitionEdgeDef`. Each edge has a stable GUID, a from-node GUID, a to-node GUID, a condition expression tree, a priority integer, and a transition policy (cooldown duration, interruptible flag).
+- **Entry** — A single GUID identifying which node is the starting point when the state machine is first started.
+
+Graphs are stored as `AGISStateMachineGraphAsset` (Unity ScriptableObject) and can be assigned to slots on an actor's runner in the Inspector. Because a graph is pure data with no code references, it is fully serializable, diffable, and transferable between sessions without recompilation.
+
+### 1.2 The Compiler
+
+`AGISGraphCompiler` transforms a UGC graph into an `AGISRuntimeGraph` before execution begins. The compilation step:
+
+- Validates all type ID references against the active registries and reports missing types as errors rather than silently failing at runtime
+- Resolves all GUID references into direct index-based lookups for zero-cost node and edge access during the tick loop
+- Builds per-node sorted adjacency lists — outgoing edges ordered by priority (descending) so the runner always evaluates the highest-priority transition first without sorting on every frame
+- Instantiates a runtime object for each node by calling the node type's factory method, producing an `IAGISNodeRuntime` ready to receive Enter / Tick / Exit calls
+
+The compiled `AGISRuntimeGraph` is cached (`AGISRuntimeGraphCache`) so re-entering the same graph after a stop does not recompile. The cache is invalidated when the source asset changes.
+
+### 1.3 The Runner and Instance
+
+`AGISStateMachineRunner` is the MonoBehaviour that lives on an actor GameObject. It hosts one or more named slots, each of which wraps an `AGISStateMachineInstance`. On startup, the runner compiles all assigned graphs, seeds the actor state, and starts each slot at its entry node.
+
+`AGISStateMachineInstance` manages the moment-to-moment execution of a single compiled graph:
+
+- Tracks the currently active node
+- Calls `Enter()` on the active node's runtime when a state is entered
+- Calls `Tick(dt)` on the active node's runtime every frame
+- After Tick, evaluates outgoing transitions in priority order
+- When a transition fires: calls `Exit()` on the current runtime, advances to the target node, calls `Enter()` on the new runtime
+- Exposes the current node ID and last-fired edge ID for external observation (used by the editor's debug overlay and by the AI monitoring layer)
+
+The instance is deliberately minimal. It does not know about Unity, game objects, or any game-specific concept. It drives a pure data graph with a registry of typed executors.
+
+### 1.4 State Types — The Execution Building Blocks
+
+A state type is the reusable definition of a kind of behaviour. It is registered in `AGISNodeTypeRegistry` under a string type ID (e.g. `"npc.follow_target"`, `"agis.dialogue"`) and a GUID.
+
+Every state type implements two interfaces:
+
+- **`IAGISNodeType`** — The static, design-time face of the type: TypeId / DisplayName / Kind / Schema, and a `CreateRuntime(args)` factory that produces a fresh runtime instance per node activation.
+- **`IAGISNodeRuntime`** — The live, per-activation face: `Enter(args)` called once on activation, `Tick(args, dt)` called every frame, `Exit(args)` called once on deactivation.
+
+The args object passed to Enter / Tick / Exit provides the full context the runtime needs: the actor's component references, the `AGISActorState`, the schema parameter values for this specific node instance, and access to any other registered service.
+
+Separating the type (static, shared, one instance per registration) from the runtime (live, one instance per active node) means state types are stateless singletons. All mutable state goes into the runtime instance or into `AGISActorState`.
+
+Optional interfaces extend a state type's capabilities:
+
+- **`IAGISNodeSignal`** — Exposes an `IsComplete` bool. The transition system checks this via `AGISNodeCompleteConditionType` — an outgoing edge fires when the state reports it is done, without the state needing to know about the graph around it.
+- **`IAGISPersistentNodeType`** — Declares a list of `AGISActorState` keys the type needs (with types and defaults). The runner calls `EnsureKey` for each on startup. Keys already present are left untouched, enabling resume behaviour across sessions.
+
+### 1.5 Condition Types — Transition Logic
+
+A condition type is the reusable definition of a boolean test. It is registered in `AGISConditionTypeRegistry` and implements `IAGISConditionType`, providing a TypeId, DisplayName, Schema, and an `Evaluate(args) → bool` method.
+
+The args object gives the condition access to the actor state, the schema parameter values configured for this specific condition instance, and the currently active node runtime (for completion checks).
+
+Conditions are stateless. All information they need comes through args. A condition type is never instantiated per-edge — the same singleton evaluates every edge that references it.
+
+### 1.6 Condition Expression Trees
+
+The condition on a transition edge is not a single condition — it is an expression tree. `AGISConditionExprDef` supports five node kinds:
+
+- **And(children)** — True when all children are true
+- **Or(children)** — True when any child is true
+- **Not(child)** — True when the child is false
+- **Leaf(conditionDef)** — Evaluates a single condition type instance with its configured params
+- **ConstBool(value)** — A hardcoded true or false
+
+This lets designers compose arbitrarily complex transition logic without writing code. An edge might fire when "(detects player OR alert level > 3) AND NOT already in combat". The expression tree is serialized directly in the edge definition and evaluated in full on every tick.
+
+A null condition on an edge evaluates as false. An edge with `ConstBool(true)` is an unconditional transition — it fires immediately after `Tick()` unless a higher-priority edge fires first.
+
+### 1.7 The Transition System — Per-Tick Evaluation
+
+Every frame, for the currently active node, the instance:
+
+1. Calls `Tick(dt)` on the active node runtime.
+2. Iterates all outgoing edges in priority order (highest first).
+3. For each edge, checks three gates in sequence:
+   - **Scope eligibility** — If the edge exits a Grouped node, it is only eligible when the Grouped node's internal state is inside the declared scope. This prevents transitions from firing when the sub-graph is mid-execution in an ineligible state.
+   - **Transition policy** — Cooldown: the edge cannot re-fire until its cooldown period has elapsed since it last fired. Interruptible flag: if false, the edge will not fire while certain categories of action are in progress.
+   - **Condition expression** — The full expression tree is evaluated.
+4. The first edge that passes all three gates fires: `Exit()` on the current state, `Enter()` on the target state.
+
+Only one transition fires per tick. Priority determines which one wins when multiple conditions are simultaneously true.
+
+### 1.8 AGISActorState — The Actor's Persistent Memory
+
+`AGISActorState` is a serialized MonoBehaviour that lives on the actor alongside the runner. It is a typed key-value store — a blackboard — persisting across all state transitions and all slots for the lifetime of the actor.
+
+Supported value types: Bool, Int, Float, String, Vector2, Vector3, Guid.
+
+Keys are populated at startup through two discovery paths:
+
+1. Every node type in every assigned graph that implements `IAGISPersistentNodeType` declares the keys it needs.
+2. Any MonoBehaviour component on the actor that implements `IAGISPersistentNodeType` does the same.
+
+`EnsureKey` adds a key with its default value only if the key is not already present. This means an actor that was saved mid-session resumes with its previous values intact — the startup scan never overwrites live state.
+
+State types read and write the actor state via typed helpers (`GetBool`, `GetInt`, `GetFloat`, `GetString`, `Set`). Condition types read it via the same API. Because all slots share one `AGISActorState`, they communicate through it naturally: one slot writes a key, another reads it to influence its transitions.
+
+### 1.9 Multi-Slot Actors
+
+A single runner hosts any number of named slots. Each slot runs its own compiled graph simultaneously and independently. This allows an actor's concerns to be separated into parallel graphs that do not need to know about each other — for example, a stealth awareness graph tracking detection state, a behaviour graph handling patrol and combat, and a dialogue graph managing conversation state, all running concurrently.
+
+All slots share `AGISActorState` as their communication channel. One slot writes a key; another reads it in its transition conditions. No slot needs a direct reference to another. Slots are compiled and started independently — one slot failing validation does not prevent others from running.
+
+### 1.10 Hierarchical Nodes — Grouped States
+
+A Grouped node encapsulates a complete sub-graph (stored as an `AGISGroupedStateAsset`) as a single node in a parent graph. From the parent graph's perspective it is an ordinary node with Enter / Tick / Exit. Internally it runs its own `AGISStateMachineInstance`.
+
+**Parameter promotion:** Any parameter from any node inside the sub-graph can be promoted to the Grouped node's outer inspector. The designer sees and tunes only the promoted parameters; the internal structure is encapsulated. This makes Grouped nodes the primary reuse mechanism — author a behaviour once, configure it differently per actor.
+
+**Scope gating:** Edges exiting a Grouped node carry a `scopeId`. The edge is only eligible to fire when the Grouped node's internal instance is currently active inside that scope. This allows the parent graph to express "exit this macro behaviour only when it has reached a specific internal checkpoint", not just when any tick happens.
+
+### 1.11 Parallel Nodes
+
+A Parallel node runs multiple branches simultaneously within a single slot. Each branch is a small independent graph. On every tick, all branches tick. The Parallel node exits when one of its branches signals completion (`IAGISNodeSignal.IsComplete = true`) or when an outgoing transition in the parent graph fires.
+
+Parallel nodes are useful for behaviours that combine concurrent concerns — for example, playing a reaction animation while also scanning the environment — without dedicating a separate slot to each concern.
+
+### 1.12 The Validator
+
+`AGISGraphValidator` checks a UGC graph before execution and produces an `AGISGraphValidationReport` listing all findings with two severity levels:
+
+- **Error** — Graph cannot execute correctly. Examples: no entry node, a node references a type that is not registered, an edge points to a node that does not exist in the graph, a required parameter is missing.
+- **Warning** — Graph will execute but something is suspicious. Examples: an edge points to a dangling (unconnected) node, a parameter value is outside the recommended range, a node type reports its own custom warnings via its schema.
+
+The visual editor runs validation on demand and overlays error/warning indicators directly on affected nodes and edges. The runner runs validation automatically at startup and logs all findings; a graph with errors is not started.
+
+---
+
+## 2. The Visual Graph Editor
+
+The visual editor is an in-game overlay built entirely with UIToolkit Runtime (`UnityEngine.UIElements`). It has no dependency on UnityEditor and can run in implemented projects, making it suitable for modding tools, live debugging, or in-game content authoring. The editor is opened at runtime by pressing a configurable key (default: F) and renders as a full-screen overlay over the game view.
+
+### 2.1 Layout
+
+The editor is divided into five areas:
+
+- **Tab bar** — One tab per open slot. Switching tabs loads that slot's graph.
+- **Toolbar** — Save / Undo / Redo / Validate on the left. Add Node / Auto-Layout / Frame All / Frame Selected in the centre. Zoom display, Snap, Grid, Minimap, and Debug toggles on the right.
+- **Canvas** — The main authoring surface. Pan with middle mouse or Alt+drag, zoom with the scroll wheel. Displays node cards and transition edges drawn as bezier curves, with a minimap overlay and a breadcrumb bar for sub-graph drill-down.
+- **Right panel** — A context-sensitive inspector with four tabs: Node Inspector (type info, param fields, validation issues), Edge / Condition editor (condition expression tree for the selected transition), Graph Properties (graph name, entry node, save / revert), and Grouped Asset inspector (exposed parameter bindings).
+- **Status bar** — Live mode indicator, dirty flag, node count, and last message.
+
+### 2.2 Node Cards
+
+Each node is rendered as a card showing its type display name, type ID, kind colour, a gold star on the entry node, an output port handle for dragging edges, and an [x] delete button. Collapsed cards show only the header.
+
+Node kind colours:
+
+- **Normal** — Steel blue (#3A7BD5)
+- **Grouped** — Teal (#1A8B7A)
+- **Parallel** — Purple (#6B3FA0)
+- **AnyState** — Dark crimson (#8B1A1A)
+- **Entry** — Gold star overlay (any kind)
+
+### 2.3 Creating Content in the Editor
+
+- **Add node** — Spacebar or the [+ Node] toolbar button. Opens a fuzzy search window listing all registered state types grouped by category. New nodes are placed below previous ones so they never stack.
+- **Set entry** — Right-click any node → Set as Entry. The first node added to an empty graph is automatically set as entry.
+- **Create edge** — Drag from a node's output port to another node. Dropping on empty canvas opens the node search window, then auto-creates the edge to the newly placed node.
+- **Select edge** — Click the pill label on any transition. The right panel switches to the Edge / Condition tab.
+- **Edit condition** — With an edge selected, build an expression tree (And / Or / Not / Leaf / ConstBool) in the right panel using any registered condition type.
+- **Delete** — Select a node or edge and press Delete.
+- **Undo / Redo** — Ctrl+Z / Ctrl+Y. Full named command history.
+- **Save** — Ctrl+S or the Save toolbar button. Writes back to the graph asset on disk.
+- **Validate** — Runs `AGISGraphValidator`. Error and warning indicators appear as coloured overlays directly on affected nodes and edges.
+
+### 2.4 Type Authoring — Code Editor Panel
+
+Beyond editing graph structure, the visual editor supports authoring entirely new state and condition types from within the same UI. A dedicated panel provides a display name and type ID field for the new type, a parameter schema builder (add, remove, and configure schema params with type and default value), three code text areas for the Enter, Tick, and Exit bodies, a private fields and helpers section for internal variables and utility methods, and a Compile button with inline error and warning output.
+
+On compile, the editor assembles a complete C# class from the panel inputs, wrapping the body code in the correct `IAGISNodeType` / `IAGISNodeRuntime` scaffolding, and passes it to the runtime Roslyn compiler (`Microsoft.CodeAnalysis.CSharp`). The resulting type is instantiated and registered under its GUID, and is immediately available in the node search window like any built-in type. The source code is stored in the content library against the GUID and recompiled automatically on the next session startup.
+
+This compilation path is the same one the AI authoring layer uses. A type authored by a designer in this panel and a type generated by the AI are registered identically and are indistinguishable to the rest of the system.
+
+### 2.5 Scene Setup Tool
+
+A Unity Editor menu item (AGIS → Setup Runtime Editor Test Scene) creates a ready-to-use test scene: PanelSettings asset, AGIS Editor GameObject with UIDocument and `AGISGraphEditorWindow`, USS stylesheet wired, and the first `AGISStateMachineRunner` in the scene connected automatically.
+
+---
+
+## 3. Content Identity — GUIDs
+
+Every piece of content in AGIS is assigned a GUID at creation time. This is its permanent, globally unique identifier. Graphs reference other content by GUID. The registries look up types by GUID. The serialized assets store GUIDs, not names.
+
+Human-readable names are display metadata only. They can be changed without breaking any graph. This identity model is the foundation for the library and marketplace systems described in Part 2.
+
+---
+
+# Part 2 — The AI Authoring Layer
+
+## 4. Overview
+
+The AI authoring layer gives an AI system the same authoring capabilities a designer has through the visual editor — constructing graphs, configuring transitions, generating and compiling new state and condition types — but exercised programmatically, autonomously, and at runtime without human intervention.
+
+The core principle is full authoring parity: everything the editor exposes to a designer, the AI can do through the same underlying pipeline. This is not a simplified scripting layer or a restricted template system — it is the same data structures, the same compiler, the same registry, driven by a different author.
+
+---
+
+## 5. What the AI Can Create and Edit
+
+### 5.1 State Machines and Graphs
 
 The AI can construct a complete state machine from scratch, or modify an existing one, using the same data structures the editor reads and writes:
 
-   • Create new graphs — define nodes, connect them with transitions, assign priorities
-   • Edit existing graphs — add, remove, or rewire states and transitions at runtime
-   • Configure transition conditions — compose condition expression trees (And / Or / Not) using any built-in or custom condition types
-   • Set and modify parameters — tune every exposed value on every node and condition
-   • Assemble Grouped States — build reusable macro behaviours with promoted parameters, identical to those a designer would author in the editor
+- **Create new graphs** — define nodes, connect them with transitions, assign priorities, configure condition expressions
+- **Edit existing graphs** — add, remove, or rewire states and transitions at runtime without stopping the simulation
+- **Configure conditions** — compose expression trees (And / Or / Not) from any available condition type
+- **Tune parameters** — set every exposed schema value on every node and condition
+- **Assemble Grouped States** — build reusable macro behaviours with promoted parameters, identical to those a designer would author in the editor
 
-All of this is pure data manipulation. The AI produces a graph definition that the runtime compiles and executes identically to one authored by hand.
+All of this is pure data manipulation. The AI produces a graph definition that the compiler and runner process identically to one authored by hand.
 
+### 5.2 New State Types — Custom Logic Injection
 
-1.2 New State Types — Custom Logic Injection
+Beyond editing graph structure, the AI can define entirely new kinds of states. Each state type provides three execution hooks:
 
-Beyond editing graph structure, the AI can define entirely new kinds of states that do not exist in the built-in library. This is the key capability that separates this system from a conventional scripting layer.
+- **`Enter(args)`** — Initialise movement, trigger animations, cache references, set up blackboard values
+- **`Tick(args, dt)`** — Update logic every frame: poll sensors, drive behaviour, accumulate timers, respond to world state
+- **`Exit(args)`** — Clean up: reset flags, notify other systems, persist results
 
-Each state type in AGIS has three execution hooks:
+The AI generates the full implementation of these hooks as C# code. The code is compiled at runtime into a real assembly, then registered in the node type registry under a GUID. From that point, the new state type is indistinguishable from a built-in one — it appears in the editor type picker, it can be placed in graphs, and it executes through the same Enter / Tick / Exit loop.
 
-   • Enter() — runs once when the state becomes active (initialise movement, trigger animations, cache references, set up variables)
-   • Tick(dt) — runs every frame while the state is active (update logic, poll sensors, drive behaviour, accumulate timers)
-   • Exit() — runs once when the state is leaving (clean up, reset flags, notify other systems)
+An AI-authored state type can include:
 
-The AI can generate the full implementation of these hooks as code, which is compiled and registered at runtime. From that point, the new state type is available to any graph — it behaves identically to a built-in state, with no distinction at the engine level.
+- **Private variables** — internal state that persists across `Tick()` calls for the lifetime of the active state (timers, counters, cached references, flags)
+- **Support functions** — private helper methods, exactly as a developer would write them
+- **Full Unity API access** — movement, animation, physics, audio, component queries — anything available to a developer is available to the AI
+- **Full AGIS API access** — pathfinder interface, blackboard read/write, actor state keys, detection queries, route data
+- **Optional interfaces** — completion signal (`IAGISNodeSignal`), persistent key declarations (`IAGISPersistentNodeType`)
 
-A new state type created by the AI can include:
+### 5.3 New Condition Types — Custom Transition Logic
 
-   • Private variables — internal state that persists across Tick() calls for the duration the state is active (timers, counters, cached references, flags)
-   • Support functions — private helper methods that structure the logic internally, exactly as a developer would write them
-   • Full Unity API access — movement, animation, physics, audio, component queries — anything available to a developer is available to the AI-authored state
-   • Full AGIS API access — pathfinder interface, blackboard read/write, actor state keys, detection queries, route data
-   • Optional capability interfaces — the AI can elect to implement the same optional contracts a developer would, such as exposing a completion signal (so outgoing transitions can fire when the state declares it is done) or declaring persistent actor-state keys that survive across state transitions
+The same capability applies to conditions. The AI can define new condition types that evaluate arbitrary logic — accessing any game world data, sensor output, or blackboard value — to produce a true/false result used by the transition system. Once registered, an AI-authored condition is composable with And / Or / Not like any built-in condition, and appears in the editor's condition picker.
 
+---
 
-1.3 New Condition Types — Custom Transition Logic
+## 6. How It Fits the Existing Architecture
 
-The same capability applies to conditions. The AI can define new condition types that evaluate arbitrary logic to produce a true/false result, which the transition system then uses normally. A new AI-authored condition has access to:
+The AI authoring layer requires no changes to the core pipeline. The flow is:
 
-   • All actor state and blackboard data
-   • Sensor and detection queries
-   • Game world queries (distances, tags, physics overlaps)
-   • Any custom parameters defined in its schema
+1. AI generates state or condition implementation code (C#)
+2. Runtime compiler produces a new assembly
+3. New type is registered in the appropriate registry under its GUID
+4. AI constructs or modifies a graph referencing that GUID
+5. `AGISGraphCompiler` processes the graph
+6. `AGISStateMachineRunner` executes it identically to any other graph
 
-Once registered, the condition is available to any transition in any graph, composable with And / Or / Not like any built-in condition.
+The compiler, runner, and transition evaluator are unaware of where a type came from. The registry is the only integration point.
 
+---
 
-2. HOW IT FITS THE EXISTING ARCHITECTURE
+## 7. Relationship to the Visual Editor
 
-Each state type, condition type, grouped state, and state machine in AGIS is identified by a GUID — a globally unique identifier assigned at creation time and never changed. The runtime looks up everything by GUID through a central registry. This registry is the single integration point for all content, whether built-in, designer-authored, or AI-generated:
+The visual editor and the AI authoring layer share the same data model and compose naturally. A designer can open an AI-authored graph in the editor, inspect it, and modify it. An AI can take a designer-authored graph, extend it, and hand it back. Grouped states authored by either source are reusable by both, and parameters promoted to a Grouped State's outer layer are tunable by either. There is no special format, no conversion step, and no information loss when crossing between the two authoring modes.
 
-   1. AI generates code
-   2. Compiler produces a real assembly at runtime
-   3. New type is registered in the registry under its GUID
-   4. AI constructs a graph referencing that GUID
-   5. Runtime compiles and executes the graph identically to any built-in graph
+Both the designer and the AI have full authoring capability across the entire system:
 
-No part of the execution pipeline — compiler, runner, transition evaluator — changes. The AI is simply a new kind of author feeding into the same front door the editor uses.
+- Create and edit graph structure
+- Add, remove, and rewire transitions
+- Configure condition expression trees
+- Tune node and condition parameters
+- Build and reuse Grouped States with promoted parameters
+- Define new state types with custom Enter / Tick / Exit logic
+- Define new condition types with custom evaluation logic
+- Add private variables and helper functions to custom types
 
+---
 
-3. RELATIONSHIP TO THE VISUAL EDITOR
+## 8. Content Library and Identity System
 
-The visual editor and the AI authoring layer share the same underlying data model. This means they compose naturally:
+### 8.1 GUIDs as the Primary Identifier
 
-   • A designer can open an AI-authored graph in the editor, inspect it, and modify it
-   • An AI can take a designer-authored graph, extend it, and hand it back
-   • Grouped states authored by either source are reusable by both
-   • Parameters promoted to the outer layer of a Grouped State are tunable by either
+Every piece of content — state type, condition type, grouped state, state machine — carries a permanent GUID. Graphs reference content by GUID, not by name. Names are display metadata that can be renamed or translated without breaking any reference. The backend stores GUIDs as primary keys.
 
-There is no special format, no conversion step, and no loss of information when crossing between the two authoring modes.
+### 8.2 Two-Tier Content Model
 
+Not all content needs to be fully loaded at all times.
 
-4. SCOPE OF AI AUTHORING CAPABILITY
+**Tier 1 — Preview** (always available locally): A lightweight metadata record containing everything needed to display the content in the editor and reason about it: GUID, display name, description, category, author, version, parameter schema, optional icon. The full catalogue of previews loads on startup and is small.
 
-The table below outlines which capabilities are available to each authoring mode:
+**Tier 2 — Implementation** (downloaded on demand): The actual content — C# source for AI-authored types, or asset data for grouped states and state machines. Downloaded once, cached locally, then registered in the runtime registry. After the first fetch there is no network round-trip.
 
-Capability                                    Designer (UI Editor)    AI Authoring Layer
-─────────────────────────────────────────────────────────────────────────────────────────
-Create / edit graph structure                       Yes                     Yes
-Add / remove / rewire transitions                   Yes                     Yes
-Configure condition expressions                     Yes                     Yes
-Tune node and condition parameters                  Yes                     Yes
-Build and reuse Grouped States                      Yes                     Yes
-Promote parameters to outer layer                   Yes                     Yes
-Define new state types with custom logic            No                      Yes
-Define new condition types                          No                      Yes
-Inject Enter / Tick / Exit behaviour                No                      Yes
-Add private variables and helper functions          No                      Yes
+### 8.3 When an Implementation Is Downloaded
 
-The bottom four rows represent the unique contribution of the AI authoring layer. Above that line, the two authoring modes are equivalent.
+An implementation is fetched exactly once and then cached locally. The three triggers are:
 
+- **Project startup** — The project declares a manifest of required GUIDs. The system batch-downloads anything not already cached before gameplay begins.
+- **Visual editor** — When a designer places a type for the first time, the implementation is fetched if not cached. The editor shows a loading state and proceeds once ready.
+- **AI authoring** — When the AI builds or extends a graph, the system resolves all referenced implementations before compiling.
 
-5. CONTENT IDENTITY AND THE LIBRARY SYSTEM
+### 8.4 The Content Library
 
-5.1 GUIDs as the Primary Identifier
+The content library is the single in-memory store that the editor, the AI, and the runtime all read from. It maintains two stores:
 
-Every piece of content in AGIS — every state type, condition type, grouped state, and state machine — is assigned a GUID at creation time. This GUID is permanent and globally unique. It is what graphs reference internally, what the runtime registry looks up, and what the backend database stores as its primary key.
+**Preview store** (always populated): state type previews, condition type previews, Grouped State previews, State Machine previews. The editor and AI query this for type lists, schema inspection, and reasoning about available content.
 
-Human-readable names (e.g. "Patrol State", "Detects Player") are display metadata only. They can be renamed, translated, or versioned without breaking any graph that references the type, because all internal references use the GUID.
+**Implementation cache** (populated on demand): registered state types (compiled, live in registry), registered condition types, Grouped State assets, State Machine graph assets. The runtime only ever touches this side.
 
+### 8.5 The Project Manifest
 
-5.2 Two-Tier Content Model: Previews and Implementations
+Each project carries a manifest — a flat list of GUIDs for every type, grouped state, and graph it requires. At startup, the content system compares the manifest against the local cache and downloads anything missing before the first scene loads. Content added dynamically by the AI during play — types authored or fetched at runtime that were not anticipated at build time — is downloaded on demand.
 
-Not all content needs to be fully loaded at all times. The library distinguishes between two tiers:
+### 8.6 Foundation for a Content Marketplace
 
-Tier 1 — Preview (always available locally)
+The two-tier model and GUID identity system are designed to support a marketplace where users can publish, discover, and download states, conditions, grouped states, and full state machine templates. The marketplace layer sits entirely outside the state machine — it manages publishing, discovery, and distribution. The state machine only ever sees the result: a preview added to the local library and an implementation fetched when needed. A community-authored state downloaded from the marketplace is handled identically to a built-in one.
 
-A lightweight metadata record for each known piece of content. It contains everything needed to display the content in the editor and understand what it does, but none of the actual implementation:
+---
 
-   • GUID
-   • Display name and description
-   • Content category (State / Condition / Grouped State / State Machine)
-   • Author and version
-   • Parameter schema — the list of configurable parameters and their types, so the editor can render the inspector panel and the AI can reason about what a type accepts
-   • Thumbnail or icon reference (optional)
+## 9. AI Authoring Use Cases
 
-The full list of previews for all content a user has added to their library is kept locally at all times. It is small — a preview record is a short data object — and is loaded on startup. This is what populates the editor's content browser, the AI's catalogue of available types, and the type picker search windows.
+**Generative content** — An AI generates unique behaviour graphs for each enemy encounter, producing variety that would be impractical to author manually for every variant.
 
-Tier 2 — Implementation (downloaded on demand)
+**Adaptive behaviour** — An AI monitors gameplay and modifies a live state machine in response — adding states, extending transitions, and adjusting conditions based on what it observes the player doing.
 
-The actual content: source code for AI-authored states and conditions, or full asset data for grouped states and state machines. This is only downloaded when genuinely needed, and cached locally once retrieved.
+**Assisted authoring** — A designer describes intent in natural language. The AI translates it into a concrete graph with states, transitions, and conditions, which the designer then reviews and adjusts in the visual editor. Human and AI iterate together.
 
+**Behaviour libraries** — An AI authors and packages reusable Grouped States. Designers drop them into their graphs and tune the exposed parameters. The available library grows over time without requiring developer involvement for every new behaviour.
 
-5.3 When an Implementation Is Downloaded
+**Procedural NPC systems** — At world generation time, an AI constructs tailored behaviour graphs for NPCs based on their role, environment, and relationships. Each NPC's behaviour fits its specific context rather than being selected from a fixed template set.
 
-The system downloads an implementation exactly once per installation, triggered by the first moment it is actually needed:
-
-   • Game startup — the game declares a manifest of every GUID it requires. The system checks which of those are already cached locally and batch-downloads any that are not, before gameplay begins. This is the primary load path for shipped content.
-
-   • Visual editor — when a designer places a type onto the canvas for the first time, the system fetches its implementation if not already present. The editor shows a lightweight loading state during the fetch and proceeds once ready.
-
-   • AI authoring — when the AI constructs or extends a graph referencing a GUID, the system resolves the implementation before compiling the graph. If not cached, it is downloaded inline.
-
-In all three cases, once the implementation is local it is registered in the runtime registry and available immediately. Subsequent uses hit the local cache with no network round-trip.
-
-
-5.4 The Content Library
-
-The content library is the single in-memory store that the editor, the AI, and the runtime all read from. It manages both tiers:
-
-   Preview store (always populated)
-      ○ State type previews
-      ○ Condition type previews
-      ○ Grouped State previews
-      ○ State Machine previews
-
-   Implementation cache (populated on demand)
-      ○ Registered state types (compiled, live in registry)
-      ○ Registered condition types (compiled, live in registry)
-      ○ Grouped State assets
-      ○ State Machine graph assets
-
-The editor and AI query the preview store to show type lists, inspect schemas, and reason about available content. They trigger an implementation fetch only when a type is about to be used. The runtime only ever touches the implementation cache — it never needs previews.
-
-
-5.5 The Game Manifest
-
-Each game carries a manifest: a flat list of GUIDs for every state type, condition type, grouped state, and state machine graph it uses. The manifest is compact and ships with the game build.
-
-At startup, the content system reads the manifest, compares it against the local cache, and downloads anything missing before the first scene loads. This guarantees all required implementations are present before gameplay begins, with no mid-session downloads for content the game already knows it needs.
-
-Content added dynamically by the AI during play — types the AI authors or fetches from the library that were not in the original manifest — is downloaded on demand, since the game could not have anticipated them at build time.
-
-
-5.6 Foundation for a Content Marketplace
-
-The two-tier model and GUID identity system are designed from the start to support a content marketplace where users can publish, discover, and download states, conditions, grouped states, and full state machine templates authored by other users.
-
-The marketplace layer sits entirely outside the state machine: it manages publishing, discovery, and distribution. The state machine only ever sees the result — a preview record added to the local library, and an implementation fetched when needed. From the state machine's perspective, a community-authored state downloaded from the marketplace is handled identically to a built-in one.
-
-
-6. USE CASES
-
-Generative content — an AI generates unique enemy behaviour graphs for each encounter, producing variety without manual authoring of every variant.
-
-Adaptive behaviour — an AI monitors gameplay and extends or modifies a live state machine in response, adding new states or transition conditions based on what it observes.
-
-Assisted authoring — a designer describes intent in natural language; the AI translates it into a concrete graph with states, transitions, and conditions, which the designer then reviews and adjusts in the editor.
-
-Behaviour libraries — an AI authors and packages reusable Grouped States that designers can drop into their graphs and tune via exposed parameters, expanding the available building blocks over time without developer involvement.
-
-Procedural NPC systems — at world generation time, an AI constructs tailored behaviour graphs for NPCs based on their role, environment, and relationships, producing behaviour that fits the specific context rather than selecting from a fixed set of templates.
-
-Community content — a designer publishes a complex attack pattern as a Grouped State. Other users add it to their library, see its preview and parameters in the editor, and use it in their own graphs. The implementation is only downloaded the first time they place it on a canvas or their game starts with it in the manifest.
+**Community content** — A designer publishes a complex attack pattern as a Grouped State. Other users add it to their library, inspect its parameters in the editor, and place it in their own graphs. The implementation downloads the first time it is needed.

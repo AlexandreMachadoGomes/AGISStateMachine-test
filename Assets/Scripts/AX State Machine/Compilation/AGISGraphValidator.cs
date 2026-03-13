@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using AGIS.ESM.UGC;
 using AGIS.ESM.UGC.Params;
+using AGIS.ESM.Knowledge;
 
 namespace AGIS.ESM.Runtime
 {
@@ -21,12 +22,21 @@ namespace AGIS.ESM.Runtime
         private readonly AGISNodeTypeRegistry _nodeTypes;
         private readonly AGISConditionTypeRegistry _conditionTypes;
         private readonly Func<AGISGuid, AGISGroupedStateAsset> _groupResolver;
+        private readonly Func<AGISGuid, AGISKnowledgeDocumentAsset> _knowledgeResolver;
 
-        public AGISGraphValidator(AGISNodeTypeRegistry nodeTypes, AGISConditionTypeRegistry conditionTypes, Func<AGISGuid, AGISGroupedStateAsset> groupResolver = null)
+        // ── Finding code constants ────────────────────────────────────────────────────
+        public const string Code_LLMReturnTargetMissing   = "Graph.LLMReturnTargetMissing";
+        public const string Code_LLMDialogueNodeAmbiguous = "Graph.LLMDialogueNodeAmbiguous";
+        public const string Code_KnowledgeDocUnresolved   = "Graph.KnowledgeDocUnresolved";
+
+        public AGISGraphValidator(AGISNodeTypeRegistry nodeTypes, AGISConditionTypeRegistry conditionTypes,
+            Func<AGISGuid, AGISGroupedStateAsset> groupResolver = null,
+            Func<AGISGuid, AGISKnowledgeDocumentAsset> knowledgeResolver = null)
         {
             _nodeTypes = nodeTypes ?? throw new ArgumentNullException(nameof(nodeTypes));
             _conditionTypes = conditionTypes ?? throw new ArgumentNullException(nameof(conditionTypes));
             _groupResolver = groupResolver;
+            _knowledgeResolver = knowledgeResolver;
         }
 
         public AGISGraphValidationReport ValidateGraph(AGISStateMachineGraph graph, AGISGraphValidatorOptions options = null)
@@ -142,6 +152,62 @@ namespace AGIS.ESM.Runtime
                 else
                     ValidateConditionExpr(e.condition, report, $"Graph.Edges[{i}].Condition", e.edgeId, options);
             }
+
+            // ── LLM return edge + knowledge document validation ───────────────────────
+
+            // Collect all agis.llm_dialogue nodes in this graph.
+            var llmDialogueNodeIds = new List<AGISGuid>();
+            foreach (var kv in nodeIndex)
+                if (kv.Value?.nodeTypeId == "agis.llm_dialogue")
+                    llmDialogueNodeIds.Add(kv.Key);
+
+            if (llmDialogueNodeIds.Count > 1)
+                report.Warn(Code_LLMDialogueNodeAmbiguous,
+                    $"Graph has {llmDialogueNodeIds.Count} agis.llm_dialogue nodes; only one is expected per graph.",
+                    "Graph.LLM");
+
+            bool hasLLMDialogue = llmDialogueNodeIds.Count > 0;
+
+            // Validate isLLMReturn edges.
+            for (int i = 0; i < graph.edges.Count; i++)
+            {
+                var e = graph.edges[i];
+                if (e == null || !e.isLLMReturn) continue;
+
+                if (!hasLLMDialogue)
+                    report.Error(Code_LLMReturnTargetMissing,
+                        "Edge has isLLMReturn=true but no agis.llm_dialogue node exists in this graph.",
+                        $"Graph.Edges[{i}]", edgeId: e.edgeId);
+            }
+
+            // Validate knowledge_doc_N params on agis.llm_dialogue nodes.
+            if (_knowledgeResolver != null)
+            {
+                foreach (var llmNodeId in llmDialogueNodeIds)
+                {
+                    if (!nodeIndex.TryGetValue(llmNodeId, out var llmNode)) continue;
+                    if (llmNode.@params == null) continue;
+
+                    for (int k = 0; ; k++)
+                    {
+                        string paramKey = $"knowledge_doc_{k}";
+                        if (!llmNode.@params.TryGet(paramKey, out var val)) break; // no more knowledge_doc_N params
+
+                        string guidStr = val.AsString();
+                        if (string.IsNullOrEmpty(guidStr)) continue;
+
+                        var docGuid = new AGISGuid(guidStr);
+                        if (!docGuid.IsValid) continue;
+
+                        if (_knowledgeResolver(docGuid) == null)
+                            report.Warn(Code_KnowledgeDocUnresolved,
+                                $"knowledge_doc_{k} GUID '{guidStr}' could not be resolved in the knowledge registry.",
+                                "Graph.LLM.KnowledgeDocs", nodeId: llmNodeId);
+                    }
+                }
+            }
+
+            // ─────────────────────────────────────────────────────────────────────────
 
             // Parallel rule + grouped scopeId validity for exiting edges
             foreach (var kv in nodeIndex)

@@ -261,8 +261,14 @@ namespace AGIS.ESM.RuntimeEditor
             _canvas.OnEdgeCreateRequested += OnCanvasEdgeCreateRequested;
             _canvas.OnPortDroppedOnEmpty  += OnCanvasPortDroppedOnEmpty;
             _canvas.OnNodeDeleteRequested += OnCanvasNodeDeleteRequested;
-            _canvas.OnAddNodeAtCenterRequested += () => OpenNodeSearchWindow(_canvas.ScreenToWorld(
-                new Vector2(_canvas.resolvedStyle.width * 0.5f, _canvas.resolvedStyle.height * 0.5f)));
+            _canvas.OnAddNodeAtCenterRequested += () =>
+            {
+                var center = _canvas.ScreenToWorld(new Vector2(
+                    _canvas.resolvedStyle.width * 0.5f, _canvas.resolvedStyle.height * 0.5f));
+                int nodeCount = _workingGraph?.nodes?.Count ?? 0;
+                center += new Vector2(0f, nodeCount * 120f);
+                OpenNodeSearchWindow(center);
+            };
             _canvas.OnSelectionChanged += OnCanvasSelectionChanged;
             _canvas.OnOpenSubGraphRequested += OnOpenSubGraphRequested;
 
@@ -909,9 +915,15 @@ namespace AGIS.ESM.RuntimeEditor
             if (evt.keyCode == KeyCode.Space && !ctrl)
             {
                 if (_canvas != null)
-                    OpenNodeSearchWindow(_canvas.ScreenToWorld(new Vector2(
+                {
+                    var center = _canvas.ScreenToWorld(new Vector2(
                         _canvas.resolvedStyle.width * 0.5f,
-                        _canvas.resolvedStyle.height * 0.5f)));
+                        _canvas.resolvedStyle.height * 0.5f));
+                    // Cascade offset so successive nodes don't stack
+                    int nodeCount = _workingGraph?.nodes?.Count ?? 0;
+                    center += new Vector2(0f, nodeCount * 120f);
+                    OpenNodeSearchWindow(center);
+                }
                 evt.StopPropagation();
                 return;
             }
