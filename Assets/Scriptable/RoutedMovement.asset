@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27336a7d8141f546879b578cb01fd56, type: 3}
+  m_Name: RoutedMovement
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.ESM.UGC.AGISGroupedStateAsset
+  groupAssetId:
+    _value: 1f93ec0b561a4935b3ff33b57c98da9c
+  displayName: Routed Movement
+  internalGraph:
+    graphId:
+      _value: 75d920d13764410987edd5768ee76b33
+    version: 1
+    entryNodeId:
+      _value: 222f68c1165b47e6bbeb416660032e39
+    nodes:
+    - nodeId:
+        _value: 222f68c1165b47e6bbeb416660032e39
+      nodeTypeId: npc.reset_route
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: d3a80601bc164c5587e0e49484de3f40
+      nodeTypeId: npc.move_to_waypoint
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    - nodeId:
+        _value: e392f3263fdb41148b7ef7171eac391a
+      nodeTypeId: npc.advance_waypoint
+      params:
+        values: []
+      visual:
+        position: {x: 0, y: 0}
+        collapsed: 0
+      groupAssetId:
+        _value: 
+      exposedOverrides:
+        values: []
+      parallelChildren: []
+    edges:
+    - edgeId:
+        _value: 42c2c041b34143e9b046967d52786c50
+      fromNodeId:
+        _value: 222f68c1165b47e6bbeb416660032e39
+      toNodeId:
+        _value: d3a80601bc164c5587e0e49484de3f40
+      condition:
+        kind: 4
+        constValue: 1
+        children: []
+        child:
+          rid: -2
+        leaf:
+          conditionId:
+            _value: 09f58ad74cef4589ad1c0abbcdc4ff1d
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+      isLLMReturn: 0
+    - edgeId:
+        _value: db6b448bbb4145d28b5adf1eb06c29c1
+      fromNodeId:
+        _value: d3a80601bc164c5587e0e49484de3f40
+      toNodeId:
+        _value: e392f3263fdb41148b7ef7171eac391a
+      condition:
+        kind: 3
+        constValue: 0
+        children: []
+        child:
+          rid: -2
+        leaf:
+          conditionId:
+            _value: cf2ab13b8f6a4205b935f0033bbbc8b7
+          conditionTypeId: npc.has_arrived_at_waypoint
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+      isLLMReturn: 0
+    - edgeId:
+        _value: 37334babdc46476f8c364a774415e3e3
+      fromNodeId:
+        _value: e392f3263fdb41148b7ef7171eac391a
+      toNodeId:
+        _value: d3a80601bc164c5587e0e49484de3f40
+      condition:
+        kind: 4
+        constValue: 1
+        children: []
+        child:
+          rid: -2
+        leaf:
+          conditionId:
+            _value: e7657f06374247a28f20292c97cf71b2
+          conditionTypeId: 
+          params:
+            values: []
+      priority: 0
+      policy:
+        interruptible: 1
+        cooldownSeconds: 0
+      scopeId: Any
+      isLLMReturn: 0
+  internalEntryNodeId:
+    _value: 
+  scopes: []
+  exposedParams: []
+  bindings: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

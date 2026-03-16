@@ -89,6 +89,11 @@ namespace AGIS.ESM.Runtime
             NodeTypes = new AGISNodeTypeRegistry();
             ConditionTypes = new AGISConditionTypeRegistry();
 
+            // Apply any types registered explicitly via AGISTypeRegistrar.Add() first.
+            // This is the safe path for IL2CPP / AOT builds where assembly scanning
+            // can silently drop stripped types.
+            AGISTypeRegistrar.ApplyTo(NodeTypes, ConditionTypes);
+
             if (autoRegisterTypesFromAssemblies)
             {
                 var asms = AppDomain.CurrentDomain.GetAssemblies();
@@ -333,10 +338,30 @@ namespace AGIS.ESM.Runtime
 
         private AGISGroupedStateAsset ResolveGroupAsset(AGISGuid id)
         {
-            if (_groupIndex != null && id.IsValid && _groupIndex.TryGetValue(id, out var g))
+            if (!id.IsValid) return null;
+
+            if (_groupIndex != null && _groupIndex.TryGetValue(id, out var g))
                 return g;
+
+#if UNITY_EDITOR
+            // Editor fallback: scan all currently-loaded grouped assets (covers assets that
+            // were not added to knownGroupedAssets but are referenced in a slot graph).
+            foreach (var asset in Resources.FindObjectsOfTypeAll<AGISGroupedStateAsset>())
+            {
+                if (asset != null && asset.groupAssetId == id)
+                {
+                    RegisterGroupedAsset(asset, rebuildIndex: true);
+                    return asset;
+                }
+            }
+#endif
             return null;
         }
+
+        /// <summary>
+        /// Public lookup for the runtime editor — finds a known grouped asset by id.
+        /// </summary>
+        public AGISGroupedStateAsset FindGroupedAsset(AGISGuid id) => ResolveGroupAsset(id);
 
         // ── Knowledge document registry ────────────────────────────────────────────────
 

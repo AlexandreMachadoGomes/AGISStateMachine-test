@@ -40,7 +40,7 @@ namespace AGIS.ESM.RuntimeEditor.Panels
         private readonly Label           _typeIdLabel;
         private readonly Label           _guidLabel;
         private readonly Button          _copyGuidBtn;
-        private readonly Button          _setEntryBtn;
+        private readonly Toggle          _isEntryToggle;
         private readonly VisualElement   _paramsContainer;
         private readonly VisualElement   _persistentContainer;
         private readonly VisualElement   _validationContainer;
@@ -106,9 +106,9 @@ namespace AGIS.ESM.RuntimeEditor.Panels
 
             // ── Is Entry ──────────────────────────────────────────────────────
             _inner.Add(MakeSectionHeader("Entry Point"));
-            _setEntryBtn = new Button(OnSetEntryClicked) { text = "\u2605 Set as Entry" };
-            _setEntryBtn.AddToClassList("agis-toolbar__button");
-            _inner.Add(_setEntryBtn);
+            _isEntryToggle = new Toggle("Is Entry Node");
+            _isEntryToggle.RegisterValueChangedCallback(OnIsEntryToggleChanged);
+            _inner.Add(_isEntryToggle);
 
             // ── Params ────────────────────────────────────────────────────────
             _inner.Add(MakeSectionHeader("Parameters"));
@@ -147,6 +147,15 @@ namespace AGIS.ESM.RuntimeEditor.Panels
 
         // ── Public API ────────────────────────────────────────────────────────
 
+        public void Clear()
+        {
+            _def    = null;
+            _type   = null;
+            _graph  = null;
+            _report = null;
+            Rebuild();
+        }
+
         public void Populate(
             AGISNodeInstanceDef def,
             IAGISNodeType type,
@@ -179,10 +188,11 @@ namespace AGIS.ESM.RuntimeEditor.Panels
             // Kind color
             _kindLabel.style.color = KindColor(_type.Kind);
 
-            // Entry button
+            // Entry toggle — suppress callback while setting value
             bool isEntry = _graph != null && _graph.entryNodeId == _def.nodeId;
-            _setEntryBtn.SetEnabled(!isEntry);
-            _setEntryBtn.text = isEntry ? "\u2605 This is the Entry Node" : "\u2605 Set as Entry";
+            _isEntryToggle.UnregisterValueChangedCallback(OnIsEntryToggleChanged);
+            _isEntryToggle.value = isEntry;
+            _isEntryToggle.RegisterValueChangedCallback(OnIsEntryToggleChanged);
 
             // Params
             RebuildParams();
@@ -495,14 +505,21 @@ namespace AGIS.ESM.RuntimeEditor.Panels
 
         // ── Event handlers ────────────────────────────────────────────────────
 
-        private void OnSetEntryClicked()
+        private void OnIsEntryToggleChanged(ChangeEvent<bool> evt)
         {
+            if (!evt.newValue)
+            {
+                // Entry can't be unset without choosing another node — revert silently
+                _isEntryToggle.SetValueWithoutNotify(true);
+                return;
+            }
+
             if (_def == null || _graph == null || _history == null) return;
+            if (_graph.entryNodeId == _def.nodeId) return; // already entry
+
             var cmd = new SetEntryNodeCommand(_graph, _graph.entryNodeId, _def.nodeId);
             _history.Push(cmd);
             OnSetEntryNode?.Invoke(_def.nodeId);
-            _setEntryBtn.SetEnabled(false);
-            _setEntryBtn.text = "\u2605 This is the Entry Node";
         }
 
         // ── Helpers ───────────────────────────────────────────────────────────

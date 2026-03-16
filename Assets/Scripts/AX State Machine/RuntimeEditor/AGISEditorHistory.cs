@@ -178,6 +178,7 @@ namespace AGIS.ESM.RuntimeEditor
         // Captured for undo
         private AGISNodeInstanceDef _removedNode;
         private readonly List<AGISTransitionEdgeDef> _removedEdges = new List<AGISTransitionEdgeDef>();
+        private AGISGuid _clearedEntryId;
 
         public RemoveNodeCommand(AGISStateMachineGraph graph, AGISGuid nodeId)
         {
@@ -189,6 +190,7 @@ namespace AGIS.ESM.RuntimeEditor
         {
             _removedNode = null;
             _removedEdges.Clear();
+            _clearedEntryId = AGISGuid.Empty;
 
             if (_graph.nodes != null)
             {
@@ -215,6 +217,13 @@ namespace AGIS.ESM.RuntimeEditor
                     }
                 }
             }
+
+            // Clear entry node if we just deleted it — next placed node will auto-become entry
+            if (_graph.entryNodeId == _nodeId)
+            {
+                _clearedEntryId = _graph.entryNodeId;
+                _graph.entryNodeId = AGISGuid.Empty;
+            }
         }
 
         public void Undo()
@@ -231,6 +240,9 @@ namespace AGIS.ESM.RuntimeEditor
                 foreach (var edge in _removedEdges)
                     _graph.edges.Add(edge);
             }
+
+            if (_clearedEntryId.IsValid)
+                _graph.entryNodeId = _clearedEntryId;
         }
     }
 

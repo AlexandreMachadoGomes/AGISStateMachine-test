@@ -37,6 +37,149 @@ namespace AGIS.NPC.Editor
     {
         private const string AssetFolder = "Assets/NPC_Test";
 
+        // ── Standalone graph asset creators ──────────────────────────────────────────
+
+        [MenuItem("AGIS/NPC/Create Stealth Graph Asset")]
+        public static void CreateStealthGraphAsset()
+        {
+            string path = EditorUtility.SaveFilePanelInProject(
+                "Save Stealth Graph", "StealthGraph", "asset",
+                "Choose where to save the Stealth Graph asset.");
+            if (string.IsNullOrEmpty(path)) return;
+
+            var asset = BuildStealthGraph();
+            AssetDatabase.CreateAsset(asset, path);
+            AssetDatabase.SaveAssets();
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = asset;
+            Debug.Log($"[AGIS] StealthGraph saved to {path}. Assign it to an AGISEnemyTemplateData (stealthGraph slot).");
+        }
+
+        [MenuItem("AGIS/NPC/Create Patrol Graph Asset")]
+        public static void CreatePatrolGraphAsset()
+        {
+            // Patrol graph references a RoutedMovement grouped asset — create or pick one first.
+            string routedPath = EditorUtility.SaveFilePanelInProject(
+                "Save RoutedMovement Asset", "RoutedMovement", "asset",
+                "First: save the RoutedMovement grouped state asset.");
+            if (string.IsNullOrEmpty(routedPath)) return;
+
+            string patrolPath = EditorUtility.SaveFilePanelInProject(
+                "Save Patrol Graph Asset", "PatrolGraph", "asset",
+                "Second: save the Patrol Graph asset.");
+            if (string.IsNullOrEmpty(patrolPath)) return;
+
+            var routedMovement = NPCRoutedMovementAssetBuilder.BuildAsset();
+            AssetDatabase.CreateAsset(routedMovement, routedPath);
+
+            var patrolGraph = BuildOuterGraph(routedMovement);
+            AssetDatabase.CreateAsset(patrolGraph, patrolPath);
+
+            AssetDatabase.SaveAssets();
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = patrolGraph;
+            Debug.Log($"[AGIS] PatrolGraph saved to {patrolPath}.\n" +
+                      $"RoutedMovement saved to {routedPath}.\n" +
+                      "Assign both to your AGISEnemyTemplateData: patrolGraph + knownGroupedAssets.");
+        }
+
+        [MenuItem("AGIS/NPC/Create Full NPC Graph Bundle")]
+        public static void CreateFullGraphBundle()
+        {
+            string folder = EditorUtility.SaveFolderPanel(
+                "Choose folder for NPC graph bundle", "Assets", "NPC_Graphs");
+            if (string.IsNullOrEmpty(folder)) return;
+
+            // Convert absolute path to project-relative
+            if (folder.StartsWith(Application.dataPath))
+                folder = "Assets" + folder.Substring(Application.dataPath.Length);
+
+            if (!AssetDatabase.IsValidFolder(folder))
+            {
+                var parts = folder.Split('/');
+                string parent = string.Join("/", parts, 0, parts.Length - 1);
+                AssetDatabase.CreateFolder(parent, parts[parts.Length - 1]);
+            }
+
+            var routedMovement = NPCRoutedMovementAssetBuilder.BuildAsset();
+            var stealthGraph   = BuildStealthGraph();
+            var patrolGraph    = BuildOuterGraph(routedMovement);
+            var routeData      = BuildRouteData();
+
+            SaveAssetToFolder(routedMovement, folder, "RoutedMovement.asset");
+            SaveAssetToFolder(stealthGraph,   folder, "StealthGraph.asset");
+            SaveAssetToFolder(patrolGraph,    folder, "PatrolGraph.asset");
+            SaveAssetToFolder(routeData,      folder, "RouteData_Default.asset");
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            EditorUtility.FocusProjectWindow();
+
+            Debug.Log($"[AGIS] Full NPC graph bundle saved to {folder}/\n" +
+                      "  StealthGraph.asset  → AGISEnemyTemplateData.stealthGraph\n" +
+                      "  PatrolGraph.asset   → AGISEnemyTemplateData.patrolGraph\n" +
+                      "  RoutedMovement.asset → AGISEnemyTemplateData.knownGroupedAssets[0]\n" +
+                      "  RouteData_Default.asset → AGISEnemyTemplateData.routeData");
+        }
+
+        [MenuItem("AGIS/NPC/Create Wired Enemy Template")]
+        public static void CreateWiredEnemyTemplate()
+        {
+            string folder = EditorUtility.SaveFolderPanel(
+                "Choose folder for enemy template bundle", "Assets", "NPC_Enemy");
+            if (string.IsNullOrEmpty(folder)) return;
+
+            // Convert absolute path to project-relative
+            if (folder.StartsWith(Application.dataPath))
+                folder = "Assets" + folder.Substring(Application.dataPath.Length);
+
+            if (!AssetDatabase.IsValidFolder(folder))
+            {
+                var parts  = folder.Split('/');
+                string par = string.Join("/", parts, 0, parts.Length - 1);
+                AssetDatabase.CreateFolder(par, parts[parts.Length - 1]);
+            }
+
+            // Build all sub-assets
+            var routedMovement = NPCRoutedMovementAssetBuilder.BuildAsset();
+            var stealthGraph   = BuildStealthGraph();
+            var patrolGraph    = BuildOuterGraph(routedMovement);
+            var routeData      = BuildRouteData();
+
+            SaveAssetToFolder(routedMovement, folder, "RoutedMovement.asset");
+            SaveAssetToFolder(stealthGraph,   folder, "StealthGraph.asset");
+            SaveAssetToFolder(patrolGraph,    folder, "PatrolGraph.asset");
+            SaveAssetToFolder(routeData,      folder, "RouteData_Default.asset");
+
+            // Create the template and wire everything in
+            var template = ScriptableObject.CreateInstance<AGISEnemyTemplateData>();
+            template.stealthGraph        = stealthGraph;
+            template.patrolGraph         = patrolGraph;
+            template.routeData           = routeData;
+            template.knownGroupedAssets  = new AGISGroupedStateAsset[] { routedMovement };
+
+            SaveAssetToFolder(template, folder, "EnemyTemplateData.asset");
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = template;
+
+            Debug.Log($"[AGIS] Wired enemy template bundle saved to {folder}/\n" +
+                      "  EnemyTemplateData.asset — all graph references pre-assigned.\n" +
+                      "  Use AGIS/NPC/Enemy Template Test Scene Builder and assign this template.");
+        }
+
+        private static void SaveAssetToFolder(UnityEngine.Object asset, string folder, string fileName)
+        {
+            string path = folder + "/" + fileName;
+            if (AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path) != null)
+                AssetDatabase.DeleteAsset(path);
+            AssetDatabase.CreateAsset(asset, path);
+        }
+
+        // ─────────────────────────────────────────────────────────────────────────────
+
         [MenuItem("AGIS/NPC/Build Routed Movement Test Scene")]
         public static void Build()
         {
@@ -66,8 +209,8 @@ namespace AGIS.NPC.Editor
             // ── 5. Scene objects ──────────────────────────────────────────────────────
             CreateGround();
             var astar      = CreateAstarPathfinding();
-            var walkTarget = CreateWalkTarget();
-            CreateNPC(routeData, graphAsset, routedMovement, stealthGraph, walkTarget);
+            CreateWalkTarget(); // kept for manual testing convenience (drag it as a target)
+            CreateNPC(routeData, graphAsset, routedMovement, stealthGraph);
 
             // Scan the A* graph now that the ground plane exists.
             if (astar != null)
@@ -110,7 +253,7 @@ namespace AGIS.NPC.Editor
         /// Builds the stealth slot graph — a single permanent npc.stealth_meter node with no
         /// outgoing edges. The node runs forever, filling/draining npc.detection_meter each tick.
         /// </summary>
-        private static AGISStateMachineGraphAsset BuildStealthGraph()
+        public static AGISStateMachineGraphAsset BuildStealthGraph()
         {
             var asset = ScriptableObject.CreateInstance<AGISStateMachineGraphAsset>();
 
@@ -156,7 +299,7 @@ namespace AGIS.NPC.Editor
         /// • Selector priority 3/2 route to Chase/Investigate based on meter value.
         /// • Wander/RoutedMovement return to Selector on detection so priorities re-evaluate.
         /// </summary>
-        private static AGISStateMachineGraphAsset BuildOuterGraph(AGISGroupedStateAsset routedMovement)
+        public static AGISStateMachineGraphAsset BuildOuterGraph(AGISGroupedStateAsset routedMovement)
         {
             var asset = ScriptableObject.CreateInstance<AGISStateMachineGraphAsset>();
 
@@ -553,8 +696,7 @@ namespace AGIS.NPC.Editor
             NPCRouteData               routeData,
             AGISStateMachineGraphAsset  graphAsset,
             AGISGroupedStateAsset       routedMovement,
-            AGISStateMachineGraphAsset  stealthGraph,
-            GameObject                  walkTarget)
+            AGISStateMachineGraphAsset  stealthGraph)
         {
             if (GameObject.Find("NPC_Test") != null)
             {
@@ -577,11 +719,10 @@ namespace AGIS.NPC.Editor
             aiPath.maxSpeed           = 5f;
             aiPath.slowdownDistance   = 1f;
             aiPath.endReachedDistance = 0.5f;
-            aiPath.enabled            = false;    // disabled until state machine activates
+            aiPath.enabled            = true;
 
-            var destSetter = npc.AddComponent<AIDestinationSetter>();
-            destSetter.target  = walkTarget.transform;
-            destSetter.enabled = false;
+            // IAGISNPCPathFinder bridge — NPCAStarPathFinder drives AIPath directly (no UCC).
+            npc.AddComponent<NPCAStarPathFinder>();
 
             // Detection cone — default 60° / 10 unit range on all layers.
             // npc.show_detection_cone is auto-populated false by IAGISPersistentComponent.

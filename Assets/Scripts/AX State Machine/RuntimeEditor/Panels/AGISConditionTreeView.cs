@@ -25,7 +25,7 @@ namespace AGIS.ESM.RuntimeEditor.Panels
             AGISConditionTypeRegistry condTypes,
             Action<AGISConditionExprDef> onChanged)
         {
-            _condTypes = condTypes ?? throw new ArgumentNullException(nameof(condTypes));
+            _condTypes = condTypes; // may be null before runner is ready; usage sites are guarded
             _onChanged = onChanged ?? throw new ArgumentNullException(nameof(onChanged));
 
             style.flexDirection = FlexDirection.Column;
@@ -278,7 +278,7 @@ namespace AGIS.ESM.RuntimeEditor.Panels
             IAGISConditionType ct = null;
             if (leaf != null && !string.IsNullOrEmpty(leaf.conditionTypeId))
             {
-                if (_condTypes.TryGet(leaf.conditionTypeId, out ct))
+                if (_condTypes != null && _condTypes.TryGet(leaf.conditionTypeId, out ct))
                     displayName = ct.DisplayName ?? leaf.conditionTypeId;
                 else
                     displayName = leaf.conditionTypeId;
@@ -329,7 +329,7 @@ namespace AGIS.ESM.RuntimeEditor.Panels
             typeChoices.Add("(none)");
             typeIds.Add("");
 
-            foreach (var ctype in _condTypes.AllTypes)
+            foreach (var ctype in _condTypes?.AllTypes ?? System.Linq.Enumerable.Empty<IAGISConditionType>())
             {
                 typeChoices.Add(ctype.DisplayName ?? ctype.TypeId);
                 typeIds.Add(ctype.TypeId);

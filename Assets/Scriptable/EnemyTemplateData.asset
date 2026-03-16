@@ -11,11 +11,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99744b11a552062489e2781d89122968, type: 3}
   m_Name: EnemyTemplateData
-  m_EditorClassIdentifier: 
-  patrolGraph: {fileID: 0}
-  stealthGraph: {fileID: 0}
-  knownGroupedAssets: []
-  routeData: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.NPC.AGISEnemyTemplateData
+  patrolGraph: {fileID: 11400000, guid: 301dd30304ca17142af7b2cb28a096ed, type: 2}
+  stealthGraph: {fileID: 11400000, guid: 36850e629ee098a4686f703c7a4536e9, type: 2}
+  knownGroupedAssets:
+  - {fileID: 11400000, guid: fa90c3cf8ccd9ed459b3141b435ffe2f, type: 2}
+  routeData: {fileID: 11400000, guid: f9028d4a9aed6d84ea6e910032cbdee8, type: 2}
   fillRate: 1
   drainRate: 0.4
   maxDetection: 3

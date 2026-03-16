@@ -49,6 +49,9 @@ namespace AGIS.ESM.RuntimeEditor
 
         // ── Public events ─────────────────────────────────────────────────────
         public event Action<AGISGuid> OnNodeSelectRequested;
+        public event Action<AGISGuid> OnDeleteNode;
+        public event Action<AGISGuid> OnDeleteEdge;
+        public event Action<AGISGuid> OnSetEntryNode;
         public event Action OnGraphSaveRequested;
         public event Action OnGraphRevertRequested;
 
@@ -112,6 +115,11 @@ namespace AGIS.ESM.RuntimeEditor
 
             // Wire _graphTab.OnGoToNode → OnNodeSelectRequested
             _graphTab.OnGoToNode += id => OnNodeSelectRequested?.Invoke(id);
+
+            // Forward delete and entry events from inner panels
+            _nodeTab.OnDeleteNode   += id => OnDeleteNode?.Invoke(id);
+            _edgeTab.OnDeleteEdge   += id => OnDeleteEdge?.Invoke(id);
+            _nodeTab.OnSetEntryNode += id => OnSetEntryNode?.Invoke(id);
 
             // Show the default tab (Graph)
             SwitchTab(_activeTabIndex);
@@ -196,6 +204,8 @@ namespace AGIS.ESM.RuntimeEditor
         /// <summary>Populate and show the graph properties tab.</summary>
         public void ShowGraphTab(AGISStateMachineGraph graph)
         {
+            _nodeTab.Clear();
+            _edgeTab.Clear();
             _graphTab.SetGraph(graph, _runner, _slotIndex);
             SwitchTab(TAB_GRAPH);
         }

@@ -70,6 +70,17 @@ namespace AGIS.ESM.RuntimeEditor
             public AGISEditorHistory history;
         }
 
+        // Sub-graph navigation stack (empty = at root/slot level)
+        private struct GraphLevel
+        {
+            public string label;
+            public AGISStateMachineGraph workingGraph;
+            public AGISEditorHistory history;
+            public AGISGroupedStateAsset groupedAsset; // null at slot level
+        }
+        private readonly List<GraphLevel> _graphNavStack = new List<GraphLevel>();
+        private AGISGroupedStateAsset _currentGroupedAsset;
+
         // ── Properties ────────────────────────────────────────────────────────
 
         public bool IsDirty => _history != null && _history.CanUndo;
@@ -198,6 +209,10 @@ namespace AGIS.ESM.RuntimeEditor
         {
             if (tabIndex < 0 || tabIndex >= _openTabs.Count) return;
 
+            // Clear sub-graph nav when switching tabs
+            _graphNavStack.Clear();
+            _currentGroupedAsset = null;
+
             _activeTabIndex = tabIndex;
             var tab = _openTabs[tabIndex];
             _workingGraph = tab.workingGraph;
@@ -211,6 +226,7 @@ namespace AGIS.ESM.RuntimeEditor
 
             _rightPanel?.SetGraph(_workingGraph, targetRunner, activeSlotIndex, SaveGraph, RevertGraph);
             _rightPanel?.ShowGraphTab(_workingGraph);
+            _breadcrumb?.SetRoot();
             _statusBar?.SetMessage("Ready", AGISStatusSeverity.Ok);
 
             RefreshToolbarState();
@@ -283,6 +299,9 @@ namespace AGIS.ESM.RuntimeEditor
             _rightPanel.OnGraphSaveRequested   += SaveGraph;
             _rightPanel.OnGraphRevertRequested += RevertGraph;
             _rightPanel.OnNodeSelectRequested  += id => _canvas?.SelectNode(id);
+            _rightPanel.OnDeleteNode    += OnRightPanelDeleteNode;
+            _rightPanel.OnDeleteEdge    += OnRightPanelDeleteEdge;
+            _rightPanel.OnSetEntryNode  += _ => _canvas?.RefreshEntryIndicators();
             hContainer.Add(_rightPanel);
 
             _root.Add(hContainer);
@@ -550,6 +569,18 @@ namespace AGIS.ESM.RuntimeEditor
         {
             if (_workingGraph == null || targetRunner == null) return;
 
+            // If we're editing a grouped asset's sub-graph, save it back to the asset
+            if (_currentGroupedAsset != null)
+            {
+                CommitSubGraph();
+                _history?.Clear();
+                RebuildTabBar();
+                string name = !string.IsNullOrEmpty(_currentGroupedAsset.displayName)
+                    ? _currentGroupedAsset.displayName : "grouped asset";
+                _statusBar?.SetMessage($"Sub-graph '{name}' saved.", AGISStatusSeverity.Ok);
+                return;
+            }
+
             // Validate first
             var validator = new AGISGraphValidator(targetRunner.NodeTypes, targetRunner.ConditionTypes, null);
             var report = validator.ValidateGraph(_workingGraph);
@@ -579,13 +610,19 @@ namespace AGIS.ESM.RuntimeEditor
 
         public void RevertGraph()
         {
-            if (IsDirty)
+            if (targetRunner == null) return;
+
+            // Revert sub-graph: re-clone from the grouped asset
+            if (_currentGroupedAsset != null)
             {
-                // In a full implementation, show a confirmation dialog.
-                // For now, revert immediately.
+                _workingGraph = AGISGraphClone.CloneGraph(_currentGroupedAsset.internalGraph ?? new AGISStateMachineGraph());
+                _history?.Clear();
+                _canvas?.RebuildAll(_workingGraph, targetRunner.NodeTypes, targetRunner.ConditionTypes, _history);
+                _canvas?.FrameAll();
+                _statusBar?.SetMessage("Sub-graph reverted.", AGISStatusSeverity.Ok);
+                return;
             }
 
-            if (targetRunner == null) return;
             var slot = GetActiveSlot();
             if (slot == null) return;
 
@@ -732,22 +769,154 @@ namespace AGIS.ESM.RuntimeEditor
             _history.Push(new RemoveNodeCommand(_workingGraph, nodeId));
             _canvas?.RemoveNodeCard(nodeId);
             _canvas?.RefreshEdgeLayer();
+            _rightPanel?.ShowGraphTab(_workingGraph);
             _statusBar?.SetMessage("Node deleted.", AGISStatusSeverity.Ok);
+        }
+
+        private void OnRightPanelDeleteNode(AGISGuid nodeId)
+        {
+            _canvas?.RemoveNodeCard(nodeId);
+            _canvas?.RefreshEdgeLayer();
+            _rightPanel?.ShowGraphTab(_workingGraph);
+            _statusBar?.SetMessage("Node deleted.", AGISStatusSeverity.Ok);
+        }
+
+        private void OnRightPanelDeleteEdge(AGISGuid edgeId)
+        {
+            _canvas?.RefreshEdgeLayer();
+            _rightPanel?.ShowGraphTab(_workingGraph);
+            _statusBar?.SetMessage("Transition deleted.", AGISStatusSeverity.Ok);
         }
 
         private void OnOpenSubGraphRequested(AGISGuid nodeId)
         {
-            // Find the node def and open its sub-graph as a new tab
-            if (_workingGraph?.nodes == null) return;
-            foreach (var node in _workingGraph.nodes)
+            if (_workingGraph?.nodes == null || targetRunner == null) return;
+
+            var node = _workingGraph.nodes.Find(n => n != null && n.nodeId == nodeId);
+            if (node == null || !node.groupAssetId.IsValid)
             {
-                if (node != null && node.nodeId == nodeId && node.groupAssetId.IsValid)
-                {
-                    _statusBar?.SetMessage($"Sub-graph drill-down: {node.groupAssetId.Value.Substring(0, 8)}…", AGISStatusSeverity.Ok);
-                    // Full drill-down implementation would open a new tab with the grouped asset's internal graph
-                    break;
-                }
+                _statusBar?.SetMessage("This node has no linked grouped asset.", AGISStatusSeverity.Warning);
+                return;
             }
+
+            var asset = targetRunner.FindGroupedAsset(node.groupAssetId);
+            if (asset == null)
+            {
+                _statusBar?.SetMessage(
+                    $"Grouped asset '{node.groupAssetId.Value.Substring(0, 8)}…' not found in runner. " +
+                    "Add it to the runner's Known Grouped Assets list.", AGISStatusSeverity.Warning);
+                return;
+            }
+
+            PushSubGraph(node, asset);
+        }
+
+        // ─────────────────────────────────────────────────────────────────────
+        // Sub-graph navigation
+        // ─────────────────────────────────────────────────────────────────────
+
+        private void PushSubGraph(AGISNodeInstanceDef node, AGISGroupedStateAsset asset)
+        {
+            // Push current level onto nav stack
+            _graphNavStack.Add(new GraphLevel
+            {
+                label        = GetCurrentLevelLabel(),
+                workingGraph = _workingGraph,
+                history      = _history,
+                groupedAsset = _currentGroupedAsset,
+            });
+
+            // Clone the asset's internal graph as the new working copy
+            _workingGraph        = AGISGraphClone.CloneGraph(asset.internalGraph ?? new AGISStateMachineGraph());
+            _history             = new AGISEditorHistory();
+            _currentGroupedAsset = asset;
+
+            _canvas?.RebuildAll(_workingGraph, targetRunner.NodeTypes, targetRunner.ConditionTypes, _history);
+            _canvas?.FrameAll();
+
+            int slotIndex = _activeTabIndex >= 0 && _activeTabIndex < _openTabs.Count
+                ? _openTabs[_activeTabIndex].slotIndex : 0;
+            _rightPanel?.SetGraph(_workingGraph, targetRunner, slotIndex, SaveGraph, RevertGraph);
+            _rightPanel?.ShowGraphTab(_workingGraph);
+
+            RebuildBreadcrumb();
+            string subLabel = !string.IsNullOrEmpty(asset.displayName) ? asset.displayName : node.nodeTypeId;
+            _statusBar?.SetMessage($"Editing sub-graph: {subLabel}", AGISStatusSeverity.Ok);
+            RefreshToolbarState();
+        }
+
+        private void PopToLevel(int stackIndex)
+        {
+            if (stackIndex < 0 || stackIndex >= _graphNavStack.Count) return;
+
+            // Commit the current sub-graph before popping
+            CommitSubGraph();
+
+            // Discard every level above stackIndex
+            while (_graphNavStack.Count > stackIndex + 1)
+                _graphNavStack.RemoveAt(_graphNavStack.Count - 1);
+
+            // Restore the target level
+            var level = _graphNavStack[stackIndex];
+            _graphNavStack.RemoveAt(stackIndex);
+
+            _workingGraph        = level.workingGraph;
+            _history             = level.history;
+            _currentGroupedAsset = level.groupedAsset;
+
+            _canvas?.RebuildAll(_workingGraph, targetRunner?.NodeTypes, targetRunner?.ConditionTypes, _history);
+            _canvas?.FrameAll();
+
+            int slotIndex = _activeTabIndex >= 0 && _activeTabIndex < _openTabs.Count
+                ? _openTabs[_activeTabIndex].slotIndex : 0;
+            _rightPanel?.SetGraph(_workingGraph, targetRunner, slotIndex, SaveGraph, RevertGraph);
+            _rightPanel?.ShowGraphTab(_workingGraph);
+
+            RebuildBreadcrumb();
+            _statusBar?.SetMessage("Navigated up.", AGISStatusSeverity.Ok);
+            RefreshToolbarState();
+        }
+
+        /// <summary>Write the current working sub-graph back into the grouped asset's internalGraph.</summary>
+        private void CommitSubGraph()
+        {
+            if (_currentGroupedAsset == null || _workingGraph == null) return;
+            _currentGroupedAsset.internalGraph = AGISGraphClone.CloneGraph(_workingGraph);
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(_currentGroupedAsset);
+#endif
+        }
+
+        private string GetCurrentLevelLabel()
+        {
+            if (_currentGroupedAsset != null)
+                return !string.IsNullOrEmpty(_currentGroupedAsset.displayName)
+                    ? _currentGroupedAsset.displayName : "Grouped";
+
+            if (_activeTabIndex >= 0 && _activeTabIndex < _openTabs.Count)
+                return _openTabs[_activeTabIndex].slotName;
+
+            return "Graph";
+        }
+
+        private void RebuildBreadcrumb()
+        {
+            if (_breadcrumb == null) return;
+
+            if (_graphNavStack.Count == 0)
+            {
+                _breadcrumb.SetRoot();
+                return;
+            }
+
+            var crumbs = new List<(string label, System.Action onClick)>();
+            for (int i = 0; i < _graphNavStack.Count; i++)
+            {
+                int captured = i;
+                crumbs.Add((_graphNavStack[i].label, () => PopToLevel(captured)));
+            }
+
+            _breadcrumb.SetPath(crumbs, GetCurrentLevelLabel());
         }
 
         // ─────────────────────────────────────────────────────────────────────

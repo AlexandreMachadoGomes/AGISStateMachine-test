@@ -44,7 +44,7 @@ namespace AGIS.ESM.RuntimeEditor.Panels
         // ─────────────────────────────────────────────────────────────────────
         public AGISEdgeInspectorPanel(AGISConditionTypeRegistry condTypes)
         {
-            _condTypes = condTypes ?? throw new ArgumentNullException(nameof(condTypes));
+            _condTypes = condTypes; // may be null before runner is ready; Rebuild() guards usage
 
             style.flexGrow = 1;
             style.flexDirection = FlexDirection.Column;
@@ -162,6 +162,14 @@ namespace AGIS.ESM.RuntimeEditor.Panels
         }
 
         // ── Public API ────────────────────────────────────────────────────────
+
+        public void Clear()
+        {
+            _edge    = null;
+            _graph   = null;
+            _report  = null;
+            Rebuild();
+        }
 
         public void Populate(
             AGISTransitionEdgeDef edge,

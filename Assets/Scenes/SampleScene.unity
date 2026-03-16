@@ -432,36 +432,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!115 &1071677860
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 7
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_Type: 0
-  m_ExecutionOrder: 0
-  m_ClassName: Seeker
-  m_Namespace: Pathfinding
-  m_AssemblyName: Assembly-CSharp
---- !u!115 &1079570371
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 7
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_Type: 0
-  m_ExecutionOrder: 0
-  m_ClassName: AIDestinationSetter
-  m_Namespace: Pathfinding
-  m_AssemblyName: Assembly-CSharp
 --- !u!1 &1165731320
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +615,7 @@ MonoBehaviour:
   debugMode: 0
   graphUpdateDebugMode: 0
   debugFloor: 0
-  debugRoof: 20000
+  debugRoof: 1
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
@@ -666,7 +636,7 @@ MonoBehaviour:
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
-  maxFrameTime: 1
+  maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
   navmeshUpdates:
@@ -693,7 +663,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1847101399
+--- !u!1 &1908578497
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -701,19 +671,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1847101412}
-  - component: {fileID: 1847101411}
-  - component: {fileID: 1847101410}
-  - component: {fileID: 1847101409}
-  - component: {fileID: 1847101408}
-  - component: {fileID: 1847101407}
-  - component: {fileID: 1847101406}
-  - component: {fileID: 1847101405}
-  - component: {fileID: 1847101404}
-  - component: {fileID: 1847101403}
-  - component: {fileID: 1847101402}
-  - component: {fileID: 1847101401}
-  - component: {fileID: 1847101400}
+  - component: {fileID: 1908578511}
+  - component: {fileID: 1908578510}
+  - component: {fileID: 1908578509}
+  - component: {fileID: 1908578508}
+  - component: {fileID: 1908578507}
+  - component: {fileID: 1908578506}
+  - component: {fileID: 1908578505}
+  - component: {fileID: 1908578504}
+  - component: {fileID: 1908578503}
+  - component: {fileID: 1908578502}
+  - component: {fileID: 1908578501}
+  - component: {fileID: 1908578500}
+  - component: {fileID: 1908578499}
+  - component: {fileID: 1908578498}
   m_Layer: 0
   m_Name: NPC_Test
   m_TagString: Untagged
@@ -721,18 +692,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1847101400
+--- !u!114 &1908578498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55e808dca38bf9249b62d7948117400f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.ESM.Runtime.AGISStateMachineRunner
   tickHz: 30
   maxTransitionsPerTick: 4
   updateMode: 0
@@ -743,11 +714,16 @@ MonoBehaviour:
   knowledgeDocuments: []
   actorGroupIds: []
   llmProvider: {fileID: 0}
-  autoRegisterTypesFromAssemblies: 1
+  autoRegisterTypesFromAssemblies: 0
   slots:
-  - slotName: patrol
+  - slotName: Stealth
     enabled: 1
-    graphAsset: {fileID: 11400000, guid: feaf26bc9f012c546a52934311537dbb, type: 2}
+    graphAsset: {fileID: 11400000, guid: 36850e629ee098a4686f703c7a4536e9, type: 2}
+    tickHzOverride: 0
+    maxTransitionsPerTickOverride: 0
+  - slotName: Patrol
+    enabled: 1
+    graphAsset: {fileID: 11400000, guid: 301dd30304ca17142af7b2cb28a096ed, type: 2}
     tickHzOverride: 0
     maxTransitionsPerTickOverride: 0
   trace:
@@ -756,110 +732,208 @@ MonoBehaviour:
     warnings: 1
     errors: 1
     prefix: '[AGIS_ESM]'
---- !u!114 &1847101401
+--- !u!114 &1908578499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8607ef620cadca645ae782c7108abe68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.ESM.Runtime.AGISActorState
+  _values:
+    values: []
+--- !u!114 &1908578500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908578497}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3f748356a110d141a15f0ea489b9b82, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.ESM.Runtime.AGISActorRuntime
   createBlackboardOnAwake: 1
---- !u!114 &1847101402
+--- !u!114 &1908578501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a47190f7b035ae4d884c2c94c334551, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.NPC.Routes.NPCRouteDataHolder
   routeData: {fileID: 0}
---- !u!114 &1847101403
+--- !u!114 &1908578502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5598bb860b137da4bba0e27785ce24db, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.NPC.NPCDetectionMeter
   fillRate: 1
   drainRate: 0.4
   maxDetection: 3
   investigateThreshold: 1
   targetTag: Player
---- !u!114 &1847101404
+--- !u!114 &1908578503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea0fcc56198304649bdbe40a211a5631, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.NPC.NPCDetectionCone
   shape: 1
   detectionMask:
     serializedVersion: 2
     m_Bits: 4294967295
   range: 10
   angle: 60
---- !u!114 &1847101405
+--- !u!114 &1908578504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1079570371}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1847101406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cb37a498ccace948aac46f7b5a9bbec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1847101407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1071677860}
+  m_Script: {fileID: 11500000, guid: 56cab020c512181428770b8ecf252406, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
---- !u!54 &1847101408
+  m_EditorClassIdentifier: Assembly-CSharp::AGIS.NPC.NPCUCCPathFinder
+--- !u!114 &1908578505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908578497}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.AIPath
+  version: 1073741824
+  radius: 0.5
+  height: 2
+  simulateMovement: 1
+  maxSpeed: 3.5
+  gravity: {x: NaN, y: NaN, z: NaN}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  endReachedDistance: 0.5
+  whenCloseToDestination: 0
+  rvoDensityBehavior:
+    enabled: 1
+    densityThreshold: 0.5
+    returnAfterBeingPushedAway: 0
+    progressAverage: 0
+    lastJobDensityResult: 0
+  repathRateCompatibility: NaN
+  canSearchCompability: 0
+  orientation: 0
+  enableRotation: 1
+  autoRepath:
+    mode: 2
+    period: 0.5
+    sensitivity: 10
+    maximumPeriod: 2
+    visualizeSensitivity: 0
+  maxAcceleration: -2.5
+  rotationSpeed: 360
+  slowdownDistance: 1
+  pickNextWaypointDist: 2
+  alwaysDrawGizmos: 0
+  slowWhenNotFacingTarget: 1
+  preventMovingBackwards: 0
+  constrainInsideGraph: 0
+--- !u!114 &1908578506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908578497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.Seeker
+  version: 1073741824
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagCostMultipliers:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  tagEntryCosts: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!54 &1908578507
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -880,13 +954,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!23 &1847101409
+--- !u!23 &1908578508
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -929,13 +1003,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1847101410
+--- !u!136 &1908578509
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -952,24 +1026,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &1847101411
+--- !u!33 &1908578510
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1847101412
+--- !u!4 &1908578511
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1847101399}
+  m_GameObject: {fileID: 1908578497}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.09, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1005,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3a7cc00d1c5994e86c526ae5aa0500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AGIS.ESM.RuntimeEditor.AGISGraphEditorWindow
-  targetRunner: {fileID: 1847101400}
+  targetRunner: {fileID: 0}
   activeSlotIndex: 0
   toggleKey: 102
   editorStyleSheet: {fileID: 7433441132597879392, guid: 8298d99be9667394286abc8ad52d9d94, type: 3}
@@ -1056,6 +1130,6 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1400908158}
   - {fileID: 1165731321}
-  - {fileID: 1847101412}
   - {fileID: 1707950116}
   - {fileID: 2105901263}
+  - {fileID: 1908578511}

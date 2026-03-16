@@ -1125,6 +1125,9 @@ namespace AGIS.ESM.RuntimeEditor
 
             foreach (var id in new List<AGISGuid>(_selectedNodeIds))
                 OnNodeDeleteRequested?.Invoke(id);
+
+            _selectedNodeIds.Clear();
+            FireSelectionChanged();
         }
 
         // ── Zoom level ────────────────────────────────────────────────────────
@@ -1148,6 +1151,8 @@ namespace AGIS.ESM.RuntimeEditor
         // ─────────────────────────────────────────────────────────────────────
         // Entry indicator helpers
         // ─────────────────────────────────────────────────────────────────────
+
+        public void RefreshEntryIndicators()  => UpdateAllEntryIndicators();
 
         private void UpdateAllEntryIndicators()
         {
